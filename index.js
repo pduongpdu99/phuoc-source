@@ -1,6 +1,6 @@
 const express = require('express');
 const routing = require('./src/routes');
-const configuration = require('./src/config/dotenv_config');
+// const configuration = require('./src/config/dotenv_config');
 
 const app = express();
 
@@ -13,6 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', routing(express));
 
 // listening
-app.listen(configuration.port, configuration.hostname, function() {
-    console.log(`Server run at http://${configuration.hostname}:${configuration.port}`);
+app.listen(3000, 'localhost', function() {
+    console.log(`Server run at http://localhost:3000`);
 });
