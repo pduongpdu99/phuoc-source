@@ -13,6 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', routing(express));
 
 // listening
-app.listen(process.env.PORT || 5000, 'localhost', function() {
+app.listen(process.env.PORT || 5000, function() {
     console.log(`Server run at http://localhost:5000`);
 });
