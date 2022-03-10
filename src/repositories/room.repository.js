@@ -35,10 +35,10 @@ export class RoomRepository {
     static async create(body = {}) {
         const path = `${roomAPIPath}/add/`;
         return fetch(path, {
-            method: "POST",
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: body,
-        }).then(data => data.json()).then(data => data);
+            body: JSON.stringify(body),
+        });
     }
 
     /**
@@ -50,9 +50,8 @@ export class RoomRepository {
         const path = `${roomAPIPath}/delete/${id}`;
         return fetch(path, {
             method: "DELETE",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json()).then(data => data);
+        });
     }
 
     /**
@@ -63,10 +62,10 @@ export class RoomRepository {
     static async updateById(body = {}) {
         const path = `${roomAPIPath}/update/`;
         return fetch(path, {
-            method: "PUT",
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: body,
-        }).then(data => data.json()).then(data => data);
+            body: JSON.stringify(body),
+        });
     }
 
     /**

@@ -37,8 +37,8 @@ export class UserRepository {
         return fetch(path, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
-            body: body,
-        }).then(data => data.json()).then(data => data);
+            body: JSON.stringify(body),
+        })
     }
 
     /**
@@ -52,7 +52,7 @@ export class UserRepository {
             method: "DELETE",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json()).then(data => data);
+        })
     }
 
     /**
@@ -65,8 +65,8 @@ export class UserRepository {
         return fetch(path, {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
-            body: body,
-        }).then(data => data.json()).then(data => data);
+            body: JSON.stringify(body),
+        })
     }
 
     /**

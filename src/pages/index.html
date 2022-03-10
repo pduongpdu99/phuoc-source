@@ -12,16 +12,101 @@
 </head>
 
 <body>
-    <div id="input"></div>
+    <!-- Vị trí cần gọi -->
+    <table id="input" border="1">
+        <tr>
+            <th>Mã phòng</th>
+            <th>Tên phòng</th>
+            <th>Trạng thái</th>
+        </tr>
+    </table>
+
+    <div><input type="text" id="roomid"></div>
+    <div><input type="text" id="name"></div>
+    <div><input type="text" id="status"></div>
+    <div><button id="tao">Tạo</button></div>
+    <div><button id="xoa">Xóa</button></div>
+    <div><button id="sua">Sửa</button></div>
+
     <script type="module">
         import { RoomProvider } from './providers/index.js';
-        
+
         let element = document.getElementById('input');
-        RoomProvider.paginate(2, 1).then((rooms) => {
-            console.log(rooms);
-            rooms.results.forEach(roomData => element.innerHTML += roomData.roomId + " ");
+        let tao = document.getElementById('tao');
+        let sua = document.getElementById('sua');
+        let xoa = document.getElementById('xoa');
+
+
+        RoomProvider.getAll().then(data => {
+            let htmls = data.map(item => `
+            <tr>
+                <td>${item.roomId}</td>
+                <td>${item.name}</td>
+                <td>${item.status}</td>
+            </tr>
+            `);
+
+            element.innerHTML += htmls.join('\n');
         });
-        
+
+        function taoRoom() {
+            const roomid = document.getElementById('roomid');
+            const name = document.getElementById('name');
+            const status = document.getElementById('status');
+
+            const dataRequest = {
+                "roomid": roomid.value,
+                "name": name.value,
+                "status": status.value,
+            };
+
+
+            RoomProvider.create(dataRequest)
+                .then((data) => {
+                    alert("đã thêm thành công");
+                })
+                .catch(err => console.log(err));
+        }
+
+        function xoaRoom() {
+            const roomid = document.getElementById('roomid');
+
+            RoomProvider.deleteById(roomid.value)
+                .then((data) => {
+                    alert("đã xóa thành công");
+                })
+                .catch(err => console.log(err));
+        }
+
+        function suaRoom() {
+            const roomid = document.getElementById('roomid');
+            const name = document.getElementById('name');
+            const status = document.getElementById('status');
+
+            const dataRequest = {
+                "roomid": roomid.value,
+                "name": name.value,
+                "status": status.value,
+            };
+
+
+            RoomProvider.updateById(dataRequest)
+                .then((data) => {
+                    alert("đã sửa thành công");
+                })
+                .catch(err => console.log(err));
+        }
+
+        tao.onclick = taoRoom;
+        sua.onclick = suaRoom;
+        xoa.onclick = xoaRoom;
+
+
+        // RoomProvider.paginate(2, 1).then((rooms) => {
+        //     console.log(rooms);
+        //     rooms.results.forEach(roomData => element.innerHTML += roomData.roomId + " ");
+        // });
+
     </script>
 </body>
 
