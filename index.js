@@ -11,6 +11,4 @@ app.use(express.urlencoded({ extended: true }));
 app.use('', routing(express))
 
 // listening
-app.listen(5000, function() {
-    console.log(`Server run at http://localhost:5000`);
-});
+app.listen(5000);
