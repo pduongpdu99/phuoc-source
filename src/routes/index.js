@@ -27,6 +27,15 @@ const routing = (express) => {
             res.end(data);
         });
     });
+    
+    router.get('/register', function (_req, res) {
+        fs.readFile('src/pages/register/index.html', function (err, data) {
+            if (err) return console.log(err);
+            res.setHeader('Content-Type', 'text/html');
+            res.end(data);
+        });
+    });
+
 
     return router;
 }

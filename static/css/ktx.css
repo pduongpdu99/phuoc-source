@@ -1,0 +1,94 @@
+#container {
+    margin: 0 auto;
+    width: 60%;
+    background-color:#EEEEEE; 
+    border-radius: 30px;
+    /* box-shadow:4px 4px 10px rgba(0,0,0,0.2); */
+    /* box-shadow: 
+        0px 0px 0px 5px rgba( 255,255,255,0.4 ), 
+        0px 4px 20px rgba( 0,0,0,0.33 ); */
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, .4);
+    
+}
+
+#DK {
+    text-align: center;
+}
+#NgayDK {
+    text-align: right;
+    
+}
+#trong{
+    color: red;
+}
+
+
+#CLDK{
+    text-align: center;
+}
+
+#Cancle{
+    text-align: center;
+    margin: 40px;
+    font-size: 15px;
+    border-radius: 8px;
+    
+    border: none;
+    background: #BBBBBB;
+    color: hsl(0, 0, 100);
+    padding: 15px 15px;
+    text-decoration: none;
+    position: relative;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.2);
+}
+
+#Cancle:hover {background-color: #66FF33}
+
+#Cancle:active {
+  background-color: #66FF33;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#DangKy{
+    text-align: center;
+    margin: 40px;
+    font-size: 15px;
+    border-radius: 8px;
+
+    border: none;
+    background: #BBBBBB;
+    color: hsl(0, 0, 100);
+    padding: 15px 15px;
+    text-decoration: none;
+    position: relative;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.2);
+    
+}
+#DangKy:hover {background-color: #66FF33}
+
+#DangKy:active {
+  background-color: #66FF33;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+#Khoangcach{
+padding:14px;
+}
+
+input{
+    border-radius: 0; 
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 1px #B3BBCE;
+    border-color: #bbb;
+    background: transparent;
+    position: relative;
+   
+  
+}
+
+#gioitinh{
+    background:transparent ;
+}
