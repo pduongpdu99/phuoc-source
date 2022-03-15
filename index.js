@@ -11,4 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use('', routing(express))
 
 // listening
-app.listen(5000);
+app.listen(5000, "0.0.0.0", function () {
+    console.log("Listening on Port 5000");
+});
