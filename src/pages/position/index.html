@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Room list</title>
+   <link rel="stylesheet" href="css/room.css">
+</head>
+
+<body>
+   <div class="room-contrainner">
+      <label for="">Hãy chọn giới tính của ban:</label>
+      <select name="" id="room">
+         <option value="220">Nam</option>
+         <option value="230">Nữ</option>
+      </select>
+   </div>
+   <ul class="showcase">
+      <li>
+         <div class="select-room">
+            <small>chọn</small>
+         </div>
+      </li>
+      <li>
+         <div class="notFull-room">
+            <small>Trống</small>
+         </div>
+      </li>
+      <li>
+         <div class="still-room">
+            <small>còn ghép được</small>
+         </div>
+      </li>
+      <li>
+         <div class="Full-room">
+            <small>phòng đã đầy</small>
+         </div>
+      </li>
+   </ul>
+   <div class="contrainner" id="container"></div>
+   <script type="text/javascript" src="js/room.js"></script>
+</body>
+
+</html>
