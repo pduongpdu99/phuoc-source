@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.static('static'));
 app.use(express.static('src'));
 app.use(express.urlencoded({ extended: true }));
-app.use('/', routing(express))
+app.use('', routing(express))
 
 // listening
 app.listen(configuration.port, configuration.hostname, function() {
