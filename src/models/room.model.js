@@ -1,12 +1,12 @@
 export class Room {
-    roomId = "";
+    id = "";
     name = "";
     status = "";
     atUpdated = "";
     atCreated = "";
 
     toJson(data) {
-        this.roomId = data.roomid;
+        this.id = data.id;
         this.name = data.name;
         this.status = data.status;
         this.atUpdated = data.atupdated;

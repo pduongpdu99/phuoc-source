@@ -1,5 +1,5 @@
 export class User {
-    userId = "";
+    id = "";
     role = 0;
     name = "";
     phoneNumber = "";
@@ -13,7 +13,7 @@ export class User {
     atCreated = "";
 
     toJson(data) {
-        this.userId = data.userid;
+        this.id = data.id;
         this.role = data.role;
         this.name = data.name;
         this.phoneNumber = data.phonenumber;
