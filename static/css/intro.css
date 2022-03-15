@@ -11,6 +11,7 @@
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
+    min-height: 90vh;
 }
 
 /* images */
@@ -35,6 +36,33 @@
     left: 0px;
 }
 
+.wallpaper .center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    border: 10px solid white;
+    text-align: center;
+    z-index: 2;
+    width: 800px;
+    border-style: double;
+}
+
+.logopdu {
+    width: 150px;
+}
+
+.wallpaper .center div:nth-child(2) {
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.wallpaper .center div:nth-child(1) {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
 .wallpaper .title {
     font-size: 25px;
 }
@@ -42,16 +70,67 @@
 .wallpaper .category {
     display: flex;
     height: 60px;
-    background: black;
-    box-shadow: 0px 0px 3px grey;
+    z-index: 1;
     align-items: center;
+    position: relative;
+    margin: 0px 20vw;
 }
 
-.wallpaper .category .title {
+.wallpaper .category .title,
+.wallpaper .category .register,
+.wallpaper .category .menu .item {
     width: 100px;
     text-align: center;
 }
 
-.wallpaper .category .title, .wallpaper .category .menu .item {
+.wallpaper .category .menu .item a.text {
+    color: white;
+}
+
+.wallpaper .category .menu {
+    width: 100%;
+    display: flex;
+}
+
+.wallpaper .category .register {
+    display: flex;
+    align-items: center;
+    width: 250px;
+}
+
+.wallpaper .category .register span {
+    margin-right: 10px;
+}
+
+.register-button {
+    color: red !important;
+    border-radius: 30px;
+    width: 100px;
+    text-align: center;
+}
+
+.register-button .span-1 {
+    color: rgb(165, 0, 0) !important;
+    background: rgb(255, 72, 72) !important;
+    background: none;
+    border-radius: 30px !important;
+    margin: 0px !important;
+}
+
+.register-button .span-1::after,
+.register-button .span-1::before {
+    background-color: #6f0014 !important;
+}
+
+.register-button .span-2 {
+    padding: 5px 10px;
+    color: rgb(182, 0, 0) !important;
+    margin: 0px !important;
+}
+
+.wallpaper .category .title,
+.wallpaper .category .menu .item {
     cursor: pointer;
 }
+
+

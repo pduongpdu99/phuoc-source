@@ -8,40 +8,57 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/intro.css">
     <link rel="stylesheet" href="css/common.css">
+
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/footer.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
     <div class="container-fuild">
 
         <div id="wallpaper" class="wallpaper">
-            <div class="color-widget">
-                <div class="category">
-                    <div class="title">
-                        <div class="text">PDU</div>
+            <div class="color-widget"></div>
+            <div class="category">
+                <div class="title">
+                    <div class="text"><strong>PDU</strong></div>
+                </div>
+                <div class="menu">
+                    <div class="item">
+                        <a href="#booking" class="text">Booking</a>
                     </div>
-                    <div class="menu">
-                        <div class="item">
-                            <div class="text">About us</div>
-                        </div>
-                        <div class="item">
-                            <div class="text"></div>
-                        </div>
-                        <div class="item">
-                            <div class="text">Đăng ký</div>
-                        </div>
+                    <div class="item">
+                        <a href="#aboutus" class="text">About us</a>
                     </div>
                 </div>
+                <div class="register">
+                    <span class="material-icons" style="font-size: 16px">bluetooth</span>
+                    <span class="material-icons" style="margin-right: 40px; font-size: 16px">share</span>
+                    <button class="mdc-button mdc-button__ripple register-button">
+                        <span class="mdc-button__ripple span-1"></span>
+                        <span class="mdc-button__label span-2">Register</span>
+                    </button>
+                </div>
             </div>
+
+            <div class="center">
+                <div><img class="logopdu" src="images/logopdu.jpg" alt="logopdu.jpg"></div>
+                <div><strong>TRUNG TÂM HỖ TRỢ SINH VIÊN<br>QUAN HỆ DOANH NGHIỆP VÀ KHỞI NGHIỆP </strong></div>
+                <br>
+                <div>Hoan nghênh chào đón các bạn đến với <br>Ký Túc Xá Trường Đại Học Phạm Văn Đồng </div>
+            </div>
+
         </div>
 
         <div class="d1">
             <div class="Noidung">
-                <h3>TRUNG TÂM HỖ TRỢ SINH VIÊN - QUÂN HỆ DOANH NGHIỆP VÀ KHỞI NGHIỆP </h3>
-                <p>Hoan nghênh chào đón các bạn đến với Ký Túc Xá Trường Đại Học Phạm Văn Đồng </p>
-
-                <div id="button">
-                    <a href=""><button>ĐĂNG KÝ </button></a>
-                </div>
                 <div id="udb">
                     <img src="../hinhanh/trangdau.jpg" alt="" width="1000px" height="300px">
                     <p>Trung tâm hỗ trợ sinh viên trường Đại Học Phạm Văn Đồng nằm cơ sở 13 Huỳnh Thúc Kháng ,TP Quảng
@@ -73,19 +90,120 @@
                 </div>
 
             </div>
-            <div class="d3">
-                <div id="cuoi">
-                    <h3>Cần hỗ trợ thêm hãy liên hệ Ban Quản Lý Thầy : Võ Duy Quân </h3>
-                    <p><img src="../hinhanh/tele.png" alt="" width="25px" height="25px">Số điện thoại : 0975435889</p>
-                    <p><img src="../hinhanh/zalo (3).png" alt="" width="25px" height="25px"> <a
-                            href="https://www.facebook.com/profile.php?id=100059017260123">Facebook : Võ duy Quân</a>
-                    </p>
-                    <p> <img src="../hinhanh/zalo (1).png" alt="" width="25px" height="25px">Zalo :0975435889</p>
-                    <p><img src="../hinhanh/zalo (2).png" alt="" width="25px" height="25px"> email : vdquan@pdu.edu.vn
-                    </p>
+        </div>
+    </div>
+
+    <!-- Site footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-cta pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="cta-text">
+                                <h4>Find us</h4>
+                                <span>509 Phan Đình Phùng, TP. Quảng Ngãi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-phone"></i>
+                            <div class="cta-text">
+                                <h4>Call us</h4>
+                                <span>0982899982</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="far fa-envelope-open"></i>
+                            <div class="cta-text">
+                                <h4>Fullname</h4>
+                                <span>Nguyễn Duy Quân</span> <br> <br>
+
+                                <h4>Mail us</h4>
+                                <span>vdquan@pdu.edu.vn</span> <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-content pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-logo">
+                                <a href="index.html"><img class="logopdu" src="images/logopdu.jpg"
+                                        alt="logopdu.jpg"></a>
+                            </div>
+                            <div class="footer-text">
+                                <p>Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do eiusmod tempor
+                                    incididuntut consec tetur adipisicing
+                                    elit,Lorem ipsum dolor sit amet.</p>
+                            </div>
+                            <div class="footer-social-icon">
+                                <span>Follow us</span>
+                                <a href="https://www.facebook.com/voduy.quan"><i
+                                        class="fab fa-facebook-f facebook-bg"></i></a>
+                                <a href="#"><i class="fab fa-twitter twitter-bg"></i></a>
+                                <a href="#"><i class="fab fa-google-plus-g google-bg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h3>Subscribe</h3>
+                            </div>
+                            <div class="footer-text mb-25">
+                                <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
+                            </div>
+                            <div class="subscribe-form">
+                                <form action="#">
+                                    <input type="text" placeholder="Email Address">
+                                    <button><i class="fab fa-telegram-plane"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="copyright-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                        <div class="copyright-text">
+                            <p>Copyright &copy; 2022, by IT Student from Pham Van Dong University</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                        <div class="footer-menu">
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Terms</a></li>
+                                <li><a href="#">Privacy</a></li>
+                                <li><a href="#">Policy</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

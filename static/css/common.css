@@ -4,9 +4,12 @@
 }
 
 body {
-    background-color: rgb(216, 206, 206);
     color: black;
     position: relative;
     font-family: "Lato", sans-serif;
     margin: 0;
+}
+
+a {
+    text-decoration: none;
 }
