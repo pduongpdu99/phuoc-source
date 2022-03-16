@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From ĐĂNG KÝ</title>
+    <link rel="stylesheet" href="css/ktx.css">
+</head>
+
+<body>
+
+    <table id="container" border="0">
+        <tr>
+            <td id="DK" colspan="3">
+                <h2>ĐƠN ĐĂNG KÝ VÀO KÝ TÚC XÁ</h2>
+            </td>
+        </tr>
+        <tr>
+            <td id="NgayDK" colspan="3">Ngày đăng ký: <input id="Date" type="text"></td>
+        </tr>
+        <tr>
+            <td id="Khoangcach">Họ tên: <br><input id="name" type="text">
+                <div  id="trong"></div>
+            </td>
+            
+            <td id="Khoangcach">
+                <label for="gioitinh">Giới tính</label>
+                <br>
+                <select id="gioitinh">
+                    <option value="nam">Nam</option>
+                    <option value="nu">Nữ</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td id="Khoangcach">Ngày sinh: <br> <input id="borndate" type="text"></td>
+            <td id="Khoangcach">Dân tộc: <br><input id="dantoc" type="text"></td>
+            <td id="Khoangcach">Quốc tịch: <br> <input id="National" type="text"></td>
+        </tr>
+        <tr>
+            <td id="Khoangcach">Số CMND, hộ chiếu: <br><input id="id" type="text"></td>
+            <td id="Khoangcach">Ngày cấp: <br><input id="datec" type="text"></td>
+            <td id="Khoangcach">Nơi cấp: <br><input id="datew" type="text"></td>
+            
+        </tr>
+        <tr>
+            <td id="Khoangcach">SĐT: <br><input id="phone" type="text"></td>
+            <td id="Khoangcach">SĐT gia đình: <br><input id="phoneF" type="text"></td>
+        </tr>
+        <tr>
+            <td id="Khoangcach">Số phòng: <br><input type="text"></td>
+            <td id="Khoangcach">Mã phòng: <br><input type="text"></td>
+        </tr>
+        <tr>
+            <td colspan="3" id="CLDK">
+                <button onclick="cancle()"  id="Cancle">Cancle</button>
+                <button onclick="dangky()" id="DangKy"> Đăng Ký</button>
+            </td>
+        </tr>
+    </table>
+    <script src="ktx.js"></script>
+</body>
+
+</html>
