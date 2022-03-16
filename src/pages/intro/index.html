@@ -19,78 +19,124 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="css/card-fields.css">
 </head>
 
 <body>
-    <div class="container-fuild">
-
-        <div id="wallpaper" class="wallpaper">
-            <div class="color-widget"></div>
-            <div class="category">
-                <div class="title">
-                    <div class="text"><strong>PDU</strong></div>
+    <!-- header -->
+    <div id="wallpaper" class="wallpaper">
+        <div class="color-widget"></div>
+        <div class="category">
+            <div class="title">
+                <div class="text"><strong>PDU</strong></div>
+            </div>
+            <div class="menu">
+                <div class="item">
+                    <a href="#booking" class="text">Booking</a>
                 </div>
-                <div class="menu">
-                    <div class="item">
-                        <a href="#booking" class="text">Booking</a>
-                    </div>
-                    <div class="item">
-                        <a href="#aboutus" class="text">About us</a>
-                    </div>
-                </div>
-                <div class="register">
-                    <span class="material-icons" style="font-size: 16px">bluetooth</span>
-                    <span class="material-icons" style="margin-right: 40px; font-size: 16px">share</span>
-                    <button class="mdc-button mdc-button__ripple register-button">
-                        <span class="mdc-button__ripple span-1"></span>
-                        <span class="mdc-button__label span-2">Register</span>
-                    </button>
+                <div class="item">
+                    <a href="#aboutus" class="text">About us</a>
                 </div>
             </div>
-
-            <div class="center">
-                <div><img class="logopdu" src="images/logopdu.jpg" alt="logopdu.jpg"></div>
-                <div><strong>TRUNG TÂM HỖ TRỢ SINH VIÊN<br>QUAN HỆ DOANH NGHIỆP VÀ KHỞI NGHIỆP </strong></div>
-                <br>
-                <div>Hoan nghênh chào đón các bạn đến với <br>Ký Túc Xá Trường Đại Học Phạm Văn Đồng </div>
-            </div>
-
-        </div>
-
-        <div class="d1">
-            <div class="Noidung">
-                <div id="udb">
-                    <img src="../hinhanh/trangdau.jpg" alt="" width="1000px" height="300px">
-                    <p>Trung tâm hỗ trợ sinh viên trường Đại Học Phạm Văn Đồng nằm cơ sở 13 Huỳnh Thúc Kháng ,TP Quảng
-                        Ngãi ,Tỉnh Quảng Ngãi
-                        đã sẵn sàng đón toàn cầu các em sinh viên </p>
-                </div>
-
-            </div>
-            <div class="d2">
-                <div id="image1">
-                    <img src="../hinhanh/mat.jpg" alt="" width="450px" height="200px">
-                    <p> Ký túc xá của Trường Đại Học Pham Văn Đồng nằm cơ sở Huynh Thúc Kháng Lorem ipsum dolor, sit
-                        amet consectetur
-                        adipisicing elit. Porro reprehenderit dolorem voluptatem alias sit earum dolorum, eaque quisquam
-                        tempora quis.</p>
-                    <p></p>
-                </div>
-                <div id="image2">
-                    <img src="../hinhanh/1.jpg" alt="" width="450px" height="200px">
-                    <p> Trong phòng gồm có 4 Giường , phòng ở sạch sẽ Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Nisi earum, nemo
-                        iusto distinctio rerum magni repudiandae. Exercitationem quidem corrupti dolorum? </p>
-                </div>
-                <div id="image3">
-                    <img src="../hinhanh/hoi.jpg" alt="" width="450px" height="200px">
-                    <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint, minima Lorem ipsum dolor sit
-                        amet consectetur adipisicing elit. Pariatur,
-                        recusandae.</p>
-                </div>
-
+            <div class="register">
+                <span class="material-icons" style="font-size: 16px">bluetooth</span>
+                <span class="material-icons" style="margin-right: 40px; font-size: 16px">share</span>
+                <button class="mdc-button mdc-button__ripple register-button">
+                    <span class="mdc-button__ripple span-1"></span>
+                    <span class="mdc-button__label span-2">Register</span>
+                </button>
             </div>
         </div>
+
+        <div class="center">
+            <div><img class="logopdu" src="images/logopdu.jpg" alt="logopdu.jpg"></div>
+            <div><strong>TRUNG TÂM HỖ TRỢ SINH VIÊN<br>QUAN HỆ DOANH NGHIỆP VÀ KHỞI NGHIỆP </strong></div>
+            <br>
+            <div>Hoan nghênh chào đón các bạn đến với <br>Ký Túc Xá Trường Đại Học Phạm Văn Đồng </div>
+        </div>
+    </div>
+
+    <!-- content -->
+    <div class="content">
+        <section id="blog" data-stellar-background-ratio="0.5" style="background-position: 0% -233px;">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12 col-sm-12">
+                        <div class="section-title">
+                            <h2>Our Blog</h2>
+                            <span class="line-bar">...</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <!-- BLOG THUMB -->
+                        <div class="media blog-thumb">
+                            <div class="media-object media-left">
+                                <a href="blog-detail.html"><img src="images/blog-image1.jpg" class="img-responsive"
+                                        alt=""></a>
+                            </div>
+                            <div class="media-body blog-info">
+                                <small><i class="fa fa-clock-o"></i> December 22, 2017</small>
+                                <h3><a href="blog-detail.html">How To Find Out Beautiful Workspace.</a></h3>
+                                <p>Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.</p>
+                                <a href="blog-detail.html" class="btn section-btn">Read article</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <!-- BLOG THUMB -->
+                        <div class="media blog-thumb">
+                            <div class="media-object media-left">
+                                <a href="blog-detail.html"><img src="images/blog-image2.jpg" class="img-responsive"
+                                        alt=""></a>
+                            </div>
+                            <div class="media-body blog-info">
+                                <small><i class="fa fa-clock-o"></i> December 18, 2017</small>
+                                <h3><a href="blog-detail.html">woman sportwear.</a></h3>
+                                <p>Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.</p>
+                                <a href="blog-detail.html" class="btn section-btn">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <!-- BLOG THUMB -->
+                        <div class="media blog-thumb">
+                            <div class="media-object media-left">
+                                <a href="blog-detail.html"><img src="images/blog-image3.jpg" class="img-responsive"
+                                        alt=""></a>
+                            </div>
+                            <div class="media-body blog-info">
+                                <small><i class="fa fa-clock-o"></i> December 14, 2017</small>
+                                <h3><a href="blog-detail.html">new creative fashion.</a></h3>
+                                <p>Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.</p>
+                                <a href="blog-detail.html" class="btn section-btn">Read article</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <!-- BLOG THUMB -->
+                        <div class="media blog-thumb">
+                            <div class="media-object media-left">
+                                <a href="blog-detail.html"><img src="images/blog-image4.jpg" class="img-responsive"
+                                        alt=""></a>
+                            </div>
+                            <div class="media-body blog-info">
+                                <small><i class="fa fa-clock-o"></i> December 10, 2017</small>
+                                <h3><a href="blog-detail.html">minimalist design trend in 2018.</a></h3>
+                                <p>Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.</p>
+                                <a href="blog-detail.html" class="btn section-btn">View Detail</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- Site footer -->

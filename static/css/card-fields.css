@@ -1,0 +1,25 @@
+#blog {
+    background: #f0f0f0;
+}
+
+section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    text-align: center;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
