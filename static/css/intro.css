@@ -22,7 +22,7 @@
 }
 
 .image.logo.blur {
-    filter: blur(8px);
+    filter: blur(30px);
 }
 
 .wallpaper .color-widget {

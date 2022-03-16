@@ -1,25 +1,231 @@
-#blog {
-    background: #f0f0f0;
+.media:first-child {
+    margin-top: 0;
 }
 
-section {
-    padding-top: 80px;
-    padding-bottom: 80px;
+.blog-thumb {
+    background: #ffffff;
+    -webkit-box-shadow: 0 1px 30px rgb(0 0 0 / 10%);
+    -moz-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 30px rgb(0 0 0 / 10%);
+    border-radius: 3px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.media.blog-thumb .media-left {
+    width: 35%;
+}
+.media-body,
+.media-left,
+.media-right {
+    display: table-cell;
+    vertical-align: top;
+}
+.media-left,
+.media > .pull-left {
+    padding-right: 10px;
+}
+.media-object {
+    display: block;
+}
+
+a {
+    color: #252525;
+    font-weight: normal;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    text-decoration: none !important;
+}
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+a {
+    background-color: transparent;
+}
+
+.blog-info {
+    padding: 55px 25px;
+}
+.media-body,
+.media-left,
+.media-right {
+    display: table-cell;
+    vertical-align: top;
+}
+.media-body {
+    width: 10000px;
+}
+
+.blog-thumb small {
+    color: #ce3232;
+    font-weight: 500;
+    display: block;
+}
+.small,
+small {
+    font-size: 85%;
+}
+
+.blog-thumb small .fa {
+    margin-right: 5px;
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.blog-info h3 {
+    margin: 0;
+    padding: 8px 0 6px 0;
+    text-transform: capitalize;
+}
+h3 {
+    color: #505050;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+p {
+    color: #757575;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 25px;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+.blog-info .section-btn {
+    background: #f0f0f0;
+    color: #393939;
+    margin-top: 20px;
+}
+.section-btn {
+    background: #ce3232;
+    border: 0;
+    border-radius: 100px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: inherit;
+    font-weight: normal;
+    padding: 15px 30px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.carousel-inner > .item > a > img,
+.carousel-inner > .item > img,
+.img-responsive,
+.thumbnail a > img,
+.thumbnail > img {
+    display: inline-block;
+    max-width: 100%;
+    height: 320px;
+    width: 300px;
+}
+
+img {
+    vertical-align: middle;
+}
+img {
+    border: 0;
+}
+
+.section-row {
+    display: flex;
+}
+
+.section-row .media {
+    margin: 20px;
+}
+
+.media-object.media-left {
+    background-position: center;
+}
+
+/* card */
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.section-work {
+    background-position: 0% -64.0938px;
+    vertical-align: top;
+    padding: 100px 0px;
+}
+
+.section-work .section-title {
+    margin-bottom: 100px;
+}
+
+.section-work .card {
+    width: 90%;
+    max-width: 450px;
+    background-color: #fff;
+    padding: 0 2rem 1.5rem 2rem;
+    border-radius: 10px;
+    transition: box-shadow 0.3s linear;
+}
+.section-work .card:hover {
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.3);
+}
+
+.section-work .card .card-img {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    transform: translateY(-15%);
+    transition: box-shadow 0.3s linear;
+}
+.section-work .card:hover .card-img {
+    box-shadow: none;
+}
+.section-work .card .card-img img {
+    width: 100%;
+    display: block;
+}
+
+.section-work .card .card-content {
     text-align: center;
 }
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-main,
-menu,
-nav,
-section,
-summary {
-    display: block;
+.section-work .card .card-content .big-title {
+    color: #333;
+    font-size: 1.3rem;
+}
+.section-work .card .card-content .medium-title {
+    color: #999;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
 }
