@@ -11,38 +11,38 @@
 </head>
 
 <body>
-   <div class="room-contrainner">
-      <label for="">Hãy chọn giới tính của ban:</label>
-      <select name="" id="room">
-         <option value="220">Nam</option>
-         <option value="230">Nữ</option>
-      </select>
+   <div class="room-planning">
+      <div class="room-contrainner">
+         <label for="">Hãy chọn giới tính của ban:</label>
+         <select name="" id="room">
+            <option value="220">Nam</option>
+            <option value="230">Nữ</option>
+         </select>
+      </div>
+      
+      <ul class="showcase">
+         <li>
+            <div class="select-room"> </div>
+            <small id="form">chọn</small>
+         </li>
+         <li>
+            <div class="notFull-room"></div>
+            <small id="form">Trống</small>
+         </li>
+         <li>
+            <div class="still-room"> </div>
+            <small id="form">còn ghép được</small>
+         </li>
+         <li>
+            <div class="Full-room"> </div>
+            <small id="form">phòng đã đầy</small>
+         </li>
+      </ul>
+      <div class="contrainner" id="container-male"></div>
+      <div style="margin-top: 100px;"></div>
+      <div class="contrainner" id="container-female"></div>
    </div>
-   <ul class="showcase">
-      <li>
-         <div class="select-room">
-            <small>chọn</small>
-         </div>
-      </li>
-      <li>
-         <div class="notFull-room">
-            <small>Trống</small>
-         </div>
-      </li>
-      <li>
-         <div class="still-room">
-            <small>còn ghép được</small>
-         </div>
-      </li>
-      <li>
-         <div class="Full-room">
-            <small>phòng đã đầy</small>
-         </div>
-      </li>
-   </ul>
-   <div class="contrainner" id="container-male"></div>
-   <div style="margin-top: 100px;"></div>
-   <div class="contrainner" id="container-female"></div>
+   </div>
    <script type="text/javascript" src="js/room.js"></script>
 </body>
 

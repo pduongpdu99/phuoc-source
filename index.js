@@ -12,5 +12,5 @@ app.use('', routing(express))
 
 // listening
 app.listen(process.env.PORT, function () {
-    console.log("Listening on Port 5000");
+    console.log('Listening on Port', process.env.PORT);
 });
