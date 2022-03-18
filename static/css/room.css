@@ -1,5 +1,13 @@
-.room-contrainner {
+.room-planning{
     margin: 20px 0;
+    width: 1200px;
+    padding:100px ;
+   
+}
+.room-contrainner {
+    
+    text-align: center;
+   
 }
 .room-contrainner select {
     background-color: #eff;
@@ -9,33 +17,28 @@
     margin-left: 10px;
     padding: 5px 15px 5px 15px;
     -moz-appearance: none;
+   
 }
 .contrainner {
     perspective: 1000px;
     margin-bottom: 30px;
+   
 }
 .row {
     display: flex;
+    padding-left: 50px;
 }
 .row1 {
     display: flex;
 }
-.between {
-    background-color: rgb(194, 191, 191);
-    height: 150px;
-    width: 800px;
-    margin: 5px;
-    border-radius: 10px;
-    text-align: center;
-    padding: 10px;
-}
+
 .room {
-    height: 30px;
-    width: 70px;
+    height: 50px;
+    width: 100px;
     margin: 5px;
     border-radius: 10px;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
     cursor: pointer;
 }
 .room.select-room {
@@ -55,20 +58,58 @@
     transform: scale(1);
 }
 .showcase {
-    background: rgba(0, 0, 0, 0.1);
-    padding: 5px 10px;
+    
+    padding: 5px 200px;
     border-radius: 5px;
-    color: blue;
+    color: rgb(175, 175, 248);
     list-style-type: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: 10%;
+    width: 100%;
+    margin: 0 20px;
+    
+    
 }
+    
+
 .showcase li {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 10px;
+    margin: 20px ;
+    
+    
 }
-.showcase li small {
-    padding-left: 3px;
+.showcase li .select-room {
+   
+    background-color: aquamarine;
+    border-radius: 30%;
+   padding: 10px;
+    
 }
+.showcase li .notFull-room {
+   
+    background-color: greenyellow;
+    border-radius: 30%;
+   padding: 10px;
+    
+}
+.showcase li .still-room {
+   
+    background-color: rgb(248, 192, 87);
+    border-radius: 30%;
+    padding: 10px;
+    
+}
+.showcase li .Full-room {
+   
+    background-color: rgb(240, 84, 84);
+    border-radius: 30%;
+   padding: 10px;
+    
+}
+#form{
+   padding-left: 20px;
+    
+
+}
+
+
