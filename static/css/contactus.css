@@ -16,12 +16,14 @@
 #contact-us #map {
     height: 100%;
     width: 50%;
+    background: rgb(247, 247, 247);
 }
 
 #contact-us .container__content {
     color: var(--white);
     margin: 2em 3em;
     padding: 0.5rem;
+    background: rgb(247, 247, 247);
 }
 
 #contact-us .content__social {
@@ -91,4 +93,34 @@
 #contact-us {
     background: rgb(223, 223, 223);
     padding: 200px 0px;
+}
+
+/* media */
+@media only screen and (max-width: 994px) {
+    #contact-us {
+        padding: 100px 0px;
+    }
+
+    #contact-us .container {
+        background: none;
+        box-shadow: none;
+        display: block;
+        height: fit-content;
+        text-align: left;
+        width: 100%;
+        padding: 10px;
+        transform: scale(0.95);
+    }
+
+    #contact-us #map {
+        width: 100%;
+    }
+
+    #contact-us .container__content {
+        color: var(--white);
+        margin: 0;
+        padding: 0.5rem;
+        background: rgb(247, 247, 247);
+        margin-top: 20px;
+    }
 }

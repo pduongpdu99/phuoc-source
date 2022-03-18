@@ -45,12 +45,20 @@
     border: 10px solid white;
     text-align: center;
     z-index: 2;
-    width: 800px;
+    width: 50vw;
     border-style: double;
 }
 
+.wallpaper .center .center-box-title {
+    font-size: 2vw;
+}
+
+.wallpaper .center .center-box-welcome {
+    font-size: 1vw;
+}
+
 .logopdu {
-    width: 150px;
+    width: 15vw;
 }
 
 .wallpaper .center div:nth-child(2) {
@@ -140,4 +148,199 @@
     -webkit-line-clamp: 3;
     line-clamp: 3;
     -webkit-box-orient: vertical;
+}
+
+/* mobile */
+.category-mobile {
+    width: 100%;
+    color: #ffffff;
+    position: relative;
+    top: 0px;
+    z-index: 1;
+
+    display: none !important;
+}
+
+.category-mobile .header-fixed {
+    background-color: #151414;
+    padding: 20px 40px;
+    /* height: 80px; */
+    color: #ffffff;
+    box-sizing: border-box;
+    top: -100px;
+
+    -webkit-transition: top 0.3s;
+    transition: top 0.3s;
+}
+
+.category-mobile .header-fixed .header-limiter {
+    max-width: 1200px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/*	The header placeholder. It is displayed when the header is fixed to the top of the
+	browser window, in order to prevent the content of the page from jumping up. */
+
+.category-mobile .header-fixed-placeholder {
+    height: 80px;
+    display: none;
+}
+
+/* Logo */
+
+.category-mobile .header-fixed .header-limiter h1 {
+    /* float: left; */
+    font: normal 28px Cookie, Arial, Helvetica, sans-serif;
+    line-height: 40px;
+    margin: 0;
+}
+
+.category-mobile .header-fixed .header-limiter h1 span {
+    color: #ff5e14;
+}
+
+/* The navigation links */
+
+.category-mobile .header-fixed .header-limiter a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.category-mobile .header-fixed .header-limiter nav {
+    font: 16px Arial, Helvetica, sans-serif;
+    line-height: 40px;
+    /* float: right; */
+}
+
+.category-mobile .header-fixed .header-limiter nav a {
+    display: inline-block;
+    padding: 0 5px;
+    text-decoration: none;
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+.category-mobile .header-fixed .header-limiter nav a:hover {
+    opacity: 1;
+}
+
+.category-mobile .header-fixed .header-limiter nav a.selected {
+    color: #ff5e14;
+    pointer-events: none;
+    opacity: 1;
+}
+
+/* Fixed version of the header */
+
+body.fixed .header-fixed {
+    padding: 10px 40px;
+    height: 50px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+body.fixed .header-fixed-placeholder {
+    display: block;
+}
+
+body.fixed .header-fixed .header-limiter h1 {
+    font-size: 24px;
+    line-height: 30px;
+}
+
+body.fixed .header-fixed .header-limiter nav {
+    line-height: 28px;
+    font-size: 13px;
+}
+
+/* media */
+@media only screen and (max-width: 994px) {
+    .wallpaper .center {
+        width: 80vw;
+    }
+
+    .logopdu {
+        width: 18vw;
+    }
+
+    .wallpaper .center .center-box-title {
+        font-size: 3vw !important;
+    }
+
+    .wallpaper .center .center-box-welcome {
+        font-size: 2vw !important;
+    }
+
+    .wallpaper .category {
+        display: none;
+    }
+
+    .wallpaper .category-mobile {
+        display: block !important;
+    }
+
+    #work div:nth-child(2) .container {
+        margin-bottom: 40px;
+        text-align: -webkit-center;
+    }
+
+    .media-body,
+    .media-left,
+    .media-right {
+        display: table-row-group !important;
+    }
+
+    .media-body.blog-info div {
+        padding: 20px !important;
+    }
+
+    .carousel-inner > .item > a > img,
+    .carousel-inner > .item > img,
+    .img-responsive,
+    .thumbnail a > img,
+    .thumbnail > img {
+        width: 100% !important;
+    }
+}
+
+@media all and (max-width: 750px) {
+    #work div:nth-child(2) {
+        display: block !important;
+    }
+}
+
+@media all and (max-width: 600px) {
+    .header-fixed {
+        padding: 20px 0;
+        /* height: 75px; */
+    }
+
+    .header-fixed .header-limiter h1 {
+        float: none;
+        margin: -8px 0 10px;
+        text-align: center;
+        font-size: 24px;
+        line-height: 1;
+    }
+
+    .header-fixed .header-limiter nav {
+        line-height: 1;
+        float: none;
+    }
+
+    .header-fixed .header-limiter nav a {
+        font-size: 13px;
+    }
+
+    body.fixed .header-fixed {
+        display: none;
+    }
+
+    .section-row {
+        display: block !important;
+    }
 }
