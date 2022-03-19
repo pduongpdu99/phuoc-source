@@ -1,66 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>From ĐĂNG KÝ</title>
-    <link rel="stylesheet" href="css/ktx.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/register.css">
 </head>
-
 <body>
+    <p class="tip">Trung tâm hỗ trợ sinh viên - quan hệ Doanh nghiệp và khởi nghiệp.</p>
+<div class="cont">
+  <div class="form ">
+    <h2>Đơn đăng ký vào ở ký túc xá</h2>
+    <label>
+      <span>Họ và tên</span>
+      <input type="text" />
+    </label>
+    <label>
+      <span>ngày sinh</span>
+      <input type="text" />
+    </label>
+    <label>
+        <span>Giới tính</span>
+        <select name="" id="gender">
+            <option value="220">Nam</option>
+            <option value="230">Nữ</option>
+        </select>
+      </label>
+      <label>
+        <span>Dân tộc</span>
+        <input type="text" />
+      </label>
+      <label>
+      <span>Quốc tịch</span>
+        <input type="text" />
+      </label>
+      <label>
+        <span>Số CNND/CCCD</span>
+          <input type="text" />
+     </label>
+     <label>
+        <span>Địa chỉ</span>
+          <input type="text" />
+     </label>
+     <label>
+        <span>Số điện thoại</span>
+          <input type="text" />
+     </label>
+     <label>
+        <span>Mã phòng</span>
+          <input type="text" />
+     </label>
+     <label>
+        <span>Số phòng</span>
+          <input type="text" />
+     </label>
 
-    <table id="container" border="0">
-        <tr>
-            <td id="DK" colspan="3">
-                <h2>ĐƠN ĐĂNG KÝ VÀO KÝ TÚC XÁ</h2>
-            </td>
-        </tr>
-        <tr>
-            <td id="NgayDK" colspan="3">Ngày đăng ký: <input id="Date" type="text"></td>
-        </tr>
-        <tr>
-            <td id="Khoangcach">Họ tên: <br><input id="name" type="text">
-                <div  id="trong"></div>
-            </td>
-            
-            <td id="Khoangcach">
-                <label for="gioitinh">Giới tính</label>
-                <br>
-                <select id="gioitinh">
-                    <option value="nam">Nam</option>
-                    <option value="nu">Nữ</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td id="Khoangcach">Ngày sinh: <br> <input id="borndate" type="text"></td>
-            <td id="Khoangcach">Dân tộc: <br><input id="dantoc" type="text"></td>
-            <td id="Khoangcach">Quốc tịch: <br> <input id="National" type="text"></td>
-        </tr>
-        <tr>
-            <td id="Khoangcach">Số CMND, hộ chiếu: <br><input id="id" type="text"></td>
-            <td id="Khoangcach">Ngày cấp: <br><input id="datec" type="text"></td>
-            <td id="Khoangcach">Nơi cấp: <br><input id="datew" type="text"></td>
-            
-        </tr>
-        <tr>
-            <td id="Khoangcach">SĐT: <br><input id="phone" type="text"></td>
-            <td id="Khoangcach">SĐT gia đình: <br><input id="phoneF" type="text"></td>
-        </tr>
-        <tr>
-            <td id="Khoangcach">Số phòng: <br><input type="text"></td>
-            <td id="Khoangcach">Mã phòng: <br><input type="text"></td>
-        </tr>
-        <tr>
-            <td colspan="3" id="CLDK">
-                <button onclick="cancle()"  id="Cancle">Cancle</button>
-                <button onclick="dangky()" id="DangKy"> Đăng Ký</button>
-            </td>
-        </tr>
-    </table>
-    <script src="ktx.js"></script>
+    <button type="button" class="submit">Đăng ký</button>
+    <button type="button" class="fb-btn">Hủy</button>
+  </div>
+  <div class="sub-cont">
+    <div class="img">
+      <div class="img__text m--up">
+        <h2>Welcome to Dormitory of PDU</h2>
+        <p>Vui mừng chào đón các bạn tới với kí tý xá trường Đại học Phạm Văn Đồng</p>
+      </div>
+   
+
 </body>
-
 </html>
