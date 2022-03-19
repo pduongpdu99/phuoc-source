@@ -1,28 +1,20 @@
-.room-planning{
-    margin: 20px 0;
-    width: 1200px;
-    padding:100px ;
-   
+.room-planning {
+    padding: 100px;
+    position: relative;
+    width: fit-content;
+    display: inline-block;
 }
-.room-contrainner {
-    
-    text-align: center;
-   
+
+body {
+    background: #f4f4f4;
 }
-.room-contrainner select {
-    background-color: #eff;
-    border: 0;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-left: 10px;
-    padding: 5px 15px 5px 15px;
-    -moz-appearance: none;
-   
+
+.phuoc-element-css.select {
+    position: relative;
 }
 .contrainner {
     perspective: 1000px;
     margin-bottom: 30px;
-   
 }
 .row {
     display: flex;
@@ -36,80 +28,89 @@
     height: 50px;
     width: 100px;
     margin: 5px;
-    border-radius: 10px;
     text-align: center;
     padding: 15px;
+    box-shadow: 0px 0px 5px #a9a9a9;
     cursor: pointer;
 }
+
 .room.select-room {
     background-color: aquamarine;
+    transition: .2s;
 }
+
+.room.select-room:hover {
+    background-color: rgb(73, 230, 177);
+    transition: .2s;
+}
+
 .room.full-room {
     background-color: rgb(243, 36, 36);
+    transition: .2s;
 }
+
+.room.full-room:hover {
+    background-color: rgb(173, 3, 3);
+    transition: .2s;
+}
+
 .room.still-room {
     background-color: rgb(245, 153, 120);
+    transition: .2s;
 }
+
+.room.still-room:hover {
+    background-color: rgb(221, 79, 27);
+    transition: .2s;
+}
+
 .room.notFull-room {
-    background-color: greenyellow;
+    background-color: #89ff2f;
+    transition: .2s;
 }
+.room.notFull-room:hover {
+    background-color: #72db22;
+    transition: .2s;
+}
+
 .showcase room:not(.sold):hover {
     cursor: default;
     transform: scale(1);
 }
 .showcase {
-    
     padding: 5px 200px;
     border-radius: 5px;
     color: rgb(175, 175, 248);
     list-style-type: none;
     display: flex;
-    justify-content: 10%;
     width: 100%;
     margin: 0 20px;
-    
-    
 }
-    
 
 .showcase li {
     display: flex;
-    margin: 20px ;
-    
-    
+    margin: 20px;
 }
 .showcase li .select-room {
-   
     background-color: aquamarine;
     border-radius: 30%;
-   padding: 10px;
-    
+    padding: 10px;
 }
 .showcase li .notFull-room {
-   
-    background-color: greenyellow;
+    background-color: #89ff2f;
     border-radius: 30%;
-   padding: 10px;
-    
+    padding: 10px;
 }
 .showcase li .still-room {
-   
     background-color: rgb(248, 192, 87);
     border-radius: 30%;
     padding: 10px;
-    
 }
 .showcase li .Full-room {
-   
     background-color: rgb(240, 84, 84);
     border-radius: 30%;
-   padding: 10px;
-    
+    padding: 10px;
 }
-#form{
-   padding-left: 20px;
-    
-
+#form {
+    padding-left: 20px;
 }
-
-

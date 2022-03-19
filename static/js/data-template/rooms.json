@@ -1,0 +1,362 @@
+[
+    {
+        "id": "room-0101",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "1",
+        "status": "empty",
+        "user_number": 0,
+        "name": "101",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0102",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "1",
+        "status": "semi",
+        "user_number": 2,
+        "name": "102",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0103",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "1",
+        "status": "semi",
+        "user_number": 2,
+        "name": "103",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0104",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "1",
+        "status": "empty",
+        "user_number": 0,
+        "name": "104",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0105",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "1",
+        "status": "empty",
+        "user_number": 0,
+        "name": "105",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0106",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "1",
+        "status": "empty",
+        "user_number": 0,
+        "name": "106",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0107",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "1",
+        "status": "empty",
+        "user_number": 0,
+        "name": "107",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0108",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "1",
+        "status": "full",
+        "user_number": 4,
+        "name": "108",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0109",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "1",
+        "status": "empty",
+        "user_number": 0,
+        "name": "109",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0110",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "1",
+        "status": "empty",
+        "user_number": 0,
+        "name": "110",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0201",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "2",
+        "status": "empty",
+        "user_number": 0,
+        "name": "201",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0202",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "2",
+        "status": "semi",
+        "user_number": 2,
+        "name": "202",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0203",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "2",
+        "status": "semi",
+        "user_number": 2,
+        "name": "203",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0204",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "2",
+        "status": "empty",
+        "user_number": 0,
+        "name": "204",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0205",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "2",
+        "status": "empty",
+        "user_number": 0,
+        "name": "205",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0206",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "2",
+        "status": "empty",
+        "user_number": 0,
+        "name": "206",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0207",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "2",
+        "status": "empty",
+        "user_number": 0,
+        "name": "207",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0208",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "2",
+        "status": "full",
+        "user_number": 4,
+        "name": "208",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0209",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "2",
+        "status": "empty",
+        "user_number": 0,
+        "name": "209",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0210",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "2",
+        "status": "empty",
+        "user_number": 0,
+        "name": "210",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0301",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "3",
+        "status": "empty",
+        "user_number": 0,
+        "name": "301",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0302",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "3",
+        "status": "semi",
+        "user_number": 2,
+        "name": "302",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0303",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "3",
+        "status": "semi",
+        "user_number": 2,
+        "name": "303",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0304",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "3",
+        "status": "empty",
+        "user_number": 0,
+        "name": "304",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0305",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "3",
+        "status": "empty",
+        "user_number": 0,
+        "name": "305",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0306",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "3",
+        "status": "empty",
+        "user_number": 0,
+        "name": "306",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0307",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "3",
+        "status": "empty",
+        "user_number": 0,
+        "name": "307",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0308",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "3",
+        "status": "full",
+        "user_number": 4,
+        "name": "308",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0309",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "3",
+        "status": "empty",
+        "user_number": 0,
+        "name": "309",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0310",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "3",
+        "status": "empty",
+        "user_number": 0,
+        "name": "310",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0401",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "4",
+        "status": "empty",
+        "user_number": 0,
+        "name": "401",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0402",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "4",
+        "status": "semi",
+        "user_number": 2,
+        "name": "402",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0403",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "4",
+        "status": "semi",
+        "user_number": 2,
+        "name": "403",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0404",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "4",
+        "status": "empty",
+        "user_number": 0,
+        "name": "404",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0405",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "4",
+        "status": "empty",
+        "user_number": 0,
+        "name": "405",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0406",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "4",
+        "status": "empty",
+        "user_number": 0,
+        "name": "406",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0407",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "4",
+        "status": "empty",
+        "user_number": 0,
+        "name": "407",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0408",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "4",
+        "status": "full",
+        "user_number": 4,
+        "name": "408",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0409",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "4",
+        "status": "empty",
+        "user_number": 0,
+        "name": "409",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    },
+    {
+        "id": "room-0410",
+        "register_createdAt": "December 10, 2020",
+        "floorId": "4",
+        "status": "empty",
+        "user_number": 0,
+        "name": "410",
+        "describe": "Ký túc xá Phạm Văn Đồng"
+    }
+]

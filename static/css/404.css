@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css?family=Kanit:900");
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  /*overflow: hidden;*/
+  background-color: rgb(12, 86, 181);
+}
+h1,
+h4 {
+  font-family: "Kanit";
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 0 #09448f, 0 2px 0 #093f85, 0 3px 0 #083b7c, 0 4px 0 #083672, 0 5px 0 #073268, 0 6px 0 #062d5f,
+    0 7px 0 #062955, 0 8px 0 #05244c, 0 0 5px rgb(0 62 142 / 5%), 0 -1px 3px rgb(0 62 142 / 20%),
+    0 9px 9px rgb(0 62 142 / 30%), 0 12px 12px rgb(0 62 142 / 30%), 0 15px 15px rgb(0 62 142 / 30%);
+  font-size: 4rem;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+}
+.box {
+  background-color: #88ce02;
+  width: 140px;
+  height: 140px;
+  border-radius: 10%;
+}
+
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 25em;
+  padding-bottom: 25em;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.svg-content {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#LeftFoot {
+  transform-origin: 12px 2px;
+}
+
+.one {
+  opacity: 0;
+  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation-delay: 0s;
+  animation: dot 1.3s infinite;
+  animation-delay: 0s;
+}
+
+.two {
+  opacity: 0;
+  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation-delay: 0.2s;
+  animation: dot 1.3s infinite;
+  animation-delay: 0.2s;
+}
+
+.three {
+  opacity: 0;
+  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation-delay: 0.3s;
+  animation: dot 1.3s infinite;
+  animation-delay: 0.3s;
+}
+
+@-webkit-keyframes dot {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes dot {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.st0 {
+  fill: none;
+  stroke: #019985;
+  stroke-width: 23;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+}
+.st1 {
+  fill: none;
+  stroke: #019985;
+  stroke-width: 23;
+  stroke-miterlimit: 10;
+}
+.st2 {
+  fill: #53c2b6;
+}
+.st3 {
+  fill: none;
+  stroke: #019985;
+  stroke-width: 5;
+  stroke-miterlimit: 10;
+}
+.st4 {
+  fill: none;
+  stroke: #1f3353;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+}
+.st5 {
+  fill: #059985;
+}
+.st6 {
+  fill: none;
+  stroke: #019985;
+  stroke-width: 26;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+}
+.st7 {
+  fill: #019985;
+}
+.st8 {
+  fill: #15263d;
+}
+.st9 {
+  fill: #1f3454;
+}
+.st10 {
+  fill: #4ac6e7;
+}
+.st11 {
+  fill: #6fcee5;
+}
+.st12 {
+  fill: #ffffff;
+}
+
+h4 {
+  font-size: 2rem;
+}

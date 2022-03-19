@@ -6,11 +6,12 @@
 
 #contact-us .container {
     background: rgb(247, 247, 247);
-    box-shadow: 0px 10px 50px 5px rgb(145, 145, 145);
+    box-shadow: 0px 10px 50px 5px rgb(164 164 164 / 37%);
     display: flex;
     height: 28rem;
     text-align: left;
     width: 50rem;
+    border-radius: 20px;
 }
 
 #contact-us #map {
@@ -91,7 +92,7 @@
 }
 
 #contact-us {
-    background: rgb(223, 223, 223);
+    background: #f3f6fd;
     padding: 200px 0px;
 }
 
@@ -102,14 +103,18 @@
     }
 
     #contact-us .container {
-        background: none;
-        box-shadow: none;
+        background: rgb(247, 247, 247);
+        /* box-shadow: none; */
         display: block;
         height: fit-content;
         text-align: left;
         width: 100%;
         padding: 10px;
         transform: scale(0.95);
+    }
+    
+    iframe {
+        border-radius: 10px 10px 0px 0p;
     }
 
     #contact-us #map {

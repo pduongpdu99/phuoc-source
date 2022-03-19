@@ -1,0 +1,110 @@
+[
+    {
+        "id": "user-00001",
+        "role": 1,
+        "name": "Phạm Dương",
+        "phoneNumber": "số điện thoại tượng chưng",
+        "address": "Địa chỉ tượng chưng",
+        "nationality": "Việt Nam",
+        "iDCard": "17d480201006",
+        "birth": "1999-05-11",
+        "sex": 2,
+        "roomId": "room-0101"
+    },
+    {
+        "id": "user-00001",
+        "role": 1,
+        "name": "Phạm Dương",
+        "phoneNumber": "số điện thoại tượng chưng",
+        "address": "Địa chỉ tượng chưng",
+        "nationality": "Việt Nam",
+        "iDCard": "17d480201006",
+        "birth": "1999-05-11",
+        "sex": 2,
+        "roomId": "room-0102"
+    },
+    {
+        "id": "user-00002",
+        "role": 1,
+        "name": "Phạm Dương",
+        "phoneNumber": "số điện thoại tượng chưng",
+        "address": "Địa chỉ tượng chưng",
+        "nationality": "Việt Nam",
+        "iDCard": "17d480201006",
+        "birth": "1999-05-11",
+        "sex": 2,
+        "roomId": "room-0103"
+    },
+    {
+        "id": "user-00003",
+        "role": 1,
+        "name": "Phạm Dương",
+        "phoneNumber": "số điện thoại tượng chưng",
+        "address": "Địa chỉ tượng chưng",
+        "nationality": "Việt Nam",
+        "iDCard": "17d480201006",
+        "birth": "1999-05-11",
+        "sex": 2,
+        "roomId": "room-0104"
+    },
+    {
+        "id": "user-00004",
+        "role": 1,
+        "name": "Phạm Dương",
+        "phoneNumber": "số điện thoại tượng chưng",
+        "address": "Địa chỉ tượng chưng",
+        "nationality": "Việt Nam",
+        "iDCard": "17d480201006",
+        "birth": "1999-05-11",
+        "sex": 2,
+        "roomId": "room-0101"
+    },
+    {
+        "id": "user-00005",
+        "role": 1,
+        "name": "Phạm Dương",
+        "phoneNumber": "số điện thoại tượng chưng",
+        "address": "Địa chỉ tượng chưng",
+        "nationality": "Việt Nam",
+        "iDCard": "17d480201006",
+        "birth": "1999-05-11",
+        "sex": 2,
+        "roomId": "room-0102"
+    },
+    {
+        "id": "user-00006",
+        "role": 1,
+        "name": "Phạm Dương",
+        "phoneNumber": "số điện thoại tượng chưng",
+        "address": "Địa chỉ tượng chưng",
+        "nationality": "Việt Nam",
+        "iDCard": "17d480201006",
+        "birth": "1999-05-11",
+        "sex": 2,
+        "roomId": "room-0102"
+    },
+    {
+        "id": "user-00007",
+        "role": 1,
+        "name": "Phạm Dương",
+        "phoneNumber": "số điện thoại tượng chưng",
+        "address": "Địa chỉ tượng chưng",
+        "nationality": "Việt Nam",
+        "iDCard": "17d480201006",
+        "birth": "1999-05-11",
+        "sex": 2,
+        "roomId": "room-0103"
+    },
+    {
+        "id": "user-00008",
+        "role": 1,
+        "name": "Phạm Dương",
+        "phoneNumber": "số điện thoại tượng chưng",
+        "address": "Địa chỉ tượng chưng",
+        "nationality": "Việt Nam",
+        "iDCard": "17d480201006",
+        "birth": "1999-05-11",
+        "sex": 2,
+        "roomId": "room-0103"
+    }
+]
