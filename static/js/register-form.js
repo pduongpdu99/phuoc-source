@@ -98,17 +98,17 @@ const danToc = [
 
 RoomProvider.getAll().then(rooms => {
   let roomOptions = document.getElementById('room-options');
+
   rooms = rooms.sort((a, b) => {
     return parseInt(a.name) - parseInt(b.name);
   });
+
   roomOptions.innerHTML = rooms
     .map(room => `<option value="${room.id}">${room.name}</option>`)
     .join('');
-})
+});
 
 function onSubmitClick() {
-
-
   const fullname = document.getElementById('fullname');
   const number = document.getElementById('number');
   const address = document.getElementById('address');
