@@ -3,7 +3,10 @@ const FRONTEND = {
     MODEL_PATH: {
         ROOM: 'rooms',
         USER: 'users',
-        HISTORY: 'historys'
+        HISTORY: 'historys',
+        NATIONALITY: 'nationality',
+        DANTOC: 'dantocs',
+        FLOOR: 'floor',
     }
 }
 

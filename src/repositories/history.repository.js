@@ -1,7 +1,7 @@
 import FRONTEND from '/config/config.js';
 
 const historyAPIPath = `${FRONTEND.BACKEND_PATH}`;
-export class HistoryRepository {
+class HistoryRepository {
     /**
     * get all API
     * @returns list
@@ -71,3 +71,5 @@ export class HistoryRepository {
         }).then(data => data.json());
     }
 }
+
+export default HistoryRepository;

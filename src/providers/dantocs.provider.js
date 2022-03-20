@@ -1,15 +1,15 @@
-import { History } from "/models/index.js";
-import { HistoryRepository } from "/repositories/index.js";
+import { Dantoc } from "/models/index.js";
+import { DantocRepository } from "/repositories/index.js";
 
-class HistoryProvider {
+class DantocProvider {
     /**
      * get all API
      * @returns list
      */
     static async getAll() {
-        return HistoryRepository.getAll().then(data => {
+        return DantocRepository.getAll().then(data => {
             return data.map(item => {
-                let model = new History();
+                let model = new Dantoc();
                 model.toJson(item);
                 return model;
             });
@@ -22,8 +22,8 @@ class HistoryProvider {
      * @returns 
      */
     static async findById(id = "") {
-        return HistoryRepository.findById(id).then(item => {
-            let model = new History();
+        return DantocRepository.findById(id).then(item => {
+            let model = new Dantoc();
             model.toJson(item);
             return model;
         });
@@ -35,7 +35,7 @@ class HistoryProvider {
      * @returns 
      */
     static async create(body = {}) {
-        return HistoryRepository.create(body);
+        return DantocRepository.create(body);
     }
 
     /**
@@ -44,7 +44,7 @@ class HistoryProvider {
      * @returns 
      */
     static async deleteById(id = "") {
-        return HistoryRepository.deleteById(id);
+        return DantocRepository.deleteById(id);
     }
 
     /**
@@ -53,8 +53,8 @@ class HistoryProvider {
      * @returns 
      */
     static async updateById(body = {}) {
-        return HistoryRepository.updateById(body);
+        return DantocRepository.updateById(body);
     }
 }
 
-export default HistoryProvider;
+export default DantocProvider;

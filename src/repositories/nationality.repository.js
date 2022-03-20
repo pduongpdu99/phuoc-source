@@ -1,13 +1,13 @@
 import FRONTEND from '/config/config.js';
 
-const userAPIPath = `${FRONTEND.BACKEND_PATH}`;
-class UserRepository {
+const nationalityAPIPath = `${FRONTEND.BACKEND_PATH}`;
+class NATIONALITYRepository {
     /**
     * get all API
     * @returns list
     */
     static async getAll() {
-        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
+        const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}`;
         return fetch(path, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
@@ -21,7 +21,7 @@ class UserRepository {
      * @returns 
      */
     static async findById(id = "") {
-        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/${id}`;
+        const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}/${id}`;
         return fetch(path, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
@@ -35,13 +35,12 @@ class UserRepository {
      * @returns 
      */
     static async create(body = {}) {
-        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
-        console.log(JSON.stringify(body));
+        const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}`;
         return fetch(path, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        }).then(data => data.json())
+        }).then(data => data.json());
     }
 
     /**
@@ -50,12 +49,12 @@ class UserRepository {
      * @returns 
      */
     static async deleteById(id = "") {
-        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/${id}`;
+        const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}/${id}`;
         return fetch(path, {
             method: "DELETE",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json())
+        }).then(data => data.json());
     }
 
     /**
@@ -64,13 +63,13 @@ class UserRepository {
      * @returns 
      */
     static async updateById(body = {}) {
-        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
+        const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}`;
         return fetch(path, {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        }).then(data => data.json())
+        }).then(data => data.json());
     }
 }
 
-export default UserRepository;
+export default NationalityRepository;

@@ -81,21 +81,29 @@ if (registerForm != undefined && registerForm.length > 0) {
 
 document.getElementById('submit').onclick = onSubmitClick;
 document.getElementById('fb-btn').onclick = onCancelClick;
-import UserProvider from '/providers/user.provider.js';
-import RoomProvider from '/providers/room.provider.js';
+
+import {
+  UserProvider,
+  DantocProvider,
+  RoomProvider,
+} from '/providers/index.js';
 
 const nationality = [
   { id: 1, name: 'Việt Nam' },
   { id: 2, name: 'Lào' },
 ]
 
-const danToc = [
-  { id: 'dtoc-0101', name: 'Kinh', nationality: 1 },
-  { id: 'dtoc-0102', name: 'Lào', nationality: 2 },
-  { id: 'dtoc-0103', name: 'Êđê', nationality: 1 },
-  { id: 'dtoc-0104', name: 'Mông', nationality: 1 }
-];
-
+const danToc = ["Bana", "Bố y", "Brâu", "Bru-vân kiều", "Chăm", "Chơ ro", "Chu-ru", "Chứt", "Co", "Cơ ho", "Cờ lao", "Cơ tu", "Cống", "Dao", "Ê-đê", "Gia rai", "Giáy", "Gié-triêng", "Hà nhì", "Hoa", "Hrê", "Kháng", "Khmer", "Khơ mú", "La chí", "La ha", "La hủ", "Lào", "Lô lô", "Lự", "Mạ", "Mảng", "Mnông", "Mông", "Mường", "Ngái", "Nùng", "Ơ đu", "Pà thẻn", "Phù lá", "Pu péo", "Ra glay", "Rơ măm", "Sán chay", "Sán dìu", "Si la", "Tà ôi", "Tày", "Thái", "Thổ", "Kinh", "Xinh mun", "Xơ đăng", "Xtiêng"];
+danToc.forEach(dt => {
+  const body = {
+    name: dt,
+    nationality: "623736b36f608d84c08460fd"
+  };
+  DantocProvider.create(body)
+})
+/**
+ * load data room
+ */
 RoomProvider.getAll().then(rooms => {
   let roomOptions = document.getElementById('room-options');
 

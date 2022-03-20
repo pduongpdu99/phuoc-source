@@ -1,15 +1,15 @@
-import { History } from "/models/index.js";
-import { HistoryRepository } from "/repositories/index.js";
+import { Nationality } from "/models/index.js";
+import { NationalityRepository } from "/repositories/index.js";
 
-class HistoryProvider {
+class NationalityProvider {
     /**
      * get all API
      * @returns list
      */
     static async getAll() {
-        return HistoryRepository.getAll().then(data => {
+        return NationalityRepository.getAll().then(data => {
             return data.map(item => {
-                let model = new History();
+                let model = new Nationality();
                 model.toJson(item);
                 return model;
             });
@@ -22,8 +22,8 @@ class HistoryProvider {
      * @returns 
      */
     static async findById(id = "") {
-        return HistoryRepository.findById(id).then(item => {
-            let model = new History();
+        return NationalityRepository.findById(id).then(item => {
+            let model = new Nationality();
             model.toJson(item);
             return model;
         });
@@ -35,7 +35,7 @@ class HistoryProvider {
      * @returns 
      */
     static async create(body = {}) {
-        return HistoryRepository.create(body);
+        return NationalityRepository.create(body);
     }
 
     /**
@@ -44,7 +44,7 @@ class HistoryProvider {
      * @returns 
      */
     static async deleteById(id = "") {
-        return HistoryRepository.deleteById(id);
+        return NationalityRepository.deleteById(id);
     }
 
     /**
@@ -53,8 +53,8 @@ class HistoryProvider {
      * @returns 
      */
     static async updateById(body = {}) {
-        return HistoryRepository.updateById(body);
+        return NationalityRepository.updateById(body);
     }
 }
 
-export default HistoryProvider;
+export default NationalityProvider;
