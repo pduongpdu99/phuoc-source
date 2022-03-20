@@ -40,7 +40,7 @@ export class HistoryRepository {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        });
+        }).then(data => data.json());
     }
 
     /**
@@ -54,7 +54,7 @@ export class HistoryRepository {
             method: "DELETE",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        });
+        }).then(data => data.json());
     }
 
     /**
@@ -68,6 +68,6 @@ export class HistoryRepository {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        });
+        }).then(data => data.json());
     }
 }

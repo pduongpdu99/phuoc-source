@@ -40,7 +40,7 @@ export class RoomRepository {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        });
+        }).then(data => data.json());
     }
 
     /**
@@ -53,7 +53,7 @@ export class RoomRepository {
         return fetch(path, {
             method: "DELETE",
             body: null,
-        });
+        }).then(data => data.json());
     }
 
     /**
@@ -67,6 +67,6 @@ export class RoomRepository {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        });
+        }).then(data => data.json());
     }
 }
