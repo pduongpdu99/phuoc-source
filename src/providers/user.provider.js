@@ -1,4 +1,4 @@
-import { User } from "../models/index.js";
+import { User } from "/models/index.js";
 import { UserRepository } from "/repositories/index.js";
 
 class UserProvider {

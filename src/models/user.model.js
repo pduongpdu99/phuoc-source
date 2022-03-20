@@ -13,7 +13,7 @@ export class User {
     atCreated = "";
 
     toJson(data) {
-        this.id = data.id;
+        this.id = data._id;
         this.role = data.role;
         this.name = data.name;
         this.phoneNumber = data.phonenumber;

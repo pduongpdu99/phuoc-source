@@ -6,7 +6,7 @@ export class Room {
     atCreated = "";
 
     toJson(data) {
-        this.id = data.id;
+        this.id = data._id;
         this.name = data.name;
         this.status = data.status;
         this.atUpdated = data.atupdated;

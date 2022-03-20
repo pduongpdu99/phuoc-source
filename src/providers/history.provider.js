@@ -1,7 +1,7 @@
-import { History } from "../models/index.js";
+import { History } from "/models/index.js";
 import { HistoryRepository } from "../repositories/index.js";
 
-export class HistoryProvider {
+class HistoryProvider {
     /**
      * get all API
      * @returns list
@@ -56,3 +56,5 @@ export class HistoryProvider {
         return HistoryRepository.updateById(body);
     }
 }
+
+export default HistoryProvider;

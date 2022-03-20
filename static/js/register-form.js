@@ -1,23 +1,4 @@
 const registerForm = document.getElementsByTagName('register-form');
-const nationality = [
-  { id: 1, name: 'Việt Nam' },
-  { id: 2, name: 'Lào' },
-]
-
-const danToc = [
-  { id: 'dtoc-0101', name: 'Kinh', nationality: 1 },
-  { id: 'dtoc-0102', name: 'Lào', nationality: 2 },
-  { id: 'dtoc-0103', name: 'Êđê', nationality: 1 },
-  { id: 'dtoc-0104', name: 'Mông', nationality: 1 }
-];
-
-const roomOptions = [
-  { id: 'room-0101', value: '101' },
-  { id: 'room-0102', value: '102' },
-  { id: 'room-0103', value: '103' },
-  { id: 'room-0104', value: '104' },
-  { id: 'room-0105', value: '105' },
-];
 
 if (registerForm != undefined && registerForm.length > 0) {
   registerForm[0].innerHTML = `
@@ -101,11 +82,33 @@ if (registerForm != undefined && registerForm.length > 0) {
 document.getElementById('submit').onclick = onSubmitClick;
 document.getElementById('fb-btn').onclick = onCancelClick;
 import UserProvider from '/providers/user.provider.js';
-import UserProvider from '/providers/rooms.provider.js';
+import RoomProvider from '/providers/room.provider.js';
+
+const nationality = [
+  { id: 1, name: 'Việt Nam' },
+  { id: 2, name: 'Lào' },
+]
+
+const danToc = [
+  { id: 'dtoc-0101', name: 'Kinh', nationality: 1 },
+  { id: 'dtoc-0102', name: 'Lào', nationality: 2 },
+  { id: 'dtoc-0103', name: 'Êđê', nationality: 1 },
+  { id: 'dtoc-0104', name: 'Mông', nationality: 1 }
+];
+
+RoomProvider.getAll().then(rooms => {
+  let roomOptions = document.getElementById('room-options');
+  rooms = rooms.sort((a, b) => {
+    return parseInt(a.name) - parseInt(b.name);
+  });
+  roomOptions.innerHTML = rooms
+    .map(room => `<option value="${room.id}">${room.name}</option>`)
+    .join('');
+})
 
 function onSubmitClick() {
-  
-  
+
+
   const fullname = document.getElementById('fullname');
   const number = document.getElementById('number');
   const address = document.getElementById('address');

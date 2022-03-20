@@ -1,7 +1,7 @@
-import { Room } from '../models/index.js';
-import { RoomRepository } from '../repositories/index.js';
+import { Room } from '/models/index.js';
+import { RoomRepository } from '/repositories/index.js';
 
-export class RoomProvider {
+class RoomProvider {
     /**
      * get all API
      * @returns list
@@ -54,3 +54,5 @@ export class RoomProvider {
         return RoomRepository.updateById(body);
     }
 }
+
+export default RoomProvider;
