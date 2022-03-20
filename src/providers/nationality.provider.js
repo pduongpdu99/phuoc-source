@@ -1,7 +1,7 @@
 import { Nationality } from "/models/index.js";
 import { NationalityRepository } from "/repositories/index.js";
 
-class NationalityProvider {
+export class NationalityProvider {
     /**
      * get all API
      * @returns list
@@ -56,5 +56,3 @@ class NationalityProvider {
         return NationalityRepository.updateById(body);
     }
 }
-
-export default NationalityProvider;

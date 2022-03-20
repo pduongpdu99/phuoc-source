@@ -1,7 +1,7 @@
 import FRONTEND from '/config/config.js';
 
 const roomAPIPath = `${FRONTEND.BACKEND_PATH}`;
-class RoomRepository {
+export class RoomRepository {
     /**
      * get all API
      * @returns list
@@ -70,5 +70,3 @@ class RoomRepository {
         }).then(data => data.json());
     }
 }
-
-export default RoomRepository;

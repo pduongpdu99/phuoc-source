@@ -1,7 +1,7 @@
 import { User } from "/models/index.js";
 import { UserRepository } from "/repositories/index.js";
 
-class UserProvider {
+export class UserProvider {
     /**
      * get all API
      * @returns list
@@ -56,5 +56,3 @@ class UserProvider {
         return UserRepository.updateById(body);
     }
 }
-
-export default UserProvider;

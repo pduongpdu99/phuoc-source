@@ -1,7 +1,7 @@
 import FRONTEND from '/config/config.js';
 
 const userAPIPath = `${FRONTEND.BACKEND_PATH}`;
-class UserRepository {
+export class UserRepository {
     /**
     * get all API
     * @returns list
@@ -72,5 +72,3 @@ class UserRepository {
         }).then(data => data.json())
     }
 }
-
-export default UserRepository;

@@ -1,7 +1,7 @@
 import FRONTEND from '/config/config.js';
 
 const dantocAPIPath = `${FRONTEND.BACKEND_PATH}`;
-class DantocRepository {
+export class DantocRepository {
     /**
     * get all API
     * @returns list
@@ -72,4 +72,3 @@ class DantocRepository {
     }
 }
 
-export default DantocRepository;

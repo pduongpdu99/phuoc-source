@@ -1,7 +1,7 @@
 import FRONTEND from '/config/config.js';
 
 const nationalityAPIPath = `${FRONTEND.BACKEND_PATH}`;
-class NATIONALITYRepository {
+export class NationalityRepository {
     /**
     * get all API
     * @returns list
@@ -71,5 +71,3 @@ class NATIONALITYRepository {
         }).then(data => data.json());
     }
 }
-
-export default NationalityRepository;

@@ -1,4 +1,9 @@
 const registerForm = document.getElementsByTagName('register-form');
+const loadingType = "spinner";
+
+let loadQuocTich = false;
+let loadDanToc = false;
+let loadPhong = false;
 
 if (registerForm != undefined && registerForm.length > 0) {
   registerForm[0].innerHTML = `
@@ -20,10 +25,7 @@ if (registerForm != undefined && registerForm.length > 0) {
         </label>
         <label>
           <span>Quốc tịch</span>
-          <select id="national">
-            <option value="1">Việt</option>
-            <option value="2">Lào</option>
-          </select>
+          <select id="national"></select>
         </label>
         <label>
           <span>Số CNND/CCCD/Mã SV</span>
@@ -39,21 +41,11 @@ if (registerForm != undefined && registerForm.length > 0) {
         </label>
         <label>
           <span>Dân tộc</span>
-          <select id="dantoc-options">
-            <option value="1">Kinh</option>
-            <option value="2">Lào</option>
-            <option value="3">Êđê</option>
-            <option value="4">Mông</option>
-          </select>
+          <select id="dantoc-options"></select>
         </label>
         <label>
           <span>Phòng</span>
           <select id="room-options">
-            <option value="1">101</option>
-            <option value="2">102</option>
-            <option value="3">103</option>
-            <option value="4">104</option>
-            <option value="5">105</option>
           </select>
         </label>
         <label>
@@ -84,37 +76,83 @@ document.getElementById('fb-btn').onclick = onCancelClick;
 
 import {
   UserProvider,
+  NationalityProvider,
   DantocProvider,
   RoomProvider,
 } from '/providers/index.js';
 
-const nationality = [
-  { id: 1, name: 'Việt Nam' },
-  { id: 2, name: 'Lào' },
-]
+function loadingCall() {
+  $('body').loadingModal({ text: 'Loading...' });
+  $('body').loadingModal('animation', loadingType);
+}
 
-const danToc = ["Bana", "Bố y", "Brâu", "Bru-vân kiều", "Chăm", "Chơ ro", "Chu-ru", "Chứt", "Co", "Cơ ho", "Cờ lao", "Cơ tu", "Cống", "Dao", "Ê-đê", "Gia rai", "Giáy", "Gié-triêng", "Hà nhì", "Hoa", "Hrê", "Kháng", "Khmer", "Khơ mú", "La chí", "La ha", "La hủ", "Lào", "Lô lô", "Lự", "Mạ", "Mảng", "Mnông", "Mông", "Mường", "Ngái", "Nùng", "Ơ đu", "Pà thẻn", "Phù lá", "Pu péo", "Ra glay", "Rơ măm", "Sán chay", "Sán dìu", "Si la", "Tà ôi", "Tày", "Thái", "Thổ", "Kinh", "Xinh mun", "Xơ đăng", "Xtiêng"];
-danToc.forEach(dt => {
-  const body = {
-    name: dt,
-    nationality: "623736b36f608d84c08460fd"
-  };
-  DantocProvider.create(body)
-})
 /**
  * load data room
  */
-RoomProvider.getAll().then(rooms => {
-  let roomOptions = document.getElementById('room-options');
+function loadRoom() {
+  RoomProvider.getAll().then(rooms => {
+    let roomOptions = document.getElementById('room-options');
 
-  rooms = rooms.sort((a, b) => {
-    return parseInt(a.name) - parseInt(b.name);
+    rooms = rooms.sort((a, b) => {
+      return parseInt(a.name) - parseInt(b.name);
+    });
+
+    roomOptions.innerHTML = rooms
+      .map(room => `<option value="${room.id}">${room.name}</option>`)
+      .join('');
+
+    loadPhong = true;
   });
+}
 
-  roomOptions.innerHTML = rooms
-    .map(room => `<option value="${room.id}">${room.name}</option>`)
-    .join('');
-});
+/**
+ * load data quốc tịch
+ */
+function loadNationality() {
+  NationalityProvider.getAll().then(nationalities => {
+    let national = document.getElementById('national');
+
+    national.innerHTML = nationalities
+      .map(room => `<option value="${room.id}">${room.name}</option>`)
+      .join('');
+    loadQuocTich = true;
+    onLoadDanToc().then(() => {
+      loadDanToc = true;
+
+      if (loadQuocTich == true && loadPhong == true && loadDanToc == true)
+        $('body').loadingModal('destroy')
+    });
+  });
+}
+
+/**
+ * load data dantoc
+ */
+async function onLoadDanToc() {
+  return DantocProvider.getAll().then(dantocs => {
+    let dantocOpts = document.getElementById('dantoc-options');
+    let national = document.getElementById('national');
+
+    dantocOpts.innerHTML = dantocs
+      .filter(dantoc => dantoc.nationality === national.value)
+      .map(dantoc => `<option value="${dantoc.id}">${dantoc.name}</option>`)
+      .join('');
+  });
+}
+
+function init() {
+  loadingCall();
+  loadRoom();
+  loadNationality();
+}
+init();
+
+function onNationalChange() {
+  loadingCall();
+  onLoadDanToc().then(() => $('body').loadingModal('destroy'));
+}
+
+document.getElementById('national').onchange = onNationalChange;
 
 function onSubmitClick() {
   const fullname = document.getElementById('fullname');
@@ -142,7 +180,10 @@ function onSubmitClick() {
     role: 1,
     avatar: "images/user.png",
   };
-  UserProvider.create(data).then((data) => console.log(data));
+
+  $('body').loadingModal({ text: 'User creating...' });
+  $('body').loadingModal('animation', loadingType);
+  UserProvider.create(data).then((data) => $('body').loadingModal('destroy'));
 }
 
 function onCancelClick() {

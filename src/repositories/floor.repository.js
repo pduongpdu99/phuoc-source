@@ -1,7 +1,7 @@
 import FRONTEND from '/config/config.js';
 
 const floorAPIPath = `${FRONTEND.BACKEND_PATH}`;
-class FloorRepository {
+export class FloorRepository {
     /**
     * get all API
     * @returns list
@@ -71,5 +71,3 @@ class FloorRepository {
         }).then(data => data.json());
     }
 }
-
-export default FloorRepository;

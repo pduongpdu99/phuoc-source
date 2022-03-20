@@ -1,7 +1,7 @@
 import { Dantoc } from "/models/index.js";
 import { DantocRepository } from "/repositories/index.js";
 
-class DantocProvider {
+export class DantocProvider {
     /**
      * get all API
      * @returns list
@@ -56,5 +56,3 @@ class DantocProvider {
         return DantocRepository.updateById(body);
     }
 }
-
-export default DantocProvider;

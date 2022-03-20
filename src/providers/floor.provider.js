@@ -1,7 +1,7 @@
 import { Floor } from "/models/index.js";
 import { FloorRepository } from "/repositories/index.js";
 
-class FloorProvider {
+export class FloorProvider {
     /**
      * get all API
      * @returns list
@@ -56,5 +56,3 @@ class FloorProvider {
         return FloorRepository.updateById(body);
     }
 }
-
-export default FloorProvider;
