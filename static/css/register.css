@@ -6,58 +6,79 @@
   padding: 0;
 }
 
-body {
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  background: #ededed;
+register-form {
+  display: block;
 }
 
-input,
-button {
+register-form .bg-dark {
+  width: 100%;
+  height: 100%;
+  background: #d2d2d2;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+register-form {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  text-align: -webkit-center;
+}
+
+register-form input,
+register-form button {
   border: none;
   outline: none;
   background: none;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 
-.tip {
+register-form .tip {
   font-size: 20px;
   margin: 40px auto 50px;
   text-align: center;
 }
 
-.cont {
+register-form .cont {
   overflow: hidden;
-  position: relative;
+  text-align: left;
   width: 900px;
-  height: 550px;
-  margin: 0 auto 100px;
   background: #fff;
+  box-shadow: 0px 0px 40px rgb(235 235 235);
+  position: fixed;
+
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.form {
+register-form .cont.animation {
+  animation-name: zoominoutsinglefeatured;
+  animation-duration: 1s;
+}
+
+register-form .form {
   position: relative;
   width: 640px;
   height: 100%;
   transition: transform 1.2s ease-in-out;
-  padding: 50px 30px 0;
+  padding: 50px;
 }
 
-.sub-cont {
+register-form .sub-cont {
   overflow: hidden;
   position: absolute;
   left: 640px;
   top: 0;
-  width: 900px;
   height: 100%;
   padding-left: 260px;
   background: #fff;
   transition: transform 1.2s ease-in-out;
 }
-.cont.s--signup .sub-cont {
+register-form .cont.s--signup .sub-cont {
   transform: translate3d(-640px, 0, 0);
 }
 
-button {
+register-form button {
   display: block;
   margin: 0 auto;
   width: 260px;
@@ -68,7 +89,7 @@ button {
   cursor: pointer;
 }
 
-.img {
+register-form .img {
   overflow: hidden;
   z-index: 2;
   position: absolute;
@@ -78,7 +99,8 @@ button {
   height: 100%;
   padding-top: 360px;
 }
-.img:before {
+
+register-form .img:before {
   content: "";
   position: absolute;
   right: 0;
@@ -89,7 +111,8 @@ button {
   background-size: cover;
   transition: transform 1.2s ease-in-out;
 }
-.img:after {
+
+register-form .img:after {
   content: "";
   position: absolute;
   left: 0;
@@ -98,10 +121,12 @@ button {
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
 }
-.cont.s--signup .img:before {
+
+register-form .cont.s--signup .img:before {
   transform: translate3d(640px, 0, 0);
 }
-.img__text {
+
+register-form .img__text {
   z-index: 2;
   position: absolute;
   left: 0;
@@ -112,24 +137,30 @@ button {
   color: #fff;
   transition: transform 1.2s ease-in-out;
 }
-.img__text h2 {
+
+register-form .img__text h2 {
   margin-bottom: 10px;
   font-weight: normal;
 }
-.img__text p {
+
+register-form .img__text p {
   font-size: 14px;
   line-height: 1.5;
 }
-.cont.s--signup .img__text.m--up {
+
+register-form .cont.s--signup .img__text.m--up {
   transform: translateX(520px);
 }
-.img__text.m--in {
+
+register-form .img__text.m--in {
   transform: translateX(-520px);
 }
-.cont.s--signup .img__text.m--in {
+
+register-form .cont.s--signup .img__text.m--in {
   transform: translateX(0);
 }
-.img__btn {
+
+register-form .img__btn {
   overflow: hidden;
   z-index: 2;
   position: relative;
@@ -142,7 +173,8 @@ button {
   font-size: 15px;
   cursor: pointer;
 }
-.img__btn:after {
+
+register-form .img__btn:after {
   content: "";
   z-index: 2;
   position: absolute;
@@ -153,7 +185,8 @@ button {
   border: 2px solid #fff;
   border-radius: 30px;
 }
-.img__btn span {
+
+register-form .img__btn span {
   position: absolute;
   left: 0;
   top: 0;
@@ -164,35 +197,40 @@ button {
   height: 100%;
   transition: transform 1.2s;
 }
-.img__btn span.m--in {
+
+register-form .img__btn span.m--in {
   transform: translateY(-72px);
 }
-.cont.s--signup .img__btn span.m--in {
+
+register-form .cont.s--signup .img__btn span.m--in {
   transform: translateY(0);
 }
-.cont.s--signup .img__btn span.m--up {
+
+register-form .cont.s--signup .img__btn span.m--up {
   transform: translateY(72px);
 }
 
-h2 {
+register-form h2 {
   width: 100%;
   font-size: 26px;
   text-align: center;
 }
 
-label {
+register-form label {
   display: block;
   width: 260px;
   margin: 25px auto 0;
   text-align: center;
 }
-label span {
+
+register-form label span {
   font-size: 12px;
   color: #cfcfcf;
   text-transform: uppercase;
 }
 
-input {
+register-form input,
+register-form select {
   display: block;
   width: 100%;
   margin-top: 5px;
@@ -202,58 +240,84 @@ input {
   text-align: center;
 }
 
-.forgot-pass {
+register-form select {
+  border: 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  outline: none;
+}
+
+register-form .forgot-pass {
   margin-top: 15px;
   text-align: center;
   font-size: 12px;
   color: #cfcfcf;
 }
 
-.submit {
+register-form .submit {
   margin-top: 40px;
   margin-bottom: 20px;
   background: #d4af7a;
   text-transform: uppercase;
 }
 
-.fb-btn {
+register-form .fb-btn {
   border: 2px solid #d3dae9;
   color: #8fa1c7;
 }
-.fb-btn span {
+register-form .fb-btn span {
   font-weight: bold;
   color: #455a81;
 }
 
-.sign-in {
+register-form .sign-in {
   transition-timing-function: ease-out;
 }
-.cont.s--signup .sign-in {
+register-form .cont.s--signup .sign-in {
   transition-timing-function: ease-in-out;
   transition-duration: 1.2s;
   transform: translate3d(640px, 0, 0);
 }
 
-.sign-up {
+register-form .sign-up {
   transform: translate3d(-900px, 0, 0);
 }
-.cont.s--signup .sign-up {
+
+register-form .cont.s--signup .sign-up {
   transform: translate3d(0, 0, 0);
 }
 
-.icon-link {
+register-form .icon-link {
   position: absolute;
   left: 5px;
   bottom: 5px;
   width: 32px;
 }
-.icon-link img {
+
+register-form .icon-link img {
   width: 100%;
   vertical-align: top;
 }
-.icon-link--twitter {
+
+register-form .icon-link--twitter {
   left: auto;
   right: 5px;
 }
 
-/*# sourceMappingURL=css.css.map */
+register-form label {
+  display: inline-block;
+}
+
+@keyframes zoominoutsinglefeatured {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -30%) rotate3d(1, 0, 0, 50deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate3d(0, 0, 0, 0deg);
+  }
+}
+
+.cardcontainer img {
+  animation: zoominoutsinglefeatured 1s infinite;
+}

@@ -1,3 +1,3 @@
-export * from './history.repository.js';
-export * from './room.repository.js';
-export * from './user.repository.js';
+export * from '/repositories/history.repository.js';
+export * from '/repositories/room.repository.js';
+export * from '/repositories/user.repository.js';

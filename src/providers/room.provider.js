@@ -53,22 +53,4 @@ export class RoomProvider {
     static async updateById(body = {}) {
         return RoomRepository.updateById(body);
     }
-
-    /**
-     * page
-     * @param {number} limit 
-     * @param {number} page 
-     * @param {object} query 
-     * @returns 
-     */
-    static async paginate(limit = 10, page = 1, query = "") {
-        return RoomRepository.paginate(limit, page, query).then(data => {
-            data['results'] = data['results'].map(item => {
-                let model = new Room();
-                model.toJson(item);
-                return model;
-            });
-            return data;
-        });
-    }
 }

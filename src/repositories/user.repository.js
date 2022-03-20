@@ -1,11 +1,13 @@
-const userAPIPath = `${FRONTEND.BACKEND_PATH}/${FRONTEND.MODEL_PATH.USER}`;
+import FRONTEND from '/config/config.js';
+
+const userAPIPath = `${FRONTEND.BACKEND_PATH}`;
 export class UserRepository {
     /**
     * get all API
     * @returns list
     */
     static async getAll() {
-        const path = `${userAPIPath}/all/`;
+        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
         return fetch(path, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
@@ -19,7 +21,7 @@ export class UserRepository {
      * @returns 
      */
     static async findById(id = "") {
-        const path = `${userAPIPath}/find/${id}`;
+        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/${id}`;
         return fetch(path, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
@@ -33,12 +35,13 @@ export class UserRepository {
      * @returns 
      */
     static async create(body = {}) {
-        const path = `${userAPIPath}/add/`;
+        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
+        console.log(JSON.stringify(body));
         return fetch(path, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        })
+        }).then(data => data.json())
     }
 
     /**
@@ -47,12 +50,12 @@ export class UserRepository {
      * @returns 
      */
     static async deleteById(id = "") {
-        const path = `${userAPIPath}/delete/${id}`;
+        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/${id}`;
         return fetch(path, {
             method: "DELETE",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        })
+        }).then(data => data.json())
     }
 
     /**
@@ -61,27 +64,11 @@ export class UserRepository {
      * @returns 
      */
     static async updateById(body = {}) {
-        const path = `${userAPIPath}/update/`;
+        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
         return fetch(path, {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        })
-    }
-
-    /**
-     * page
-     * @param {number} limit 
-     * @param {number} page 
-     * @param {object} query 
-     * @returns 
-     */
-    static async paginate(limit = 10, page = 1, query = "") {
-        const path = `${userAPIPath}/paginate?limit=${limit}&page=${page}&${query}`;
-        return fetch(path, {
-            method: "GET",
-            headers: { 'Content-Type': 'application/json' },
-            body: null,
-        }).then(data => data.json()).then(data => data);
+        }).then(data => data.json())
     }
 }

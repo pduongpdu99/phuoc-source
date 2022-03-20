@@ -1,5 +1,6 @@
 {
   "name": "phuoc-source",
+  "module": "module",
   "version": "1.0.0",
   "description": "hỗ trợ và đăng ký phòng kiến túc xá",
   "main": "index.js",

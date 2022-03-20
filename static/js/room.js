@@ -540,15 +540,15 @@ const templateInit = (
     users,
     _status = {
         empty: {
-            name: "trống",
+            name: "empty",
             classname: "empty",
         },
         semi: {
-            name: "có người",
+            name: "exist",
             classname: "semi",
         },
         full: {
-            name: "đầy",
+            name: "full",
             classname: "full",
         },
     }

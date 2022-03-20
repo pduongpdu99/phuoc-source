@@ -1,7 +1,7 @@
 import { User } from "../models/index.js";
-import { UserRepository } from "../repositories/index.js";
+import { UserRepository } from "/repositories/index.js";
 
-export class UserProvider {
+class UserProvider {
     /**
      * get all API
      * @returns list
@@ -55,22 +55,6 @@ export class UserProvider {
     static async updateById(body = {}) {
         return UserRepository.updateById(body);
     }
-
-    /**
-     * page
-     * @param {number} limit 
-     * @param {number} page 
-     * @param {object} query 
-     * @returns 
-     */
-    static async paginate(limit = 10, page = 1, query = "") {
-        return UserRepository.paginate(limit, page, query).then(data => {
-            data['results'] = data['results'].map(item => {
-                let model = new User();
-                model.toJson(item);
-                return model;
-            });
-            return data;
-        });
-    }
 }
+
+export default UserProvider;

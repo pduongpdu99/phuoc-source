@@ -55,22 +55,4 @@ export class HistoryProvider {
     static async updateById(body = {}) {
         return HistoryRepository.updateById(body);
     }
-
-    /**
-     * page
-     * @param {number} limit 
-     * @param {number} page 
-     * @param {object} query 
-     * @returns 
-     */
-    static async paginate(limit = 10, page = 1, query = "") {
-        return HistoryRepository.paginate(limit, page, query).then(data => {
-            data['results'] = data['results'].map(item => {
-                let model = new History();
-                model.toJson(item);
-                return model;
-            });
-            return data;
-        });
-    }
 }
