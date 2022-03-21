@@ -5,7 +5,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "1",
         "status": "empty",
-        "user_number": 0,
         "name": "101",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -14,7 +13,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "1",
         "status": "semi",
-        "user_number": 2,
         "name": "102",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -23,7 +21,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "1",
         "status": "semi",
-        "user_number": 2,
         "name": "103",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -32,7 +29,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "1",
         "status": "empty",
-        "user_number": 0,
         "name": "104",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -41,7 +37,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "1",
         "status": "empty",
-        "user_number": 0,
         "name": "105",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -50,7 +45,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "1",
         "status": "empty",
-        "user_number": 0,
         "name": "106",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -59,7 +53,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "1",
         "status": "empty",
-        "user_number": 0,
         "name": "107",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -68,7 +61,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "1",
         "status": "full",
-        "user_number": 4,
         "name": "108",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -77,7 +69,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "1",
         "status": "empty",
-        "user_number": 0,
         "name": "109",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -86,7 +77,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "1",
         "status": "empty",
-        "user_number": 0,
         "name": "110",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -95,7 +85,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "2",
         "status": "empty",
-        "user_number": 0,
         "name": "201",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -104,7 +93,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "2",
         "status": "semi",
-        "user_number": 2,
         "name": "202",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -113,7 +101,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "2",
         "status": "semi",
-        "user_number": 2,
         "name": "203",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -122,7 +109,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "2",
         "status": "empty",
-        "user_number": 0,
         "name": "204",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -131,7 +117,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "2",
         "status": "empty",
-        "user_number": 0,
         "name": "205",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -140,7 +125,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "2",
         "status": "empty",
-        "user_number": 0,
         "name": "206",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -149,7 +133,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "2",
         "status": "empty",
-        "user_number": 0,
         "name": "207",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -158,7 +141,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "2",
         "status": "full",
-        "user_number": 4,
         "name": "208",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -167,7 +149,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "2",
         "status": "empty",
-        "user_number": 0,
         "name": "209",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -176,7 +157,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "2",
         "status": "empty",
-        "user_number": 0,
         "name": "210",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -185,7 +165,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "3",
         "status": "empty",
-        "user_number": 0,
         "name": "301",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -194,7 +173,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "3",
         "status": "semi",
-        "user_number": 2,
         "name": "302",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -203,7 +181,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "3",
         "status": "semi",
-        "user_number": 2,
         "name": "303",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -212,7 +189,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "3",
         "status": "empty",
-        "user_number": 0,
         "name": "304",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -221,7 +197,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "3",
         "status": "empty",
-        "user_number": 0,
         "name": "305",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -230,7 +205,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "3",
         "status": "empty",
-        "user_number": 0,
         "name": "306",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -239,7 +213,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "3",
         "status": "empty",
-        "user_number": 0,
         "name": "307",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -248,7 +221,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "3",
         "status": "full",
-        "user_number": 4,
         "name": "308",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -257,7 +229,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "3",
         "status": "empty",
-        "user_number": 0,
         "name": "309",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -266,7 +237,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "3",
         "status": "empty",
-        "user_number": 0,
         "name": "310",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -275,7 +245,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "4",
         "status": "empty",
-        "user_number": 0,
         "name": "401",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -284,7 +253,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "4",
         "status": "semi",
-        "user_number": 2,
         "name": "402",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -293,7 +261,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "4",
         "status": "semi",
-        "user_number": 2,
         "name": "403",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -302,7 +269,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "4",
         "status": "empty",
-        "user_number": 0,
         "name": "404",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -311,7 +277,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "4",
         "status": "empty",
-        "user_number": 0,
         "name": "405",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -320,7 +285,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "4",
         "status": "empty",
-        "user_number": 0,
         "name": "406",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -329,7 +293,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "4",
         "status": "empty",
-        "user_number": 0,
         "name": "407",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -338,7 +301,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "4",
         "status": "full",
-        "user_number": 4,
         "name": "408",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -347,7 +309,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "4",
         "status": "empty",
-        "user_number": 0,
         "name": "409",
         "describe": "Ký túc xá Phạm Văn Đồng"
     },
@@ -356,7 +317,6 @@ const rooms = [
         "register_createdAt": "December 10, 2020",
         "floorId": "4",
         "status": "empty",
-        "user_number": 0,
         "name": "410",
         "describe": "Ký túc xá Phạm Văn Đồng"
     }
