@@ -64,6 +64,10 @@ register-form .form {
   padding: 50px;
 }
 
+register-form .form.hide {
+  display: none;
+}
+
 register-form .sub-cont {
   overflow: hidden;
   position: absolute;

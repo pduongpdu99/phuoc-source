@@ -1,15 +1,15 @@
-const registerForm = document.getElementsByTagName('register-form');
+const registerForm = document.getElementsByTagName('register-form')[0];
 const loadingType = "spinner";
 
 let loadQuocTich = false;
 let loadDanToc = false;
 let loadPhong = false;
 
-if (registerForm != undefined && registerForm.length > 0) {
-  registerForm[0].innerHTML = `
+if (registerForm != undefined) {
+  registerForm.innerHTML = `
     <div class="bg-dark"></div>
     <div class="cont animation">
-      <div class="form">
+      <div class="form" id="form">
         <h2>Đơn đăng ký vào ở ký túc xá</h2>
         <label>
           <span>Họ và tên</span>
@@ -48,14 +48,6 @@ if (registerForm != undefined && registerForm.length > 0) {
           <select id="room-options">
           </select>
         </label>
-        <label>
-          <span>Giới tính</span>
-          <select id="gender">
-            <option value="1">Nam</option>
-            <option value="2">Nữ</option>
-            <option value="3">Khác</option>
-          </select>
-        </label>
         <button type="button" id="submit" class="submit">Register</button>
         <button type="button" id="fb-btn" class="fb-btn">Cancel</button>
       </div>
@@ -81,6 +73,13 @@ import {
   RoomProvider,
 } from '/providers/index.js';
 
+import {
+  isNotEmpty,
+  isEmail,
+  isNumberPhone,
+  isDate
+} from './validation.js';
+
 function loadingCall() {
   $('body').loadingModal({ text: 'Loading...' });
   $('body').loadingModal('animation', loadingType);
@@ -101,6 +100,14 @@ function loadRoom() {
       .map(room => `<option value="${room.id}">${room.name}</option>`)
       .join('');
 
+
+    if (registerForm.attributes['roomid']) {
+      roomOptions.value = registerForm.attributes['roomid'].value
+    } else {
+      if (rooms.length > 0)
+        roomOptions.value = rooms[0].id
+    }
+
     loadPhong = true;
   });
 }
@@ -119,8 +126,9 @@ function loadNationality() {
     onLoadDanToc().then(() => {
       loadDanToc = true;
 
-      if (loadQuocTich == true && loadPhong == true && loadDanToc == true)
+      if (loadQuocTich == true && loadPhong == true && loadDanToc == true) {
         $('body').loadingModal('destroy')
+      }
     });
   });
 }
@@ -149,10 +157,70 @@ init();
 
 function onNationalChange() {
   loadingCall();
-  onLoadDanToc().then(() => $('body').loadingModal('destroy'));
+  onLoadDanToc().then(() => {
+    $('body').loadingModal('destroy')
+  });
 }
 
 document.getElementById('national').onchange = onNationalChange;
+
+function thongBaoValidation(value) {
+  alert(value);
+}
+
+function validation(model) {
+  if (!isNotEmpty(model.name)) {
+    thongBaoValidation("Fullname is not empty");
+    return false;
+  }
+
+  if (!isNumberPhone(model.phoneNumber)) {
+    thongBaoValidation("It's not number phone");
+    return false;
+  }
+
+  if (!isNotEmpty(model.address)) {
+    thongBaoValidation("address  is not empty");
+    return false;
+  }
+
+  if (!isNotEmpty(model.nationality)) {
+    thongBaoValidation("National is not empty");
+    return false;
+  }
+
+  if (!isNotEmpty(model.iDCard)) {
+    thongBaoValidation("idCard is not empty");
+    return false;
+  }
+
+  if (!isDate(model.birth)) {
+    thongBaoValidation("Birth is invalid date format yyyy-mm-dd");
+    return false;
+  }
+
+  if (!isEmail(model.email)) {
+    thongBaoValidation("it is not email");
+    return false;
+  }
+
+  if (!isNotEmpty(model.danToc)) {
+    thongBaoValidation("dantoc field is not empty");
+    return false;
+  }
+
+  if (!isNotEmpty(model.sex)) {
+    thongBaoValidation("sex field is not empty");
+    return false;
+  }
+
+  if (!isNotEmpty(model.roomId)) {
+    thongBaoValidation("room is not empty");
+    return false;
+  }
+
+  return true;
+}
 
 function onSubmitClick() {
   const fullname = document.getElementById('fullname');
@@ -164,26 +232,36 @@ function onSubmitClick() {
   const email = document.getElementById('email');
   const dantocOptions = document.getElementById('dantoc-options');
   const roomOptions = document.getElementById('room-options');
-  const gender = document.getElementById('gender');
 
   const data = {
     name: fullname.value,
     phoneNumber: number.value,
     address: address.value,
     nationality: national.value,
-    iDCard: idcard.value,
+    iDCard: idcard.value.toLowerCase(),
     birth: birth.value,
     email: email.value,
     danToc: dantocOptions.value,
     roomId: roomOptions.value,
-    sex: gender.value,
+    sex: registerForm.attributes['sex'] ? registerForm.attributes['sex'].value : 1,
     role: 1,
     avatar: "images/user.png",
   };
 
-  $('body').loadingModal({ text: 'User creating...' });
-  $('body').loadingModal('animation', loadingType);
-  UserProvider.create(data).then((data) => $('body').loadingModal('destroy'));
+  if (validation(data)) {
+    $('body').loadingModal({ text: 'User creating...' });
+    $('body').loadingModal('animation', loadingType);
+    UserProvider.create(data).then((data) => {
+      $('body').loadingModal('destroy');
+
+      fullname.value = "";
+      number.value = "";
+      address.value = "";
+      idcard.value = "";
+      birth.value = "";
+      email.value = "";
+    });
+  }
 }
 
 function onCancelClick() {
