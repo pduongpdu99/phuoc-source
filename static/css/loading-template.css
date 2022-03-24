@@ -1,0 +1,124 @@
+.loading-card {
+    max-width: 32%;
+    height: 161px;
+    padding: 16px;
+
+    width: 100%;
+    background: #f8f8f8;
+    padding: 30px;
+    border-radius: 30px;
+    border: 1px solid #ffffff;
+    margin: 5px;
+}
+
+.loading-card .header {
+    display: flex;
+    align-items: center;
+}
+
+.header .img {
+    height: 75px;
+    width: 75px;
+    background: #f0f0f0;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.details span {
+    display: block;
+    background: #e6e6e6;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.details .name {
+    height: 15px;
+    width: 100px;
+}
+
+.details .about {
+    height: 20px;
+    width: 100px;
+    margin-top: 10px;
+    left: 90%;
+}
+
+.loading-card .description {
+    margin: 25px 0;
+}
+
+.description .line {
+    background: #f1f1f1;
+    border-radius: 10px;
+    height: 13px;
+    margin: 10px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.description .line-1 {
+    width: calc(100% - 15%);
+}
+
+.description .line-3 {
+    width: calc(100% - 40%);
+}
+
+.loading-card .btns {
+    display: flex;
+}
+
+.loading-card .btns .btn {
+    height: 25px;
+    width: 50%;
+    background: #f7f7f7;
+    border-radius: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btns .btn-1 {
+    margin-right: 8px;
+}
+
+.btns .btn-2 {
+    margin-left: 8px;
+}
+
+.header .img::before,
+.details span::before,
+.description .line::before,
+.btns .btn::before {
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to right, #e7e7e7 0%, #f1f1f1 20%, #ececec 40%, #eeeeee 100%);
+    background-repeat: no-repeat;
+    background-size: 450px 400px;
+    animation: shimmer 1s linear infinite;
+}
+
+.header .img::before {
+    background-size: 650px 600px;
+}
+
+.details span::before {
+    animation-delay: 0.2s;
+}
+
+.btns .btn-2::before {
+    animation-delay: 0.2s;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -450px 0;
+    }
+
+    100% {
+        background-position: 450px 0;
+    }
+}

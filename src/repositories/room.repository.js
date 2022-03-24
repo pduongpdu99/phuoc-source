@@ -69,4 +69,19 @@ export class RoomRepository {
             body: JSON.stringify(body),
         }).then(data => data.json());
     }
+
+    /**
+     * getRoomBy API
+     * @param {number} sex 
+     * @param {number} buildings 
+     * @returns 
+     */
+    static async getRoomBy(sex, buildings) {
+        const path = `${roomAPIPath}/${FRONTEND.MODEL_PATH.ROOM}/roomBy/${sex}/${buildings}`;
+        return fetch(path, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            body: null,
+        }).then(data => data.json());
+    }
 }

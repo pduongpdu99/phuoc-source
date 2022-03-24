@@ -53,4 +53,14 @@ export class RoomProvider {
     static async updateById(body = {}) {
         return RoomRepository.updateById(body);
     }
+
+    /**
+     * getRoomBy
+     * @param {number} sex 
+     * @param {number} buildings 
+     * @returns 
+     */
+    static async getRoomBy(sex, buildings) {
+        return RoomRepository.getRoomBy(sex, buildings);
+    }
 }

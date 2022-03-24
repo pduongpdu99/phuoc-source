@@ -1,12 +1,14 @@
-const registerForm = document.getElementsByTagName('register-form')[0];
 const loadingType = "spinner";
 
 let loadQuocTich = false;
 let loadDanToc = false;
 let loadPhong = false;
 
-if (registerForm != undefined) {
-  registerForm.innerHTML = `
+function registerFormInit() {
+  const registerForm = document.getElementsByTagName('register-form')[0];
+
+  if (registerForm != undefined) {
+    registerForm.innerHTML = `
     <div class="bg-dark"></div>
     <div class="cont animation">
       <div class="form" id="form">
@@ -61,10 +63,14 @@ if (registerForm != undefined) {
       </div>
     </div>
     `;
+  }
 }
 
-document.getElementById('submit').onclick = onSubmitClick;
-document.getElementById('fb-btn').onclick = onCancelClick;
+
+if (document.getElementById('submit'))
+  document.getElementById('submit').onclick = onSubmitClick;
+if (document.getElementById('fb-btn'))
+  document.getElementById('fb-btn').onclick = onCancelClick;
 
 import {
   UserProvider,
@@ -96,16 +102,19 @@ function loadRoom() {
       return parseInt(a.name) - parseInt(b.name);
     });
 
-    roomOptions.innerHTML = rooms
-      .map(room => `<option value="${room.id}">${room.name}</option>`)
-      .join('');
+    if (roomOptions)
+      roomOptions.innerHTML = rooms
+        .map(room => `<option value="${room.id}">${room.name}</option>`)
+        .join('');
 
 
-    if (registerForm.attributes['roomid']) {
-      roomOptions.value = registerForm.attributes['roomid'].value
+    if (registerForm != undefined && registerForm.attributes['roomid']) {
+      if (roomOptions)
+        roomOptions.value = registerForm.attributes['roomid'].value
     } else {
       if (rooms.length > 0)
-        roomOptions.value = rooms[0].id
+        if (roomOptions)
+          roomOptions.value = rooms[0].id
     }
 
     loadPhong = true;
@@ -119,16 +128,13 @@ function loadNationality() {
   NationalityProvider.getAll().then(nationalities => {
     let national = document.getElementById('national');
 
-    national.innerHTML = nationalities
-      .map(room => `<option value="${room.id}">${room.name}</option>`)
-      .join('');
+    if (national)
+      national.innerHTML = nationalities
+        .map(room => `<option value="${room.id}">${room.name}</option>`)
+        .join('');
     loadQuocTich = true;
     onLoadDanToc().then(() => {
       loadDanToc = true;
-
-      if (loadQuocTich == true && loadPhong == true && loadDanToc == true) {
-        $('body').loadingModal('destroy')
-      }
     });
   });
 }
@@ -141,19 +147,14 @@ async function onLoadDanToc() {
     let dantocOpts = document.getElementById('dantoc-options');
     let national = document.getElementById('national');
 
-    dantocOpts.innerHTML = dantocs
-      .filter(dantoc => dantoc.nationality === national.value)
-      .map(dantoc => `<option value="${dantoc.id}">${dantoc.name}</option>`)
-      .join('');
+    if (dantocs)
+      if (dantocOpts)
+        dantocOpts.innerHTML = dantocs
+          .filter(dantoc => dantoc.nationality === national.value)
+          .map(dantoc => `<option value="${dantoc.id}">${dantoc.name}</option>`)
+          .join('');
   });
 }
-
-function init() {
-  loadingCall();
-  loadRoom();
-  loadNationality();
-}
-init();
 
 function onNationalChange() {
   loadingCall();
@@ -162,7 +163,8 @@ function onNationalChange() {
   });
 }
 
-document.getElementById('national').onchange = onNationalChange;
+if (document.getElementById('national'))
+  document.getElementById('national').onchange = onNationalChange;
 
 function thongBaoValidation(value) {
   alert(value);
@@ -263,7 +265,13 @@ function onSubmitClick() {
     });
   }
 }
-
 function onCancelClick() {
-
+  document.getElementsByTagName('register-form')[0].classList.add('hide')
 }
+
+function initialize() {
+  registerFormInit();
+  loadRoom();
+  loadNationality();
+}
+initialize();

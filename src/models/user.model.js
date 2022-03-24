@@ -9,6 +9,7 @@ export class User {
     birth = "";
     sex = 0;
     roomId = "";
+    avatar = "";
     atUpdated = "";
     atCreated = "";
 
@@ -16,14 +17,16 @@ export class User {
         this.id = data._id;
         this.role = data.role;
         this.name = data.name;
-        this.phoneNumber = data.phonenumber;
+        this.phoneNumber = data.phoneNumber;
         this.address = data.address;
         this.nationality = data.nationality;
         this.iDCard = data.idcard;
         this.birth = data.birth;
         this.sex = data.sex;
-        this.roomId = data.roomid;
-        this.atUpdated = data.atupdated;
-        this.atCreated = data.atcreated;
+        this.email = data.email;
+        this.avatar = data.avatar;
+        this.roomId = data.roomId;
+        this.createdAt = data.createdAt;
+        this.updatedAt = data.updatedAt;
     }
 }

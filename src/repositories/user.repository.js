@@ -71,4 +71,31 @@ export class UserRepository {
             body: JSON.stringify(body),
         }).then(data => data.json())
     }
+
+    /**
+   * get users by room id
+   * @param id 
+   * @return user list
+   */
+    static async getUsersByRoomId(id = "") {
+        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/byRoom/${id}`;
+        return fetch(path, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' },
+            body: null,
+        }).then(data => data.json())
+    }
+
+    /**
+     * get si so
+     * @return si so theo gioi tinh
+     */
+    static async getSiSo() {
+        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/siso`;
+        return fetch(path, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' },
+            body: null,
+        }).then(data => data.json())
+    }
 }

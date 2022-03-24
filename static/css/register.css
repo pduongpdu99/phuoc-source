@@ -8,12 +8,17 @@
 
 register-form {
   display: block;
+  z-index: 1;
+}
+
+register-form.hide {
+  display: none;
 }
 
 register-form .bg-dark {
   width: 100%;
   height: 100%;
-  background: #d2d2d2;
+  background: #1f1c244a;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -22,6 +27,7 @@ register-form .bg-dark {
 register-form {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   text-align: -webkit-center;
+  z-index: 1;
 }
 
 register-form input,
@@ -43,7 +49,6 @@ register-form .cont {
   text-align: left;
   width: 900px;
   background: #fff;
-  box-shadow: 0px 0px 40px rgb(235 235 235);
   position: fixed;
 
   left: 50%;

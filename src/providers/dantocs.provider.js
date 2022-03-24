@@ -7,13 +7,11 @@ export class DantocProvider {
      * @returns list
      */
     static async getAll() {
-        return DantocRepository.getAll().then(data => {
-            return data.map(item => {
-                let model = new Dantoc();
-                model.toJson(item);
-                return model;
-            });
-        });
+        return DantocRepository.getAll().then(data => data.map(item => {
+            let model = new Dantoc();
+            model.toJson(item);
+            return model;
+        }));
     }
 
     /**

@@ -1,478 +1,23 @@
-// const fs = require("fs");
-const rooms = [
-    {
-        "id": "room-0101",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "1",
-        "status": "empty",
-        "name": "101",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0102",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "1",
-        "status": "semi",
-        "name": "102",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0103",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "1",
-        "status": "semi",
-        "name": "103",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0104",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "1",
-        "status": "empty",
-        "name": "104",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0105",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "1",
-        "status": "empty",
-        "name": "105",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0106",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "1",
-        "status": "empty",
-        "name": "106",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0107",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "1",
-        "status": "empty",
-        "name": "107",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0108",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "1",
-        "status": "full",
-        "name": "108",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0109",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "1",
-        "status": "empty",
-        "name": "109",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0110",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "1",
-        "status": "empty",
-        "name": "110",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0201",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "2",
-        "status": "empty",
-        "name": "201",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0202",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "2",
-        "status": "semi",
-        "name": "202",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0203",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "2",
-        "status": "semi",
-        "name": "203",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0204",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "2",
-        "status": "empty",
-        "name": "204",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0205",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "2",
-        "status": "empty",
-        "name": "205",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0206",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "2",
-        "status": "empty",
-        "name": "206",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0207",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "2",
-        "status": "empty",
-        "name": "207",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0208",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "2",
-        "status": "full",
-        "name": "208",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0209",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "2",
-        "status": "empty",
-        "name": "209",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0210",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "2",
-        "status": "empty",
-        "name": "210",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0301",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "3",
-        "status": "empty",
-        "name": "301",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0302",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "3",
-        "status": "semi",
-        "name": "302",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0303",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "3",
-        "status": "semi",
-        "name": "303",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0304",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "3",
-        "status": "empty",
-        "name": "304",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0305",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "3",
-        "status": "empty",
-        "name": "305",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0306",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "3",
-        "status": "empty",
-        "name": "306",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0307",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "3",
-        "status": "empty",
-        "name": "307",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0308",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "3",
-        "status": "full",
-        "name": "308",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0309",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "3",
-        "status": "empty",
-        "name": "309",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0310",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "3",
-        "status": "empty",
-        "name": "310",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0401",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "4",
-        "status": "empty",
-        "name": "401",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0402",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "4",
-        "status": "semi",
-        "name": "402",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0403",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "4",
-        "status": "semi",
-        "name": "403",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0404",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "4",
-        "status": "empty",
-        "name": "404",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0405",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "4",
-        "status": "empty",
-        "name": "405",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0406",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "4",
-        "status": "empty",
-        "name": "406",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0407",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "4",
-        "status": "empty",
-        "name": "407",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0408",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "4",
-        "status": "full",
-        "name": "408",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0409",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "4",
-        "status": "empty",
-        "name": "409",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    },
-    {
-        "id": "room-0410",
-        "register_createdAt": "December 10, 2020",
-        "floorId": "4",
-        "status": "empty",
-        "name": "410",
-        "describe": "Ký túc xá Phạm Văn Đồng"
-    }
-];
+import {
+    UserProvider,
+    NationalityProvider,
+    DantocProvider,
+    RoomProvider,
+} from '/providers/index.js';
+
+import {
+    isNotEmpty,
+    isEmail,
+    isNumberPhone,
+    isDate
+} from './validation.js';
+
+import {
+    DANTOC
+} from '/utils/constant.js';
 
 
-const users = [
-    {
-        "id": "user-00001",
-        "role": 1,
-        "name": "Phạm Dương",
-        "number": "số điện thoại tượng chưng",
-        "address": "Địa chỉ tượng chưng",
-        "avatar": "images/user.png",
-        "nationality": "Việt Nam",
-        "iDCard": "17d480201006",
-        "birth": "1999-05-11",
-        "sex": 2,
-        "email": "abc@gmail.com",
-        "roomId": "room-0101"
-    },
-    {
-        "id": "user-000010",
-        "role": 1,
-        "name": "Phạm Dương",
-        "number": "số điện thoại tượng chưng",
-        "address": "Địa chỉ tượng chưng",
-        "avatar": "images/user.png",
-        "nationality": "Việt Nam",
-        "iDCard": "17d480201006",
-        "birth": "1999-05-11",
-        "sex": 2,
-        "email": "abc@gmail.com",
-        "roomId": "room-0102"
-    },
-    {
-        "id": "user-00002",
-        "role": 1,
-        "name": "Phạm Dương",
-        "number": "số điện thoại tượng chưng",
-        "address": "Địa chỉ tượng chưng",
-        "avatar": "images/user.png",
-        "nationality": "Việt Nam",
-        "iDCard": "17d480201006",
-        "birth": "1999-05-11",
-        "sex": 2,
-        "email": "abc@gmail.com",
-        "roomId": "room-0103"
-    },
-    {
-        "id": "user-00003",
-        "role": 1,
-        "name": "Phạm Dương",
-        "number": "số điện thoại tượng chưng",
-        "address": "Địa chỉ tượng chưng",
-        "avatar": "images/user.png",
-        "nationality": "Việt Nam",
-        "iDCard": "17d480201006",
-        "birth": "1999-05-11",
-        "sex": 2,
-        "email": "abc@gmail.com",
-        "roomId": "room-0104"
-    },
-    {
-        "id": "user-00004",
-        "role": 1,
-        "name": "Phạm Dương",
-        "number": "số điện thoại tượng chưng",
-        "address": "Địa chỉ tượng chưng",
-        "avatar": "images/user.png",
-        "nationality": "Việt Nam",
-        "iDCard": "17d480201006",
-        "birth": "1999-05-11",
-        "sex": 1,
-        "email": "abc@gmail.com",
-        "roomId": "room-0101"
-    },
-    {
-        "id": "user-00005",
-        "role": 1,
-        "name": "Phạm Dương",
-        "number": "số điện thoại tượng chưng",
-        "address": "Địa chỉ tượng chưng",
-        "avatar": "images/user.png",
-        "nationality": "Việt Nam",
-        "iDCard": "17d480201006",
-        "birth": "1999-05-11",
-        "sex": 1,
-        "email": "abc@gmail.com",
-        "roomId": "room-0102"
-    },
-    {
-        "id": "user-00006",
-        "role": 1,
-        "name": "Phạm Dương",
-        "number": "số điện thoại tượng chưng",
-        "address": "Địa chỉ tượng chưng",
-        "avatar": "images/user.png",
-        "nationality": "Việt Nam",
-        "iDCard": "17d480201006",
-        "birth": "1999-05-11",
-        "sex": 1,
-        "email": "abc@gmail.com",
-        "roomId": "room-0102"
-    },
-    {
-        "id": "user-00007",
-        "role": 1,
-        "name": "Phạm Dương",
-        "number": "số điện thoại tượng chưng",
-        "address": "Địa chỉ tượng chưng",
-        "avatar": "images/user.png",
-        "nationality": "Việt Nam",
-        "iDCard": "17d480201006",
-        "birth": "1999-05-11",
-        "sex": 1,
-        "email": "abc@gmail.com",
-        "roomId": "room-0103"
-    },
-    {
-        "id": "user-00008",
-        "role": 1,
-        "name": "Phạm Dương",
-        "number": "số điện thoại tượng chưng",
-        "address": "Địa chỉ tượng chưng",
-        "avatar": "images/user.png",
-        "nationality": "Việt Nam",
-        "iDCard": "17d480201006",
-        "birth": "1999-05-11",
-        "sex": 2,
-        "email": "abc@gmail.com",
-        "roomId": "room-0103"
-    },
-    {
-        "id": "user-00009",
-        "role": 1,
-        "name": "Phạm Dương",
-        "number": "số điện thoại tượng chưng",
-        "address": "Địa chỉ tượng chưng",
-        "avatar": "images/user.png",
-        "nationality": "Việt Nam",
-        "iDCard": "17d480201006",
-        "birth": "1999-05-11",
-        "sex": 2,
-        "email": "abc@gmail.com",
-        "roomId": "room-0102"
-    }
-];
-
-const floorRooms = rooms.reduce(function (r, a) {
-    r[a.floorId] = r[a.floorId] || [];
-    r[a.floorId].push(a);
-    return r;
-}, Object.create(null));
-
-const filterUsersByRoom = (roomId) => {
+const filterUsersByRoom = (roomId, users) => {
     let results = [];
     users.forEach(function (a) {
         if (a.roomId === roomId) results.push(a);
@@ -480,16 +25,9 @@ const filterUsersByRoom = (roomId) => {
     return results;
 }
 
-const filterUsersBySex = (sex) => {
-    let results = [];
-    users.forEach(function (a) {
-        if (a.sex === sex) results.push(a);
-    });
-    return results;
-}
-
 const membersElement = document.getElementById('members');
 const listBoard = document.getElementById('list-name');
+const loadingType = "spinner";
 
 const tong = document.getElementById('tong');
 const male = document.getElementById('male');
@@ -515,7 +53,7 @@ const templateInit = (
 ) => {
     return `
 <div class="project-box-wrapper">
-   <div class="project-box ${data.status}" id="${data.id}" onclick="select(${JSON.stringify({ id: data.id, name: data.name }).replace(/"/g, "'")})">
+   <div class="project-box ${data.status}" id="${data._id}">
       <div class="project-box-header" style="width: 100%">
          <span>December 10, 2020</span>
          <div class="more-wrapper">
@@ -554,20 +92,27 @@ const templateInit = (
 `;
 }
 
-
-const templateMember = (memberModel = { name: "Phạm Dương", email: "pduongpdu99@gmail.com", number: "0932443314", address: "1004 Quang Trung, TP. Quảng Ngãi" }) => `
-<div class="message-box">
-   <img src="images/user.png" alt="profile image">
-   <div class="message-content">
-      <div class="message-header">
-         <div class="name">${memberModel.name}</div>
-      </div>
-      <p class="message-line">${memberModel.email}</p>
-      <p class="message-line">${memberModel.number}</p>
-      <p class="message-line">${memberModel.address}</p>
-   </div>
-</div>
-`;
+/**
+ * template member
+ * @param {{id: String, name: String, email: String, number: String, address: String}} memberModel 
+ * @returns 
+ */
+const templateMember = (memberModel) => {
+    let html = `
+    <div class="message-box" id="message-box-${memberModel.id}">
+       <img src="images/user.png" alt="profile image">
+       <div class="message-content">
+          <div class="message-header">
+             <div class="name">${memberModel.name}</div>
+          </div>
+          <p class="message-line">${memberModel.email}</p>
+          <p class="message-line">${memberModel.phoneNumber}</p>
+          <p class="message-line">${memberModel.address}</p>
+       </div>
+    </div>
+    `.trim();
+    return [html, `message-box-${memberModel.id}`, memberModel];
+};
 
 /**
  * UX process
@@ -607,53 +152,405 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-function init() {
+async function init() {
+    // load sĩ số
+    UserProvider.getSiSo().then(data => {
+        let maleNum = parseInt(data['1']);
+        let femaleNum = parseInt(data['2']);
+
+        tong.innerHTML = maleNum + femaleNum;
+        male.innerHTML = maleNum;
+        female.innerHTML = femaleNum;
+    });
+
     let viewIndex = document.getElementById("view-index");
-    let results = [];
 
-    const floors = Object.keys(floorRooms);
+    const gender = 0;
+    const buildings = 0;
 
+    // get all user list
+    const users = await UserProvider.getAll();
+
+    // get rooms list 
+    const roomlist = await RoomProvider.getRoomBy(gender, buildings);
+
+    let rooms = {};
+    roomlist.forEach(item => {
+        if (rooms[item.name[0]] == undefined) rooms[item.name[0]] = []
+        rooms[item.name[0]].push(item);
+    });
 
     let data = [];
-    for (let floorIndex = 0; floorIndex < floors.length; floorIndex += 1) {
-        const floor = floorRooms[floorIndex + 1];
+    for (const [k, v] of Object.entries(rooms)) {
+        // sort 
+        rooms[k] = v.sort((a, b) => parseInt(a.name) - parseInt(b.name));
+
+        const floor = rooms[k];
         data.push(`
-            <h3>${floorIndex + 1}F</h3>
-            <div style="border-bottom: 2px solid #eaeaea; width:100%">
-            </div><div style="margin-top: 20px; width: 100%"></div>`
+                <h3>${k}F</h3>
+                <div style="border-bottom: 2px solid #eaeaea; width:100%">
+                </div><div style="margin-top: 20px; width: 100%"></div>`
         );
 
-        // re-update status
         floor.forEach(room => {
-            let users = filterUsersByRoom(room.id);
-            room.status = users.length == 0 ? "empty" : users.length >= 4 ? "full" : "semi";
-            data.push(templateInit(room, users));
-        })
+            let userList = filterUsersByRoom(room._id, users);
+            room.status = (userList.length == 0 ? "empty" : userList.length >= 4 ? "full" : "semi");
+            data.push(templateInit(room, userList));
+        });
 
-        data.push(`
-            </div><div style="margin-top: 30px; width: 100%"></div>`
-        );
+        data.push(`</div><div style="margin-top: 30px; width: 100%"></div>`);
     }
-    results.push(data.join(""))
-    viewIndex.innerHTML = results.join("")
 
-    tong.innerHTML = users.length;
-    male.innerHTML = filterUsersBySex(2).length;
-    female.innerHTML = filterUsersBySex(1).length;
+    viewIndex.innerHTML = data.join("")
+
+    // assign onclick
+    roomlist.forEach(
+        model => document.getElementById(model._id).onclick = () => onRoomClick({
+            id: model._id,
+            name: model.name
+        }, users)
+    );
 }
 
-function select(room) {
-    let users = filterUsersByRoom(room.id);
-    membersElement.innerHTML = users.map(user => templateMember(user)).join('');
-    listBoard.innerHTML = `${room.name} Room`;
-
+/**
+ * on add click
+ * @param {{id: String, name:String}} room 
+ * @param {User[]} users 
+ */
+function onRoomClick(room, users) {
     // remove selected
-    $('.project-box.selected').toggleClass('selected')
+    $('.project-box.selected').toggleClass('selected');
+
+    // filter user by rooom id 
+    let filters = filterUsersByRoom(room.id, users);
+    let ids = [];
+
+    // filter data
+    // - html
+    // - [user, roomId]
+    membersElement.innerHTML = filters.map(user => {
+        let content = templateMember(user);
+        ids.push([content[1], content[2]]);
+        return content[0];
+    }).join('');
+
+    // gán onclick vào thành viên mỗi room
+    ids.forEach(id => {
+        document.getElementById(id[0]).onclick = () => roomUpdateInit(
+            id[1],
+            room.id,
+        );
+    })
+
+
+    listBoard.innerHTML = `${room.name}`;
     document.getElementById(room.id).classList.toggle('selected');
+
+    localStorage.setItem('room-data', JSON.stringify(room));
 }
 
 init();
-select({
-    id: 'room-0101',
-    name: '101'
-})
+
+
+
+// ====================================================================================================================================================
+// ====================================================================================================================================================
+// ====================================================================================================================================================
+// ====================================================================================================================================================
+let loadQuocTich = false;
+let loadDanToc = false;
+let loadPhong = false;
+
+function registerFormInit(registerForm) {
+
+    if (registerForm != undefined) {
+        registerForm.innerHTML = `
+    <div class="bg-dark"></div>
+    <div class="cont animation">
+      <div class="form" id="form">
+        <h2>Đơn đăng ký vào ở ký túc xá</h2>
+        <label>
+          <span>Họ và tên</span>
+          <input type="text" id="fullname" />
+        </label>
+        <label>
+          <span>Số điện thoại</span>
+          <input type="text" id="number" />
+        </label>
+        <label>
+          <span>Địa chỉ</span>
+          <input type="text" id="address" />
+        </label>
+        <label>
+          <span>Quốc tịch</span>
+          <select id="national"></select>
+        </label>
+        <label>
+          <span>Số CNND/CCCD/Mã SV</span>
+          <input type="text" id="idcard"/>
+        </label>
+        <label>
+          <span>Ngày sinh</span>
+          <input type="text" id="birth"/>
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="text" id="email"/>
+        </label>
+        <label>
+          <span>Dân tộc</span>
+          <select id="dantoc-options"></select>
+        </label>
+        <label>
+          <span>Phòng</span>
+          <select id="room-options">
+          </select>
+        </label>
+        <button type="button" id="submit" class="submit">Register</button>
+        <button type="button" id="fb-btn" class="fb-btn">Cancel</button>
+      </div>
+      <div class=" sub-cont">
+        <div class="img">
+          <div class="img__text m--up">
+            <h2>Welcome to Dormitory of PDU</h2>
+            <p>Vui mừng chào đón các bạn tới với kí tý xá trường Đại học Phạm Văn Đồng</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    `;
+    }
+}
+
+/**
+ * loading
+ */
+function loadingCall() {
+    $('body').loadingModal({ text: 'Loading...' });
+    $('body').loadingModal('animation', loadingType);
+}
+
+/**
+ * load data room
+ */
+async function loadRoom(registerForm) {
+    let rooms = await RoomProvider.getAll();
+    let roomOptions = document.getElementById('room-options');
+
+    // rooms sorted
+    rooms = rooms.sort((a, b) => {
+        return parseInt(a.name) - parseInt(b.name);
+    });
+
+    // room options 
+    if (roomOptions) {
+        roomOptions.innerHTML = rooms
+            .map(room => `<option value="${room.id}">${room.name}</option>`)
+            .join('');
+    }
+
+    // tồn tại register form 
+    if (registerForm != undefined && registerForm.attributes['roomid']) {
+        if (roomOptions)
+            roomOptions.value = registerForm.attributes['roomid'].value
+    } else {
+        if (rooms.length > 0)
+            if (roomOptions)
+                roomOptions.value = rooms[0].id
+    }
+
+    loadPhong = true;
+}
+
+/**
+ * load data quốc tịch
+ */
+async function loadNationality() {
+    const nationalities = await NationalityProvider.getAll();
+    let national = document.getElementById('national');
+
+    if (national)
+        national.innerHTML = nationalities
+            .map(room => `<option value="${room.id}">${room.name}</option>`)
+            .join('');
+    loadQuocTich = true;
+    onLoadDanToc().then(() => {
+        loadDanToc = true;
+    });
+}
+
+/**
+ * load data dantoc
+ */
+async function onLoadDanToc() {
+    return DantocProvider.getAll().then(dantocs => {
+        let dantocOpts = document.getElementById('dantoc-options');
+        let national = document.getElementById('national');
+
+        if (dantocs)
+            if (dantocOpts) {
+                dantocOpts.innerHTML = dantocs
+                    .filter(dantoc => dantoc.nationality === national.value)
+                    .map(dantoc => `<option value="${dantoc.id}">${dantoc.name}</option>`)
+                    .join('');
+                dantocOpts.value = DANTOC.KINH;
+                document.getElementById(DANTOC.KINH).setAttribute('selected', 'true');
+            }
+
+    });
+}
+
+function onNationalChange() {
+    loadingCall();
+    onLoadDanToc().then(() => {
+        $('body').loadingModal('destroy')
+    });
+}
+
+if (document.getElementById('national'))
+    document.getElementById('national').onchange = onNationalChange;
+
+function thongBaoValidation(value) {
+    alert(value);
+}
+
+function validation(model) {
+    if (!isNotEmpty(model.name)) {
+        thongBaoValidation("Fullname is not empty");
+        return false;
+    }
+
+    if (!isNumberPhone(model.phoneNumber)) {
+        thongBaoValidation("It's not number phone");
+        return false;
+    }
+
+    if (!isNotEmpty(model.address)) {
+        thongBaoValidation("address  is not empty");
+        return false;
+    }
+
+    if (!isNotEmpty(model.nationality)) {
+        thongBaoValidation("National is not empty");
+        return false;
+    }
+
+    if (!isNotEmpty(model.iDCard)) {
+        thongBaoValidation("idCard is not empty");
+        return false;
+    }
+
+    if (!isDate(model.birth)) {
+        thongBaoValidation("Birth is invalid date format yyyy-mm-dd");
+        return false;
+    }
+
+    if (!isEmail(model.email)) {
+        thongBaoValidation("it is not email");
+        return false;
+    }
+
+    if (!isNotEmpty(model.danToc)) {
+        thongBaoValidation("dantoc field is not empty");
+        return false;
+    }
+
+    if (!isNotEmpty(model.sex)) {
+        thongBaoValidation("sex field is not empty");
+        return false;
+    }
+
+    if (!isNotEmpty(model.roomId)) {
+        thongBaoValidation("room is not empty");
+        return false;
+    }
+
+    return true;
+}
+
+document.getElementById('add-button').onclick = function () {
+    let roomData = localStorage.getItem('room-data');
+    roomData = JSON.parse(roomData);
+
+    // xử lý register form
+    const initDiv = document.getElementById('init-register-form');
+    const register = document.createElement('register-form');
+
+    register.setAttribute('roomid', roomData.id);
+    register.setAttribute('sex', 1);
+    register.setAttribute('class', "register-form");
+    initDiv.appendChild(register);
+    initialize(register);
+};
+
+function onSubmitClick() {
+    const fullname = document.getElementById('fullname');
+    const number = document.getElementById('number');
+    const address = document.getElementById('address');
+    const national = document.getElementById('national');
+    const idcard = document.getElementById('idcard');
+    const birth = document.getElementById('birth');
+    const email = document.getElementById('email');
+    const dantocOptions = document.getElementById('dantoc-options');
+    const roomOptions = document.getElementById('room-options');
+    const sex = document.getElementsByClassName('register-form')[0].getAttribute('sex');
+
+    const data = {
+        name: fullname.value,
+        phoneNumber: number.value,
+        address: address.value,
+        nationality: national.value,
+        iDCard: idcard.value.toLowerCase(),
+        birth: birth.value,
+        email: email.value,
+        danToc: dantocOptions.value,
+        roomId: roomOptions.value,
+        // sex: registerForm.attributes['sex'] ? registerForm.attributes['sex'].value : 1,
+        sex: sex,
+        role: 1,
+        avatar: "images/user.png",
+    };
+
+    if (validation(data)) {
+        $('body').loadingModal({ text: 'User creating...' });
+        $('body').loadingModal('animation', loadingType);
+        UserProvider.create(data).then((data) => {
+            $('body').loadingModal('destroy');
+
+            fullname.value = "";
+            number.value = "";
+            address.value = "";
+            idcard.value = "";
+            birth.value = "";
+            email.value = "";
+        });
+    }
+}
+function onCancelClick() {
+    document.getElementById('init-register-form').innerHTML = "";
+}
+
+function initialize(registerForm) {
+    registerFormInit(registerForm);
+    loadRoom(registerForm);
+    loadNationality();
+
+    if (document.getElementById('submit'))
+        document.getElementById('submit').onclick = onSubmitClick;
+    if (document.getElementById('fb-btn'))
+        document.getElementById('fb-btn').onclick = onCancelClick;
+}
+
+
+// ====================================================================================================================================================
+// ====================================================================================================================================================
+// ====================================================================================================================================================
+// ====================================================================================================================================================
+
+// tạo form chuyển phòng cho user
+function roomUpdateInit(userId, roomId) {
+    console.log(
+        userId,
+        roomId
+    )
+}

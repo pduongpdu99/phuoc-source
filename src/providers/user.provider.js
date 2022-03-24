@@ -55,4 +55,27 @@ export class UserProvider {
     static async updateById(body = {}) {
         return UserRepository.updateById(body);
     }
+
+    /**
+     * get users by room id
+     * @param id 
+     * @return user list
+     */
+    static async getUsersByRoomId(id) {
+        return UserRepository.getUsersByRoomId(id).then(data => {
+            return data.map(item => {
+                let model = new User();
+                model.toJson(item);
+                return model;
+            });
+        });
+    }
+
+    /**
+     * get si so
+     * @return si so theo gioi tinh
+     */
+    static async getSiSo() {
+        return UserRepository.getSiSo();
+    }
 }

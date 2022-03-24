@@ -7,6 +7,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Room</title>
    <link rel="stylesheet" href="css/room-x.css">
+   <link rel="stylesheet" href="css/loading-template.css">
 </head>
 
 <body>
@@ -111,15 +112,15 @@
             <div class="projects-section-line">
                <div class="projects-status">
                   <div class="item-status">
-                     <span class="status-number" id="tong">100</span>
+                     <span class="status-number" id="tong">0</span>
                      <span class="status-type">Tổng</span>
                   </div>
                   <div class="item-status">
-                     <span class="status-number" id="male">40</span>
+                     <span class="status-number" id="male">0</span>
                      <span class="status-type">Nam</span>
                   </div>
                   <div class="item-status">
-                     <span class="status-number" id="female">60</span>
+                     <span class="status-number" id="female">0</span>
                      <span class="status-type">Nữ</span>
                   </div>
                </div>
@@ -148,7 +149,25 @@
                   </button>
                </div>
             </div>
-            <div class="project-boxes jsGridView" id="view-index"></div>
+            <div class="project-boxes jsGridView" id="view-index">
+
+               <div class="loading-card">
+                  <div class="header">
+                     <div class="details">
+                        <span class="name"></span>
+                        <br>
+                        <span class="about"></span>
+                     </div>
+                  </div>
+                  <div style="margin-top: 20px"></div>
+                  <div class="btns">
+                     <div class="btn btn-1"></div>
+                     <div style="width: 100%;"></div>
+                     <div class="btn btn-2"></div>
+                  </div>
+               </div>
+
+            </div>
          </div>
          <div class="messages-section">
             <button class="messages-close">
@@ -161,15 +180,53 @@
                </svg>
             </button>
             <div class="projects-section-header">
-               <p id="list-name">101 Room</p>
-               <div class="add-button">Add</div>
+               <p id="list-name">101</p>
+               <div class="add-button" id="add-button">Add</div>
             </div>
             <div class="messages" id="members"></div>
          </div>
       </div>
    </div>
+
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-   <script src="js/room.js"></script>
+   <script type="module" src="js/room.js"></script>
+
+   <!-- register form -->
+   <div id="init-register-form"></div>
+   <!-- <register-form roomid="62370bdd4e6cc1079d9ccb20" sex="2" class="register-form hide"></register-form> -->
+   <link rel="stylesheet" href="css/register.css">
+   <link rel="stylesheet" href="css/jquery.loadingModal.min.css">
+   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"></script>
+   <!-- <script src="js/register-form.js"></script> -->
+   <script src="js/jquery.loadingModal.min.js"></script>
+   <script type="module">
+      // preloading 
+      let viewIndex = document.getElementById('view-index');
+      const template = () => `
+      <div class="loading-card">
+         <div class="header">
+            <div class="details">
+               <span class="name"></span>
+               <br>
+               <span class="about"></span>
+            </div>
+         </div>
+         <div style="margin-top: 20px"></div>
+         <div class="btns">
+            <div class="btn btn-1"></div>
+            <div style="width: 100%;"></div>
+            <div class="btn btn-2"></div>
+         </div>
+      </div>
+      `;
+
+      for (let i = 0; i < 9; i++)
+         viewIndex.innerHTML += template()
+   </script>
+
+
+
 </body>
 
 </html>
