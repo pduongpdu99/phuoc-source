@@ -149,8 +149,12 @@
                   </button>
                </div>
             </div>
-            <div class="project-boxes jsGridView" id="view-index">
+            <div class="project-boxes jsGridView" id="view-index"></div>
 
+            <script>
+               // preloading 
+               let viewIndex = document.getElementById('view-index');
+               const template = () => `
                <div class="loading-card">
                   <div class="header">
                      <div class="details">
@@ -166,8 +170,15 @@
                      <div class="btn btn-2"></div>
                   </div>
                </div>
+               `;
 
-            </div>
+               for (let i = 0; i < 9; i++)
+                  viewIndex.innerHTML += template()
+
+               delete template;
+               delete viewIndex;
+            </script>
+
          </div>
          <div class="messages-section">
             <button class="messages-close">
@@ -200,33 +211,6 @@
       crossorigin="anonymous"></script>
    <!-- <script src="js/register-form.js"></script> -->
    <script src="js/jquery.loadingModal.min.js"></script>
-   <script type="module">
-      // preloading 
-      let viewIndex = document.getElementById('view-index');
-      const template = () => `
-      <div class="loading-card">
-         <div class="header">
-            <div class="details">
-               <span class="name"></span>
-               <br>
-               <span class="about"></span>
-            </div>
-         </div>
-         <div style="margin-top: 20px"></div>
-         <div class="btns">
-            <div class="btn btn-1"></div>
-            <div style="width: 100%;"></div>
-            <div class="btn btn-2"></div>
-         </div>
-      </div>
-      `;
-
-      for (let i = 0; i < 9; i++)
-         viewIndex.innerHTML += template()
-   </script>
-
-
-
 </body>
 
 </html>
