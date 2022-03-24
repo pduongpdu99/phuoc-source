@@ -112,7 +112,7 @@ a {
   background-color: var(--main-color);
   position: relative;
 
-  display: none;
+  /* display: none; */
 }
 .app-icon:before,
 .app-icon:after {
