@@ -98,4 +98,60 @@ export class UserRepository {
             body: null,
         }).then(data => data.json())
     }
+
+    /**
+     * get room by sex
+     * @param {number} sex 
+     */
+    static async getRoomsBySex(sex = 0) {
+        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/getRoomsBySex/${sex}`;
+        return fetch(path, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' },
+            body: null,
+        }).then(data => data.json())
+    }
+
+    /**
+     * get rooms by name
+     * @param {string} name 
+     * @returns 
+     */
+    static async getRoomsByName(name) {
+        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/getRoomsByName/${name}`;
+        return fetch(path, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' },
+            body: null,
+        }).then(data => data.json())
+    }
+
+    /**
+     * get rooms by user number
+     * @param {number} type 
+     * @returns 
+     */
+    static async getRoomsByUserNumber(type) {
+        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/getRoomsByUserNumber/${type}`;
+        return fetch(path, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' },
+            body: null,
+        }).then(data => data.json())
+    }
+
+    /**
+     * switch all
+     * @param {string} from 
+     * @param {string} to 
+     * @returns 
+     */
+    static async switchAll(from, to) {
+        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/switchAll/${from}/${to}`;
+        return fetch(path, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' },
+            body: null,
+        }).then(data => data.json())
+    }
 }

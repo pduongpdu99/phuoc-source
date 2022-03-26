@@ -34,6 +34,15 @@ const loadingType = "spinner";
 const tong = document.getElementById('tong');
 const male = document.getElementById('male');
 const female = document.getElementById('female');
+const switchButton = document.getElementById('switch-button');
+localStorage.clear('room-data');
+
+switchButton.onclick = () => {
+    let data = localStorage.getItem('room-data');
+    let roomData = data != null && data != undefined ? JSON.parse(data) : undefined;
+    if (roomData) switchRoom(roomData.id);
+    else alert("Chưa có dữ liệu");
+};
 
 const templateInit = (
     data,
@@ -305,8 +314,7 @@ function registerFormInit(registerForm) {
         </label>
         <label>
           <span>Phòng</span>
-          <select id="room-options">
-          </select>
+          <select id="room-options"></select>
         </label>
         <button type="button" id="submit" class="submit">Register</button>
         <button type="button" id="fb-btn" class="fb-btn">Cancel</button>
@@ -403,9 +411,12 @@ async function onLoadDanToc() {
 }
 
 function onNationalChange() {
+    // spin loading 
     loadingCall();
+
+    // destroy spin loading
     onLoadDanToc().then(() => {
-        $('body').loadingModal('destroy')
+        $('body').loadingModal('destroy');
     });
 }
 
@@ -519,6 +530,9 @@ function onSubmitClick() {
         UserProvider.create(data).then((data) => {
             $('body').loadingModal('destroy');
 
+            // code render
+            // ...
+
             fullname.value = "";
             number.value = "";
             address.value = "";
@@ -526,6 +540,9 @@ function onSubmitClick() {
             birth.value = "";
             email.value = "";
         });
+
+        // xóa form
+        onCancelClick();
     }
 }
 function onCancelClick() {
@@ -555,7 +572,6 @@ function initialize(registerForm) {
  * @returns 
  */
 const initSwitchFormHTML = (roomModel) => {
-    console.log(roomModel);
     return `
     <div class="bg-dark"></div>
     <switch-form user="user_id" room="room_id" class="light">
@@ -586,7 +602,13 @@ const initSwitchFormHTML = (roomModel) => {
  * @param {string} roomId 
  */
 async function roomUpdateInit(user, roomId) {
-    const room = await RoomProvider.findById(roomId);
+    // spin loading
+    loadingCall();
+
+    const room = await RoomProvider.findById(roomId).then(data => {
+        $("body").loadingModal('destroy');
+        return data;
+    });
 
     // render inner html into init-switch-form index
     $('#init-switch-form').html(initSwitchFormHTML(room))
@@ -616,16 +638,77 @@ async function roomUpdateInit(user, roomId) {
 }
 
 /**
+ * tạo form chuyển từ from room thành to room
+ * @param {string} roomId 
+ */
+async function switchRoom(roomId) {
+    loadingCall();
+    const room = await RoomProvider.findById(roomId).then(data => {
+        $("body").loadingModal('destroy');
+        return data;
+    });
+
+    // render inner html into init-switch-form index
+    $('#init-switch-form').html(initSwitchFormHTML(room))
+
+    // khởi tạo switch form 
+    switchFormInit(roomId);
+
+    // assign event function cho button trong switch form 
+    document.getElementById('switch-submit').onclick = function () {
+        const toRoomId = document.getElementById('switch-form-to').getAttribute('data-id');
+
+        // check null
+        if (toRoomId && toRoomId.length > 0) {
+            onSwitchAllClick(
+                // id từ room bàn đầu
+                roomId,
+
+                // id room cần chuyển
+                toRoomId
+            );
+        } else alert("Dữ liệu không hợp lệ/ Dữ liệu không được rỗng")
+
+    };
+
+    // assign event function cho cancel button switch form 
+    document.getElementById('switch-cancel').onclick = onSwitchFormCancel;
+}
+
+/**
  * on switch form submit
  * @param {User} user
  */
 function onSwitchFormSubmit(user, roomIdNeedToChanged) {
-    loadingCall();
     user.roomId = roomIdNeedToChanged;
 
     // use update by id api to room id change
     UserProvider.updateById(user).then(userUpdated => {
-        // alert('Room id chanhed');
+        // code render
+        // ....
+
+        // destroy spin loading
+        $('body').loadingModal('destroy');
+        onSwitchFormCancel();
+    });
+}
+
+/**
+ * on switch all click
+ * @param {string} fromRoomId 
+ * @param {string} toRoomId 
+ */
+function onSwitchAllClick(fromRoomId, toRoomId) {
+    // console.log(fromRoomId, toRoomId);
+    loadingCall();
+
+
+    // use update by id api to room id change
+    UserProvider.switchAll(fromRoomId, toRoomId).then((data) => {
+        // code render
+        // ....
+
+        // destroy spin loading
         $('body').loadingModal('destroy');
         onSwitchFormCancel();
     });
@@ -751,6 +834,5 @@ function autocomplete(inp, arr) {
 async function switchFormInit(roomId) {
     let rooms = await RoomProvider.getAll();
     const data = rooms.sort((a, b) => a.name - b.name).filter(item => item.id !== roomId);
-
     autocomplete(document.getElementById("switch-form-to"), data);
 }

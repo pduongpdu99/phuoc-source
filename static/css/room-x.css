@@ -281,11 +281,11 @@ a {
   padding-bottom: 32px;
 }
 .projects-section-header {
-  display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
   color: var(--main-color);
+  display: flex;
 }
 .projects-section-header p {
   font-size: 24px;
@@ -294,9 +294,12 @@ a {
   opacity: 0.9;
   margin: 0;
   color: var(--main-color);
+  display: inline-block;
+  width: 100%;
 }
 .projects-section-header .time {
   font-size: 20px;
+  text-align: right;
 }
 
 .projects-status {
@@ -922,12 +925,22 @@ a {
 }
 
 /* custom */
-.add-button {
-  background: #d7fff6;
-  color: #1ff1c2;
+.add-button,
+.switch-button {
   padding: 10px 20px;
   border-radius: 20px;
   text-align: center;
   margin-right: 10px;
   cursor: pointer;
+  display: inline-block;
+}
+
+.add-button {
+  background: #d7fff6;
+  color: #1ff1c2;
+}
+
+.switch-button {
+  background: #e6d7ff;
+  color: #661ff1;
 }

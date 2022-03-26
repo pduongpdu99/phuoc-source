@@ -31,6 +31,10 @@ const FRONTEND = {
         LONG: 108.807403
       },
     },
+  },
+
+  HEADERS: {
+    
   }
 }
 

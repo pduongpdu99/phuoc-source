@@ -78,4 +78,41 @@ export class UserProvider {
     static async getSiSo() {
         return UserRepository.getSiSo();
     }
+
+    /**
+     * get room by sex
+     * @param {number} sex 
+     * @return 
+     */
+    static async getRoomsBySex(sex = 0) {
+        return UserRepository.getRoomsBySex(sex);
+    }
+
+    /**
+     * get rooms by name
+     * @param {string} name 
+     * @returns 
+     */
+    static async getRoomsByName(name) {
+        return UserRepository.getRoomsByName(name);
+    }
+
+    /**
+     * get rooms by user number
+     * @param {number} type 
+     * @returns 
+     */
+    static async getRoomsByUserNumber(type) {
+        return UserRepository.getRoomsByUserNumber(type);
+    }
+
+    /**
+     * switch all
+     * @param {string} from 
+     * @param {string} to 
+     * @returns 
+     */
+    static async switchAll(from, to) {
+        return UserRepository.switchAll(from, to);
+    }
 }
