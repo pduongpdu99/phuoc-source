@@ -16,11 +16,25 @@
    <div class="app-container">
       <div class="app-header">
          <div class="app-header-left">
-            <a href="/"><span class="iconify" data-icon="ant-design:home-filled" style="font-size: 30px; color: black"></span></a>
+            <a href="/"><span class="iconify" data-icon="ant-design:home-filled"
+                  style="font-size: 30px; color: black"></span></a>
             <p class="app-name">Room register</p>
             <div class="search-wrapper">
-               <input class="search-input" type="text" placeholder="Filter">
-               <span class="iconify" data-icon="feather:filter"></span>
+               <input class="search-input" type="text" placeholder="Filter by user name">
+               <span class="iconify phuoc-filter" data-icon="feather:filter"></span>
+               <style>
+                  .iconify.phuoc-filter {
+                     font-size: 25px;
+                     padding: 5px;
+                     border-radius: 30px;
+                     cursor: pointer;
+                     transition: .2s;
+                  }
+
+                  .iconify.phuoc-filter:hover {
+                     background: rgba(0, 0, 0, 0.301);
+                  }
+               </style>
             </div>
          </div>
          <div class="app-header-right">
@@ -188,7 +202,7 @@
             <div class="projects-section-header">
                <p id="list-name">List</p>
                <div class="add-button" id="add-button">Add</div>
-               <div class="switch-button" id="switch-button">Switch</div>
+               <div class="switch-button" id="switch-button">Switch all</div>
             </div>
             <div class="messages" id="members"></div>
          </div>

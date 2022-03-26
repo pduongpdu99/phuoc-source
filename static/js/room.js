@@ -257,6 +257,7 @@ function onRoomClick(room, users) {
     listBoard.innerHTML = `${room.name}`;
     document.getElementById(room.id).classList.toggle('selected');
 
+    room.number = filters.length;
     localStorage.setItem('room-data', JSON.stringify(room));
 }
 
@@ -484,16 +485,23 @@ function validation(model) {
 document.getElementById('add-button').onclick = function () {
     let roomData = localStorage.getItem('room-data');
     roomData = JSON.parse(roomData);
+    console.log(roomData)
 
-    // xử lý register form
-    const initDiv = document.getElementById('init-register-form');
-    const register = document.createElement('register-form');
+    const number = roomData.number;
+    if (number < 4) {
+        // xử lý register form
+        const initDiv = document.getElementById('init-register-form');
+        const register = document.createElement('register-form');
 
-    register.setAttribute('roomid', roomData.id);
-    register.setAttribute('sex', 1);
-    register.setAttribute('class', "register-form");
-    initDiv.appendChild(register);
-    initialize(register);
+        register.setAttribute('roomid', roomData.id);
+        register.setAttribute('sex', 1);
+        register.setAttribute('class', "register-form");
+        initDiv.appendChild(register);
+        initialize(register);
+    } else {
+        thongBaoValidation("Room member is maxium");
+    }
+
 };
 
 function onSubmitClick() {
@@ -679,18 +687,28 @@ async function switchRoom(roomId) {
  * on switch form submit
  * @param {User} user
  */
-function onSwitchFormSubmit(user, roomIdNeedToChanged) {
+async function onSwitchFormSubmit(user, roomIdNeedToChanged) {
     user.roomId = roomIdNeedToChanged;
+    loadingCall();
 
-    // use update by id api to room id change
-    UserProvider.updateById(user).then(userUpdated => {
-        // code render
-        // ....
+    // lấy tất cả người dùng theo id room
+    const users = (await UserProvider.getAll()).filter(item => item.roomId === roomIdNeedToChanged)
 
-        // destroy spin loading
-        $('body').loadingModal('destroy');
-        onSwitchFormCancel();
-    });
+    if (users.length < 4) {
+        // use update by id api to room id change
+        UserProvider.updateById(user).then(userUpdated => {
+            // code render
+            // ....
+
+            // destroy spin loading
+            $('body').loadingModal('destroy');
+            onSwitchFormCancel();
+        });
+    } else {
+        thongBaoValidation("Phòng đã đầy")
+    }
+
+
 }
 
 /**
