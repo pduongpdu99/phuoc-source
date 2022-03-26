@@ -1,3 +1,17 @@
+import {
+  UserProvider,
+  NationalityProvider,
+  DantocProvider,
+  RoomProvider,
+} from '/providers/index.js';
+
+import {
+  isNotEmpty,
+  isEmail,
+  isNumberPhone,
+  isDate
+} from './validation.js';
+
 const loadingType = "spinner";
 
 let loadQuocTich = false;
@@ -14,27 +28,27 @@ function registerFormInit() {
       <div class="form" id="form">
         <h2>Đơn đăng ký vào ở ký túc xá</h2>
         <label>
-          <span>Họ và tên</span>
-          <input type="text" id="fullname" />
+          <span>Fullname</span>
+          <input type="text" id="fullname"/>
         </label>
         <label>
-          <span>Số điện thoại</span>
+          <span>Number</span>
           <input type="text" id="number" />
         </label>
         <label>
-          <span>Địa chỉ</span>
+          <span>Address</span>
           <input type="text" id="address" />
         </label>
         <label>
-          <span>Quốc tịch</span>
+          <span>Nationality</span>
           <select id="national"></select>
         </label>
         <label>
-          <span>Số CNND/CCCD/Mã SV</span>
+          <span>Số CNND/CCCD/StudentID</span>
           <input type="text" id="idcard"/>
         </label>
         <label>
-          <span>Ngày sinh</span>
+          <span>Birthday</span>
           <input type="text" id="birth"/>
         </label>
         <label>
@@ -42,18 +56,18 @@ function registerFormInit() {
           <input type="text" id="email"/>
         </label>
         <label>
-          <span>Dân tộc</span>
+          <span>Ethnic</span>
           <select id="dantoc-options"></select>
         </label>
         <label>
-          <span>Phòng</span>
+          <span>Room</span>
           <select id="room-options">
           </select>
         </label>
         <button type="button" id="submit" class="submit">Register</button>
         <button type="button" id="fb-btn" class="fb-btn">Cancel</button>
       </div>
-      <div class=" sub-cont">
+      <div class="sub-cont">
         <div class="img">
           <div class="img__text m--up">
             <h2>Welcome to Dormitory of PDU</h2>
@@ -63,28 +77,13 @@ function registerFormInit() {
       </div>
     </div>
     `;
+
+    if (document.getElementById('submit'))
+      document.getElementById('submit').onclick = onSubmitClick;
+    if (document.getElementById('fb-btn'))
+      document.getElementById('fb-btn').onclick = onCancelClick;
   }
 }
-
-
-if (document.getElementById('submit'))
-  document.getElementById('submit').onclick = onSubmitClick;
-if (document.getElementById('fb-btn'))
-  document.getElementById('fb-btn').onclick = onCancelClick;
-
-import {
-  UserProvider,
-  NationalityProvider,
-  DantocProvider,
-  RoomProvider,
-} from '/providers/index.js';
-
-import {
-  isNotEmpty,
-  isEmail,
-  isNumberPhone,
-  isDate
-} from './validation.js';
 
 function loadingCall() {
   $('body').loadingModal({ text: 'Loading...' });
