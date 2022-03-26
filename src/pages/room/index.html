@@ -8,6 +8,8 @@
    <title>Room</title>
    <link rel="stylesheet" href="css/room-x.css">
    <link rel="stylesheet" href="css/loading-template.css">
+
+   <link rel="stylesheet" href="css/switch-form.css">
 </head>
 
 <body>
@@ -171,8 +173,7 @@
                   </div>
                </div>
                `;
-
-               for (let i = 0; i < 9; i++)
+               for (let i = 0; i < 10; i++)
                   viewIndex.innerHTML += template()
 
                delete template;
@@ -191,7 +192,7 @@
                </svg>
             </button>
             <div class="projects-section-header">
-               <p id="list-name">DANH SÁCH</p>
+               <p id="list-name">List</p>
                <div class="add-button" id="add-button">Add</div>
             </div>
             <div class="messages" id="members"></div>
@@ -204,12 +205,11 @@
 
    <!-- register form -->
    <div id="init-register-form"></div>
-   <!-- <register-form roomid="62370bdd4e6cc1079d9ccb20" sex="2" class="register-form hide"></register-form> -->
+   <div id="init-switch-form"></div>
    <link rel="stylesheet" href="css/register.css">
    <link rel="stylesheet" href="css/jquery.loadingModal.min.css">
    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
       crossorigin="anonymous"></script>
-   <!-- <script src="js/register-form.js"></script> -->
    <script src="js/jquery.loadingModal.min.js"></script>
 </body>
 
