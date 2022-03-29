@@ -34,9 +34,8 @@ const FRONTEND = {
   },
 
   HEADERS: {
-    
+
   }
 }
 
 export default FRONTEND;
-

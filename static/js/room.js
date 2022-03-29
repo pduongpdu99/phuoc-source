@@ -15,7 +15,7 @@ import {
 
 // DANTOC constants
 import {
-    DANTOC
+    CONSTANTS
 } from '/utils/constant.js';
 
 
@@ -34,15 +34,13 @@ const loadingType = "spinner";
 const tong = document.getElementById('tong');
 const male = document.getElementById('male');
 const female = document.getElementById('female');
-const switchButton = document.getElementById('switch-button');
-localStorage.clear('room-data');
+localStorage.clear()
 
-switchButton.onclick = () => {
-    let data = localStorage.getItem('room-data');
-    let roomData = data != null && data != undefined ? JSON.parse(data) : undefined;
-    if (roomData) switchRoom(roomData.id);
-    else alert("Chưa có dữ liệu");
-};
+if (localStorage.getItem('buildings') == null)
+    localStorage.setItem('buildings', CONSTANTS.BUILDING.K1);
+
+if (localStorage.getItem('status') == null)
+    localStorage.setItem('status', CONSTANTS.STATUS.ALL);
 
 const templateInit = (
     data,
@@ -105,8 +103,8 @@ const templateInit = (
 
 /**
  * template member
- * @param {{id: String, name: String, email: String, number: String, address: String}} memberModel 
- * @returns 
+ * @param {{id: String, name: String, email: String, number: String, address: String}} memberModel
+ * @returns
  */
 const templateMember = (memberModel) => {
     let html = `
@@ -119,6 +117,7 @@ const templateMember = (memberModel) => {
           <p class="message-line">${memberModel.email}</p>
           <p class="message-line">${memberModel.phoneNumber}</p>
           <p class="message-line">${memberModel.address}</p>
+          <p class="message-line">${memberModel.sex === 1 ? "Nam" : "Nữ"}</p>
        </div>
     </div>
     `.trim();
@@ -163,11 +162,46 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-async function init() {
+function preloading() {
+    // preloading
+    let viewIndex = document.getElementById('view-index');
+    viewIndex.innerHTML = "";
+
+    const template = () => `
+    <div class="loading-card">
+       <div class="header">
+          <div class="details">
+             <span class="name"></span>
+             <br>
+             <span class="about"></span>
+          </div>
+       </div>
+       <div style="margin-top: 20px"></div>
+       <div class="btns">
+          <div class="btn btn-1"></div>
+          <div style="width: 100%;"></div>
+          <div class="btn btn-2"></div>
+       </div>
+    </div>
+    `;
+    for (let i = 0; i < 10; i++)
+        viewIndex.innerHTML += template();
+}
+
+async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONSTANTS.STATUS.ALL, loading: false }) {
+    if (argument.loading) loadingCall();
+    preloading();
+
     // load sĩ số
-    UserProvider.getSiSo().then(data => {
-        let maleNum = parseInt(data['1']);
-        let femaleNum = parseInt(data['2']);
+    let buildings = localStorage.getItem('buildings');
+    let status = localStorage.getItem('status');
+    UserProvider.getSiSo(
+        buildings,
+        status
+    ).then(data => {
+
+        let maleNum = data['male'];
+        let femaleNum = data['female'];
 
         tong.innerHTML = maleNum + femaleNum;
         male.innerHTML = maleNum;
@@ -176,14 +210,14 @@ async function init() {
 
     let viewIndex = document.getElementById("view-index");
 
-    const gender = 0;
-    const buildings = 0;
-
     // get all user list
     const users = await UserProvider.getAll();
 
-    // get rooms list 
-    const roomlist = await RoomProvider.getRoomBy(gender, buildings);
+    // get rooms list
+    const roomlist = await RoomProvider.getRoomBy(
+        argument.buildings,
+        argument.status
+    );
 
     let rooms = {};
     roomlist.forEach(item => {
@@ -193,7 +227,7 @@ async function init() {
 
     let data = [];
     for (const [k, v] of Object.entries(rooms)) {
-        // sort 
+        // sort
         rooms[k] = v.sort((a, b) => parseInt(a.name) - parseInt(b.name));
 
         const floor = rooms[k];
@@ -221,18 +255,20 @@ async function init() {
             name: model.name
         }, users)
     );
+
+    if (argument.loading) $('body').loadingModal('destroy');
 }
 
 /**
  * on add click
- * @param {{id: String, name:String}} room 
- * @param {User[]} users 
+ * @param {{id: String, name:String}} room
+ * @param {User[]} users
  */
 function onRoomClick(room, users) {
     // remove selected
     $('.project-box.selected').toggleClass('selected');
 
-    // filter user by rooom id 
+    // filter user by rooom id
     let filters = filterUsersByRoom(room.id, users);
     let ids = [];
 
@@ -353,14 +389,14 @@ async function loadRoom(registerForm) {
         return parseInt(a.name) - parseInt(b.name);
     });
 
-    // room options 
+    // room options
     if (roomOptions) {
         roomOptions.innerHTML = rooms
             .map(room => `<option value="${room.id}">${room.name}</option>`)
             .join('');
     }
 
-    // tồn tại register form 
+    // tồn tại register form
     if (registerForm != undefined && registerForm.attributes['roomid']) {
         if (roomOptions)
             roomOptions.value = registerForm.attributes['roomid'].value
@@ -404,15 +440,15 @@ async function onLoadDanToc() {
                     .filter(dantoc => dantoc.nationality === national.value)
                     .map(dantoc => `<option value="${dantoc.id}">${dantoc.name}</option>`)
                     .join('');
-                dantocOpts.value = DANTOC.KINH;
-                document.getElementById(DANTOC.KINH).setAttribute('selected', 'true');
+                dantocOpts.value = CONSTANTS.DANTOC.KINH;
+                document.getElementById(CONSTANTS.DANTOC.KINH).setAttribute('selected', 'true');
             }
 
     });
 }
 
 function onNationalChange() {
-    // spin loading 
+    // spin loading
     loadingCall();
 
     // destroy spin loading
@@ -424,10 +460,16 @@ function onNationalChange() {
 if (document.getElementById('national'))
     document.getElementById('national').onchange = onNationalChange;
 
+/**
+  * thông báo vi phạm validation
+  */
 function thongBaoValidation(value) {
     alert(value);
 }
 
+/**
+  * validation
+  */
 function validation(model) {
     if (!isNotEmpty(model.name)) {
         thongBaoValidation("Fullname is not empty");
@@ -485,7 +527,6 @@ function validation(model) {
 document.getElementById('add-button').onclick = function () {
     let roomData = localStorage.getItem('room-data');
     roomData = JSON.parse(roomData);
-    console.log(roomData)
 
     const number = roomData.number;
     if (number < 4) {
@@ -501,7 +542,14 @@ document.getElementById('add-button').onclick = function () {
     } else {
         thongBaoValidation("Room member is maxium");
     }
+};
 
+
+document.getElementById('switch-button').onclick = () => {
+    let data = localStorage.getItem('room-data');
+    let roomData = data != null && data != undefined ? JSON.parse(data) : undefined;
+    if (roomData) switchRoom(roomData.id);
+    else alert("Chưa có dữ liệu");
 };
 
 /**
@@ -536,13 +584,17 @@ function onSubmitClick() {
     };
 
     if (validation(data)) {
-        $('body').loadingModal({ text: 'User creating...' });
-        $('body').loadingModal('animation', loadingType);
         UserProvider.create(data).then((data) => {
-            $('body').loadingModal('destroy');
+            // xóa form
+            onCancelClick();
 
             // code render
-            // ...
+            const argument = {
+                buildings: localStorage.getItem('buildings'),
+                status: localStorage.getItem('status'),
+                loading: true,
+            }
+            init(argument);
 
             fullname.value = "";
             number.value = "";
@@ -551,9 +603,6 @@ function onSubmitClick() {
             birth.value = "";
             email.value = "";
         });
-
-        // xóa form
-        onCancelClick();
     }
 }
 
@@ -566,7 +615,7 @@ function onCancelClick() {
 
 /**
  * initialize
- * @param {*} registerForm 
+ * @param {*} registerForm
  */
 function initialize(registerForm) {
     registerFormInit(registerForm);
@@ -587,8 +636,8 @@ function initialize(registerForm) {
 
 /**
  * switch form html init
- * @param {Room} roomModel 
- * @returns 
+ * @param {Room} roomModel
+ * @returns
  */
 const initSwitchFormHTML = (roomModel) => {
     return `
@@ -617,8 +666,8 @@ const initSwitchFormHTML = (roomModel) => {
 
 /**
  * tạo form chuyển phòng cho user
- * @param {User} userId 
- * @param {string} roomId 
+ * @param {User} userId
+ * @param {string} roomId
  */
 async function roomUpdateInit(user, roomId) {
     // spin loading
@@ -632,10 +681,10 @@ async function roomUpdateInit(user, roomId) {
     // render inner html into init-switch-form index
     $('#init-switch-form').html(initSwitchFormHTML(room))
 
-    // khởi tạo switch form 
+    // khởi tạo switch form
     switchFormInit(roomId);
 
-    // assign event function cho button trong switch form 
+    // assign event function cho button trong switch form
     document.getElementById('switch-submit').onclick = function () {
         const roomdIdNeedToChange = document.getElementById('switch-form-to').getAttribute('data-id');
 
@@ -652,13 +701,13 @@ async function roomUpdateInit(user, roomId) {
 
     };
 
-    // assign event function cho cancel button switch form 
+    // assign event function cho cancel button switch form
     document.getElementById('switch-cancel').onclick = onSwitchFormCancel;
 }
 
 /**
  * tạo form chuyển từ from room thành to room
- * @param {string} roomId 
+ * @param {string} roomId
  */
 async function switchRoom(roomId) {
     loadingCall();
@@ -670,10 +719,10 @@ async function switchRoom(roomId) {
     // render inner html into init-switch-form index
     $('#init-switch-form').html(initSwitchFormHTML(room))
 
-    // khởi tạo switch form 
+    // khởi tạo switch form
     switchFormInit(roomId);
 
-    // assign event function cho button trong switch form 
+    // assign event function cho button trong switch form
     document.getElementById('switch-submit').onclick = function () {
         const toRoomId = document.getElementById('switch-form-to').getAttribute('data-id');
 
@@ -690,7 +739,7 @@ async function switchRoom(roomId) {
 
     };
 
-    // assign event function cho cancel button switch form 
+    // assign event function cho cancel button switch form
     document.getElementById('switch-cancel').onclick = onSwitchFormCancel;
 }
 
@@ -709,14 +758,18 @@ async function onSwitchFormSubmit(user, roomIdNeedToChanged) {
         // use update by id api to room id change
         UserProvider.updateById(user).then(userUpdated => {
             // code render
-            // ....
+            const argument = {
+                buildings: localStorage.getItem('buildings'),
+                status: localStorage.getItem('status'),
+                loading: true,
+            }
+            init(argument);
 
-            // destroy spin loading
-            $('body').loadingModal('destroy');
             onSwitchFormCancel();
         });
     } else {
-        thongBaoValidation("Phòng đã đầy")
+        thongBaoValidation("Room full");
+        $("body").loadingModal('destroy');
     }
 
 
@@ -724,18 +777,22 @@ async function onSwitchFormSubmit(user, roomIdNeedToChanged) {
 
 /**
  * on switch all click
- * @param {string} fromRoomId 
- * @param {string} toRoomId 
+ * @param {string} fromRoomId
+ * @param {string} toRoomId
  */
 function onSwitchAllClick(fromRoomId, toRoomId) {
-    // console.log(fromRoomId, toRoomId);
     loadingCall();
 
 
     // use update by id api to room id change
     UserProvider.switchAll(fromRoomId, toRoomId).then((data) => {
         // code render
-        // ....
+        const argument = {
+            buildings: localStorage.getItem('buildings'),
+            status: localStorage.getItem('status'),
+            loading: true,
+        }
+        init(argument);
 
         // destroy spin loading
         $('body').loadingModal('destroy');
@@ -753,8 +810,8 @@ function onSwitchFormCancel() {
 
 /**
  * auto complete
- * @param {*} inp 
- * @param {Room[]} arr 
+ * @param {*} inp
+ * @param {Room[]} arr
  */
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
@@ -851,6 +908,7 @@ function autocomplete(inp, arr) {
             }
         }
     }
+
     /*execute a function when someone clicks in the document:*/
     document.addEventListener("click", function (e) {
         closeAllLists(e.target);
@@ -864,4 +922,74 @@ async function switchFormInit(roomId) {
     let rooms = await RoomProvider.getAll();
     const data = rooms.sort((a, b) => a.name - b.name).filter(item => item.id !== roomId);
     autocomplete(document.getElementById("switch-form-to"), data);
+}
+
+document.getElementById('buildings-k1').onclick = function () {
+    onBuildingFilterClick(CONSTANTS.BUILDING.K1);
+    $(".badge-filter.building").addClass("unactive")
+    this.classList.toggle('unactive')
+}
+
+document.getElementById('buildings-k2').onclick = function () {
+    onBuildingFilterClick(CONSTANTS.BUILDING.K2);
+    $(".badge-filter.building").addClass("unactive")
+    this.classList.toggle('unactive')
+}
+
+document.getElementById('buildings-k3').onclick = function () {
+    onBuildingFilterClick(CONSTANTS.BUILDING.K3);
+    $(".badge-filter.building").addClass("unactive")
+    this.classList.toggle('unactive')
+}
+
+document.getElementById('buildings-k4').onclick = function () {
+    onBuildingFilterClick(CONSTANTS.BUILDING.K4);
+    $(".badge-filter.building").addClass("unactive")
+    this.classList.toggle('unactive')
+}
+
+document.getElementById('status-s1').onclick = function () {
+    onStatusFilterClick(CONSTANTS.STATUS.ALL);
+    $(".badge-filter.status").addClass("unactive")
+    this.classList.toggle('unactive')
+}
+
+document.getElementById('status-s2').onclick = function () {
+    onStatusFilterClick(CONSTANTS.STATUS.FULL);
+    $(".badge-filter.status").addClass("unactive")
+    this.classList.toggle('unactive')
+}
+
+document.getElementById('status-s3').onclick = function () {
+    onStatusFilterClick(CONSTANTS.STATUS.EXIST);
+    $(".badge-filter.status").addClass("unactive")
+    this.classList.toggle('unactive')
+}
+
+document.getElementById('status-s4').onclick = function () {
+    onStatusFilterClick(CONSTANTS.STATUS.EMPTY);
+    $(".badge-filter.status").addClass("unactive")
+    this.classList.toggle('unactive')
+}
+
+function onBuildingFilterClick(buildingId) {
+    localStorage.setItem('buildings', buildingId);
+    const argument = {
+        buildings: localStorage.getItem('buildings'),
+        status: localStorage.getItem('status'),
+        loading: true,
+    }
+
+    init(argument);
+}
+
+function onStatusFilterClick(status) {
+    localStorage.setItem('status', status);
+    const argument = {
+        buildings: localStorage.getItem('buildings'),
+        status: localStorage.getItem('status'),
+        loading: true,
+    }
+
+    init(argument);
 }

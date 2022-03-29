@@ -5,11 +5,14 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
    <title>Room</title>
+
    <link rel="stylesheet" href="css/room-x.css">
    <link rel="stylesheet" href="css/loading-template.css">
-
    <link rel="stylesheet" href="css/switch-form.css">
+   <link rel="stylesheet" href="css/register.css">
+   <link rel="stylesheet" href="css/jquery.loadingModal.min.css">
 </head>
 
 <body>
@@ -31,6 +34,9 @@
                   <defs></defs>
                   <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
                </svg>
+            </button>
+            <button class="notification-btn" onclick="toggleFilter(this)">
+               <span class="iconify phuoc-filter another" data-icon="feather:filter" style="font-size: 30px"></span>
             </button>
             <button class="add-btn" title="Add New Project">
                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -65,16 +71,28 @@
       </div>
 
       <!-- Biểu tượng filter -->
-      <div class="filter-list">
+      <div class="filter-list" id="filter-list">
          <strong>Filter: </strong>
-         <div class="badge-filter warning unactive">Male</div>
-         <div class="badge-filter tertiary unactive">Female</div>
 
-         <div class="badge-filter danger unactive">Building</div>
+         <div class="group-line-round">
+            <div class="text-label">Building</div>
+            <div class="">
+               <div class="badge-filter building danger" id="buildings-k1">K1</div>
+               <div class="badge-filter building primary unactive" id="buildings-k2">K2</div>
+               <div class="badge-filter building secondary unactive" id="buildings-k3">K3</div>
+               <div class="badge-filter building violet unactive" id="buildings-k4">K4</div>
+            </div>
+         </div>
 
-         <div class="badge-filter primary unactive">Full</div>
-         <div class="badge-filter secondary unactive">Exist</div>
-         <div class="badge-filter violet unactive">Empty</div>
+         <div class="group-line-round">
+            <div class="text-label">Status</div>
+            <div class="">
+               <div class="badge-filter status all" id="status-s1">All</div>
+               <div class="badge-filter status primary unactive" id="status-s2">Full</div>
+               <div class="badge-filter status secondary unactive" id="status-s3">Exist</div>
+               <div class="badge-filter status violet unactive" id="status-s4">Empty</div>
+            </div>
+         </div>
       </div>
 
       <div class="app-content">
@@ -162,34 +180,6 @@
                </div>
             </div>
             <div class="project-boxes jsGridView" id="view-index"></div>
-
-            <script>
-               // preloading
-               let viewIndex = document.getElementById('view-index');
-               const template = () => `
-               <div class="loading-card">
-                  <div class="header">
-                     <div class="details">
-                        <span class="name"></span>
-                        <br>
-                        <span class="about"></span>
-                     </div>
-                  </div>
-                  <div style="margin-top: 20px"></div>
-                  <div class="btns">
-                     <div class="btn btn-1"></div>
-                     <div style="width: 100%;"></div>
-                     <div class="btn btn-2"></div>
-                  </div>
-               </div>
-               `;
-               for (let i = 0; i < 10; i++)
-                  viewIndex.innerHTML += template()
-
-               delete template;
-               delete viewIndex;
-            </script>
-
          </div>
          <div class="messages-section">
             <button class="messages-close">
@@ -211,18 +201,17 @@
       </div>
    </div>
 
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-   <script type="module" src="js/room.js"></script>
-
    <!-- register form -->
    <div id="init-register-form"></div>
    <div id="init-switch-form"></div>
-   <link rel="stylesheet" href="css/register.css">
-   <link rel="stylesheet" href="css/jquery.loadingModal.min.css">
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
       crossorigin="anonymous"></script>
-   <script src="js/jquery.loadingModal.min.js"></script>
    <script src="https://code.iconify.design/2/2.2.0/iconify.min.js"></script>
+   <script type="module" src="js/room.js"></script>
+   <script src="js/jquery.loadingModal.min.js"></script>
+   <script type="text/javascript" src="js/room-x.js"></script>
 </body>
 
 </html>

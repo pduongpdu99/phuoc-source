@@ -18,8 +18,8 @@ export class UserProvider {
 
     /**
      * find by id API
-     * @param {string} id 
-     * @returns 
+     * @param {string} id
+     * @returns
      */
     static async findById(id = "") {
         return UserRepository.findById(id).then(item => {
@@ -31,8 +31,8 @@ export class UserProvider {
 
     /**
      * create API
-     * @param {object} body 
-     * @returns 
+     * @param {object} body
+     * @returns
      */
     static async create(body = {}) {
         return UserRepository.create(body);
@@ -40,8 +40,8 @@ export class UserProvider {
 
     /**
      * deleteById API
-     * @param {string} id 
-     * @returns 
+     * @param {string} id
+     * @returns
      */
     static async deleteById(id = "") {
         return UserRepository.deleteById(id);
@@ -49,8 +49,8 @@ export class UserProvider {
 
     /**
      * updateById API
-     * @param {body} body 
-     * @returns 
+     * @param {body} body
+     * @returns
      */
     static async updateById(body = {}) {
         return UserRepository.updateById(body);
@@ -58,7 +58,7 @@ export class UserProvider {
 
     /**
      * get users by room id
-     * @param id 
+     * @param id
      * @return user list
      */
     static async getUsersByRoomId(id) {
@@ -73,16 +73,18 @@ export class UserProvider {
 
     /**
      * get si so
+     * @param {string} building
+     * @param {string} status
      * @return si so theo gioi tinh
      */
-    static async getSiSo() {
-        return UserRepository.getSiSo();
+    static async getSiSo(building, status) {
+        return UserRepository.getSiSo(building, status);
     }
 
     /**
      * get room by sex
-     * @param {number} sex 
-     * @return 
+     * @param {number} sex
+     * @return
      */
     static async getRoomsBySex(sex = 0) {
         return UserRepository.getRoomsBySex(sex);
@@ -90,8 +92,8 @@ export class UserProvider {
 
     /**
      * get rooms by name
-     * @param {string} name 
-     * @returns 
+     * @param {string} name
+     * @returns
      */
     static async getRoomsByName(name) {
         return UserRepository.getRoomsByName(name);
@@ -99,8 +101,8 @@ export class UserProvider {
 
     /**
      * get rooms by user number
-     * @param {number} type 
-     * @returns 
+     * @param {number} type
+     * @returns
      */
     static async getRoomsByUserNumber(type) {
         return UserRepository.getRoomsByUserNumber(type);
@@ -108,9 +110,9 @@ export class UserProvider {
 
     /**
      * switch all
-     * @param {string} from 
-     * @param {string} to 
-     * @returns 
+     * @param {string} from
+     * @param {string} to
+     * @returns
      */
     static async switchAll(from, to) {
         return UserRepository.switchAll(from, to);

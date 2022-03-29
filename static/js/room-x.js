@@ -32,3 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.messages-section').classList.remove('show');
     });
 });
+
+function toggleFilter(element) {
+  element.classList.toggle('filter-toggle')
+  let filterList = document.getElementById('filter-list');
+  filterList.classList.toggle('hide')
+}

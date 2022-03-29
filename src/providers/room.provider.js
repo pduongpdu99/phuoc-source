@@ -16,8 +16,8 @@ export class RoomProvider {
 
     /**
      * find by id API
-     * @param {string} id 
-     * @returns 
+     * @param {string} id
+     * @returns
      */
     static async findById(id = "") {
         return RoomRepository.findById(id).then(item => {
@@ -29,8 +29,8 @@ export class RoomProvider {
 
     /**
      * create API
-     * @param {object} body 
-     * @returns 
+     * @param {object} body
+     * @returns
      */
     static async create(body = {}) {
         return RoomRepository.create(body);
@@ -38,8 +38,8 @@ export class RoomProvider {
 
     /**
      * deleteById API
-     * @param {string} id 
-     * @returns 
+     * @param {string} id
+     * @returns
      */
     static async deleteById(id = "") {
         return RoomRepository.deleteById(id);
@@ -47,8 +47,8 @@ export class RoomProvider {
 
     /**
      * updateById API
-     * @param {body} body 
-     * @returns 
+     * @param {body} body
+     * @returns
      */
     static async updateById(body = {}) {
         return RoomRepository.updateById(body);
@@ -56,9 +56,9 @@ export class RoomProvider {
 
     /**
      * getRoomBy
-     * @param {number} sex 
-     * @param {number} buildings 
-     * @returns 
+     * @param {number} sex
+     * @param {number} buildings
+     * @returns
      */
     static async getRoomBy(sex, buildings) {
         return RoomRepository.getRoomBy(sex, buildings);

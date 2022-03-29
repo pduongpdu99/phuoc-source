@@ -17,8 +17,8 @@ export class UserRepository {
 
     /**
      * find by id API
-     * @param {string} id 
-     * @returns 
+     * @param {string} id
+     * @returns
      */
     static async findById(id = "") {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/${id}`;
@@ -31,8 +31,8 @@ export class UserRepository {
 
     /**
      * create API
-     * @param {object} body 
-     * @returns 
+     * @param {object} body
+     * @returns
      */
     static async create(body = {}) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
@@ -46,8 +46,8 @@ export class UserRepository {
 
     /**
      * deleteById API
-     * @param {string} id 
-     * @returns 
+     * @param {string} id
+     * @returns
      */
     static async deleteById(id = "") {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/${id}`;
@@ -60,8 +60,8 @@ export class UserRepository {
 
     /**
      * updateById API
-     * @param {body} body 
-     * @returns 
+     * @param {body} body
+     * @returns
      */
     static async updateById(body = {}) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
@@ -74,7 +74,7 @@ export class UserRepository {
 
     /**
    * get users by room id
-   * @param id 
+   * @param id
    * @return user list
    */
     static async getUsersByRoomId(id = "") {
@@ -88,10 +88,12 @@ export class UserRepository {
 
     /**
      * get si so
+     * @param {string} building
+     * @param {string} status
      * @return si so theo gioi tinh
      */
-    static async getSiSo() {
-        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/siso`;
+    static async getSiSo(building, status) {
+        const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/siso/${building}/${status}`;
         return fetch(path, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
@@ -101,7 +103,7 @@ export class UserRepository {
 
     /**
      * get room by sex
-     * @param {number} sex 
+     * @param {number} sex
      */
     static async getRoomsBySex(sex = 0) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/getRoomsBySex/${sex}`;
@@ -114,8 +116,8 @@ export class UserRepository {
 
     /**
      * get rooms by name
-     * @param {string} name 
-     * @returns 
+     * @param {string} name
+     * @returns
      */
     static async getRoomsByName(name) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/getRoomsByName/${name}`;
@@ -128,8 +130,8 @@ export class UserRepository {
 
     /**
      * get rooms by user number
-     * @param {number} type 
-     * @returns 
+     * @param {number} type
+     * @returns
      */
     static async getRoomsByUserNumber(type) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/getRoomsByUserNumber/${type}`;
@@ -142,9 +144,9 @@ export class UserRepository {
 
     /**
      * switch all
-     * @param {string} from 
-     * @param {string} to 
-     * @returns 
+     * @param {string} from
+     * @param {string} to
+     * @returns
      */
     static async switchAll(from, to) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/switchAll/${from}/${to}`;
