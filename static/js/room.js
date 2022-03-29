@@ -585,23 +585,27 @@ function onSubmitClick() {
 
     if (validation(data)) {
         UserProvider.create(data).then((data) => {
-            // xóa form
-            onCancelClick();
+            if (data.toString() === "null") {
+                thongBaoValidation("Người dùng này đã tồn tại hãy kiểm tra lại mã sinh viên");
+            } else {
+                // xóa form
+                onCancelClick();
 
-            // code render
-            const argument = {
-                buildings: localStorage.getItem('buildings'),
-                status: localStorage.getItem('status'),
-                loading: true,
+                // code render
+                const argument = {
+                    buildings: localStorage.getItem('buildings'),
+                    status: localStorage.getItem('status'),
+                    loading: true,
+                }
+                init(argument);
+
+                fullname.value = "";
+                number.value = "";
+                address.value = "";
+                idcard.value = "";
+                birth.value = "";
+                email.value = "";
             }
-            init(argument);
-
-            fullname.value = "";
-            number.value = "";
-            address.value = "";
-            idcard.value = "";
-            birth.value = "";
-            email.value = "";
         });
     }
 }
