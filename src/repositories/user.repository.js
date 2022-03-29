@@ -36,7 +36,6 @@ export class UserRepository {
      */
     static async create(body = {}) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
-        console.log(JSON.stringify(body));
         return fetch(path, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },

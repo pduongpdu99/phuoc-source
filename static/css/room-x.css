@@ -404,12 +404,25 @@ a {
   background-color: var(--projects-section);
 }
 
+
+.delete-button{
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  color: black;
+}
+
+
 .message-box {
   border-top: 1px solid var(--message-box-border);
   padding: 16px;
   display: flex;
   align-items: flex-start;
   width: 100%;
+  position: relative;
 }
 .message-box:hover {
   background-color: var(--message-box-hover);
@@ -423,6 +436,11 @@ a {
   object-fit: cover;
   width: 40px;
   height: 40px;
+
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 
 .message-header {
@@ -442,6 +460,12 @@ a {
 .message-content {
   padding-left: 16px;
   width: 100%;
+  cursor: pointer;
+  
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 
 .star-checkbox input {

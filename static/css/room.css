@@ -36,41 +36,41 @@ body {
 
 .room.select-room {
     background-color: aquamarine;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .room.select-room:hover {
     background-color: rgb(73, 230, 177);
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .room.full-room {
     background-color: rgb(243, 36, 36);
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .room.full-room:hover {
     background-color: rgb(173, 3, 3);
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .room.still-room {
     background-color: rgb(245, 153, 120);
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .room.still-room:hover {
     background-color: rgb(221, 79, 27);
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .room.notFull-room {
     background-color: #89ff2f;
-    transition: .2s;
+    transition: 0.2s;
 }
 .room.notFull-room:hover {
     background-color: #72db22;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .showcase room:not(.sold):hover {
