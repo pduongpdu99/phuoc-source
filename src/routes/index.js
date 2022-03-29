@@ -32,15 +32,6 @@ const routing = (express) => {
         });
     });
 
-    // ruote register page 
-    router.get(FRONTEND_ROUTES.REGISTER, function (_req, res) {
-        fs.readFile('src/pages/register/index.html', function (err, data) {
-            if (err) return console.log(err);
-            res.setHeader('Content-Type', 'text/html');
-            res.end(data);
-        });
-    });
-
     // route not found(404) for link left
     router.get(FRONTEND_ROUTES.ALL, function (_req, res) {
         fs.readFile('src/pages/404/index.html', function (err, data) {
