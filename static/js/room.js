@@ -504,6 +504,9 @@ document.getElementById('add-button').onclick = function () {
 
 };
 
+/**
+ * on submit click
+ */
 function onSubmitClick() {
     const fullname = document.getElementById('fullname');
     const number = document.getElementById('number');
@@ -553,10 +556,18 @@ function onSubmitClick() {
         onCancelClick();
     }
 }
+
+/**
+ * on cancel click
+ */
 function onCancelClick() {
     document.getElementById('init-register-form').innerHTML = "";
 }
 
+/**
+ * initialize
+ * @param {*} registerForm 
+ */
 function initialize(registerForm) {
     registerFormInit(registerForm);
     loadRoom(registerForm);

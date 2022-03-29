@@ -944,3 +944,74 @@ a {
   background: #e6d7ff;
   color: #661ff1;
 }
+
+.filter-list {
+   display: inline-flex;
+   align-items: center;
+}
+
+.filter-list strong {
+   margin-right: 10px;
+}
+
+.filter-list .badge-filter {
+   padding: 10px 20px;
+   border-radius: 30px;
+   margin-right: 10px;
+   cursor: pointer;
+
+   user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   -webkit-user-select: none;
+   -o-user-select: none;
+}
+
+/* ======================== */
+.iconify.phuoc-filter {
+   font-size: 25px;
+   padding: 5px;
+   border-radius: 30px;
+   cursor: pointer;
+   transition: .2s;
+}
+
+.iconify.phuoc-filter:hover {
+   background: rgba(0, 0, 0, 0.301);
+}
+
+/* ======================== */
+.badge-filter.unactive {
+   background: rgb(228, 228, 228) !important;
+   color: rgb(119, 119, 119) !important;
+}
+
+.badge-filter.danger {
+   background: rgb(255, 205, 205);
+   color: rgb(255, 58, 58);
+}
+
+.badge-filter.primary {
+   background: rgb(192, 238, 255);
+   color: rgb(58, 193, 255);
+}
+
+.badge-filter.secondary {
+   background: rgb(218, 255, 191);
+   color: rgb(23, 220, 23);
+}
+
+.badge-filter.warning {
+   background: #fff7d7;
+   color: #f1a81f;
+}
+
+.badge-filter.tertiary {
+   background: #fdd7ff;
+   color: #f11fd8;
+}
+
+.badge-filter.violet {
+   background: #fbc7fd;
+   color: #dc1bd5;
+}

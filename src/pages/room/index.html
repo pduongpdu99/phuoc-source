@@ -22,19 +22,6 @@
             <div class="search-wrapper">
                <input class="search-input" type="text" placeholder="Filter by user name">
                <span class="iconify phuoc-filter" data-icon="feather:filter"></span>
-               <style>
-                  .iconify.phuoc-filter {
-                     font-size: 25px;
-                     padding: 5px;
-                     border-radius: 30px;
-                     cursor: pointer;
-                     transition: .2s;
-                  }
-
-                  .iconify.phuoc-filter:hover {
-                     background: rgba(0, 0, 0, 0.301);
-                  }
-               </style>
             </div>
          </div>
          <div class="app-header-right">
@@ -66,6 +53,7 @@
                <span>Admin</span>
             </button>
          </div>
+
          <button class="messages-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -75,6 +63,20 @@
             </svg>
          </button>
       </div>
+
+      <!-- Biểu tượng filter -->
+      <div class="filter-list">
+         <strong>Filter: </strong>
+         <div class="badge-filter warning unactive">Male</div>
+         <div class="badge-filter tertiary unactive">Female</div>
+
+         <div class="badge-filter danger unactive">Building</div>
+
+         <div class="badge-filter primary unactive">Full</div>
+         <div class="badge-filter secondary unactive">Exist</div>
+         <div class="badge-filter violet unactive">Empty</div>
+      </div>
+
       <div class="app-content">
          <div class="app-sidebar">
             <a href="" class="app-sidebar-link active">
@@ -162,7 +164,7 @@
             <div class="project-boxes jsGridView" id="view-index"></div>
 
             <script>
-               // preloading 
+               // preloading
                let viewIndex = document.getElementById('view-index');
                const template = () => `
                <div class="loading-card">
