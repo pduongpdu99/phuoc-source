@@ -8,6 +8,7 @@ const commonRequestOptions = {
     credentials: 'same-origin',
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
+    headers: { 'Content-Type': 'application/json' },
 };
 
 export class DantocRepository {
@@ -19,7 +20,6 @@ export class DantocRepository {
         const path = `${dantocAPIPath}/${FRONTEND.MODEL_PATH.DANTOCS}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -35,7 +35,6 @@ export class DantocRepository {
         const path = `${dantocAPIPath}/${FRONTEND.MODEL_PATH.DANTOCS}/${id}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -51,7 +50,6 @@ export class DantocRepository {
         const path = `${dantocAPIPath}/${FRONTEND.MODEL_PATH.DANTOCS}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "POST",
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
         });
 
@@ -67,7 +65,6 @@ export class DantocRepository {
         const path = `${dantocAPIPath}/${FRONTEND.MODEL_PATH.DANTOCS}/${id}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "DELETE",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -83,7 +80,6 @@ export class DantocRepository {
         const path = `${dantocAPIPath}/${FRONTEND.MODEL_PATH.DANTOCS}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "PUT",
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
         });
 

@@ -8,6 +8,7 @@ const commonRequestOptions = {
     credentials: 'same-origin',
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
+    headers: { 'Content-Type': 'application/json' },
 };
 
 export class BuildingRepository {
@@ -17,10 +18,8 @@ export class BuildingRepository {
     */
     static async getAll() {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.BUILDINGS}`;
-
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -34,10 +33,8 @@ export class BuildingRepository {
      */
     static async findById(id = "") {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.BUILDINGS}/${id}`;
-
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -53,7 +50,6 @@ export class BuildingRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.BUILDINGS}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "POST",
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
         });
 
@@ -69,7 +65,6 @@ export class BuildingRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.BUILDINGS}/${id}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "DELETE",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -85,7 +80,6 @@ export class BuildingRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.BUILDINGS}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "PUT",
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
         });
 

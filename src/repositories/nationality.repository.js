@@ -8,6 +8,7 @@ const commonRequestOptions = {
     credentials: 'same-origin',
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
+    headers: { 'Content-Type': 'application/json' },
 };
 
 
@@ -20,7 +21,6 @@ export class NationalityRepository {
         const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -36,7 +36,6 @@ export class NationalityRepository {
         const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}/${id}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -52,7 +51,6 @@ export class NationalityRepository {
         const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "POST",
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
         });
 
@@ -68,7 +66,6 @@ export class NationalityRepository {
         const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}/${id}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "DELETE",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -84,7 +81,6 @@ export class NationalityRepository {
         const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "PUT",
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
         });
 

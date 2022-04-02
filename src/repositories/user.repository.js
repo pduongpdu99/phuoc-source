@@ -8,6 +8,7 @@ const commonRequestOptions = {
     credentials: 'same-origin',
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
+    headers: { 'Content-Type': 'application/json' },
 };
 
 export class UserRepository {
@@ -19,7 +20,6 @@ export class UserRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -36,7 +36,6 @@ export class UserRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/${id}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -53,7 +52,6 @@ export class UserRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "POST",
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
         });
 
@@ -69,7 +67,6 @@ export class UserRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/${id}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "DELETE",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -85,7 +82,6 @@ export class UserRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "PUT",
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
         });
 
@@ -101,7 +97,6 @@ export class UserRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/byRoom/${id}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -118,7 +113,6 @@ export class UserRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/siso/${building}/${status}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -133,7 +127,6 @@ export class UserRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/getRoomsBySex/${sex}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -149,7 +142,6 @@ export class UserRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/getRoomsByName/${name}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -165,7 +157,6 @@ export class UserRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/getRoomsByUserNumber/${type}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
@@ -182,7 +173,6 @@ export class UserRepository {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/switchAll/${from}/${to}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
-            headers: { 'Content-Type': 'application/json' },
             body: null,
         });
 
