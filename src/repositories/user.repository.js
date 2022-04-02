@@ -105,11 +105,7 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, {
-            method: "GET",
-            headers: { 'Content-Type': 'application/json' },
-            body: null,
-        }).then(data => data.json())
+        return fetch(path, options).then(data => data.json())
     }
 
     /**
