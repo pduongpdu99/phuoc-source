@@ -111,6 +111,31 @@ body {
     border-radius: 30%;
     padding: 10px;
 }
+
+.number-field-custom {
+    display: inline-flex;
+}
+
+.number-field-custom #number-option-select {
+    text-align: left;
+    width: 30%;
+    border-right: 1px solid rgba(184, 184, 184, 0.4);
+}
+
+.number-field-custom #number {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.email-field-custom {
+    display: inline-flex;
+}
+
+.email-field-custom #domain-option-select {
+    text-align: left;
+    border-left: 1px solid rgba(184, 184, 184, 0.4);
+}
+
 #form {
     padding-left: 20px;
 }

@@ -1,4 +1,4 @@
-import FRONTEND from '/config/config.js';
+import FRONTEND from '/common/config/config.js';
 
 const dantocAPIPath = `${FRONTEND.BACKEND_PATH}`;
 export class DantocRepository {

@@ -1,4 +1,4 @@
-import FRONTEND from '/config/config.js';
+import FRONTEND from '/common/config/config.js';
 
 const historyAPIPath = `${FRONTEND.BACKEND_PATH}`;
 export class HistoryRepository {
@@ -12,7 +12,7 @@ export class HistoryRepository {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json()).then(data => data);
+        }).then(data => data.json());
     }
 
     /**
@@ -26,7 +26,7 @@ export class HistoryRepository {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json()).then(data => data);
+        }).then(data => data.json());
     }
 
     /**

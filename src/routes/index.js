@@ -1,4 +1,4 @@
-const { FRONTEND_ROUTES } = require('../config/route');
+const { FRONTEND_ROUTES } = require('../common/config/route');
 const fs = require('fs');
 
 

@@ -234,7 +234,7 @@ register-form label {
 
 register-form label span {
   font-size: 12px;
-  color: #cfcfcf;
+  color: #6e6e6e;
   text-transform: uppercase;
 }
 
@@ -247,6 +247,10 @@ register-form select {
   font-size: 16px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   text-align: center;
+}
+
+register-form input::placeholder {
+  color: rgb(214, 214, 214);
 }
 
 register-form select {

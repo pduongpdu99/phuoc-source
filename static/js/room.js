@@ -12,7 +12,7 @@ import { isNotEmpty, isEmail, isNumberPhone, isDate } from './validation.js';
 // DANTOC constants
 import {
   CONSTANTS
-} from '/utils/constant.js';
+} from '/common/utils/constant.js';
 
 
 const filterUsersByRoom = (roomId, users) => {
@@ -109,7 +109,12 @@ const templateMember = (memberModel) => {
     style="font-size: 20px; color: red"></span></div>
   </div>`);
 
-  return [html, `message-box-${memberModel.id}`, memberModel, `delete-button-${memberModel.id}`];
+  return [
+    html,
+    `message-box-${memberModel.id}`,
+    memberModel,
+    `delete-button-${memberModel.id}`
+  ];
 };
 
 /**
@@ -231,11 +236,13 @@ async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONST
   if ($('.project-box').length > 0) $('.project-box')[0].click();
 
   // add event into room box
-  for (const [k, v] of Object.entries(rooms)) {
+  for (const key of Object.keys(rooms)) {
     // floor 
-    const floor = rooms[k];
+    const floor = rooms[key];
     floor.forEach(room => {
-      document.getElementById(`add-participant-${room._id}`).onclick = onAddButtonClick;
+      document.getElementById(`add-participant-${room._id}`).onclick = function () {
+        onAddButtonClick(room, users)
+      }
     });
   }
 
@@ -265,6 +272,8 @@ function onRoomClick(room, users) {
     return content[0];
   }).join('');
 
+  document.getElementById('member-list-status').innerHTML = `LIMIT STATUS: ${filters.length}/4`;
+
   // gán onclick vào thành viên mỗi room
   ids.forEach(id => {
     document.getElementById(id[0]).onclick = () => roomUpdateInit(
@@ -279,6 +288,17 @@ function onRoomClick(room, users) {
   listBoard.innerHTML = `${room.name}`;
   document.getElementById(room.id).classList.toggle('selected');
 
+  room.number = filters.length;
+  localStorage.setItem('room-data', JSON.stringify(room));
+}
+
+/**
+ * resetRoomDataStorage
+ * @param {Room} room 
+ * @param {User[]} users 
+ */
+function resetRoomDataStorage(room, users) {
+  let filters = filterUsersByRoom(room.id, users);
   room.number = filters.length;
   localStorage.setItem('room-data', JSON.stringify(room));
 }
@@ -307,31 +327,37 @@ function registerFormInit(registerForm) {
         <h2>Đơn đăng ký vào ở ký túc xá</h2>
         <label>
           <span>Fullname</span>
-          <input type="text" id="fullname" />
+          <input type="text" id="fullname" placeholder="Enter fullname"/>
         </label>
         <label>
           <span>Number phone</span>
-          <input type="text" id="number" />
+          <div class="number-field-custom">
+            <select id="number-option-select"></select>
+            <input type="text" id="number"  placeholder="Enter number phone"/>
+          </div>
         </label>
         <label>
           <span>Address</span>
-          <input type="text" id="address" />
+          <input type="text" id="address" placeholder="Enter address"/>
         </label>
         <label>
           <span>National</span>
-          <select id="national"></select>
+          <select id="national"></select placeholder="Enter nationality">
         </label>
         <label>
           <span>Card id</span>
-          <input type="text" id="idcard"/>
+          <input type="text" id="idcard" placeholder="Enter id card/ CMND/ StudentID"/>
         </label>
         <label>
           <span>Birthday</span>
-          <input type="text" id="birth"/>
+          <input type="date" id="birth" class="form-input datepicker" value="2000-01-01" min="1970-01-01" max="2030-01-01">
         </label>
         <label>
           <span>Email</span>
-          <input type="text" id="email"/>
+          <div class="email-field-custom">
+            <input type="text" placeholder="Ex: admin" id="local-part"/>
+            <select id="domain-option-select"></select>
+          </div>
         </label>
         <label>
           <span>Dân tộc</span>
@@ -363,10 +389,19 @@ function registerFormInit(registerForm) {
     </div>
     `;
 
-    // render into sex-options
-    document.getElementById('sex-options').value = registerForm.getAttribute('sex')
+    const domains = ["gmail.com", "yahoo.com", "hotmail.com", "aol.com", "hotmail.co.uk", "hotmail.fr", "msn.com", "yahoo.fr", "wanadoo.fr", "orange.fr", "comcast.net", "yahoo.co.uk", "yahoo.com.br", "yahoo.co.in", "live.com", "rediffmail.com", "free.fr", "gmx.de", "web.de", "yandex.ru", "ymail.com", "libero.it", "outlook.com", "uol.com.br", "bol.com.br", "mail.ru", "cox.net", "hotmail.it", "sbcglobal.net", "sfr.fr", "live.fr", "verizon.net", "live.co.uk", "googlemail.com", "yahoo.es", "ig.com.br", "live.nl", "bigpond.com", "terra.com.br", "yahoo.it", "neuf.fr", "yahoo.de", "alice.it", "rocketmail.com", "att.net", "laposte.net", "facebook.com", "bellsouth.net", "yahoo.in", "hotmail.es", "charter.net", "yahoo.ca", "yahoo.com.au", "rambler.ru", "hotmail.de", "tiscali.it", "shaw.ca", "yahoo.co.jp", "sky.com", "earthlink.net", "optonline.net", "freenet.de", "t-online.de", "aliceadsl.fr", "virgilio.it", "home.nl", "qq.com", "telenet.be", "me.com", "yahoo.com.ar", "tiscali.co.uk", "yahoo.com.mx", "voila.fr", "gmx.net", "mail.com", "planet.nl", "tin.it", "live.it", "ntlworld.com", "arcor.de", "yahoo.co.id", "frontiernet.net", "hetnet.nl", "live.com.au", "yahoo.com.sg", "zonnet.nl", "club-internet.fr", "juno.com", "optusnet.com.au", "blueyonder.co.uk", "bluewin.ch", "skynet.be", "sympatico.ca", "windstream.net", "mac.com", "centurytel.net", "chello.nl", "live.ca", "aim.com", "bigpond.net.au"];
 
-    console.log(document.getElementById('national'));
+    const keyNumber = ['+84', '+856'];
+
+    // render into sex-options
+    document.getElementById('sex-options').value = registerForm.getAttribute('sex');
+
+    // render domain option into select element
+    document.getElementById('domain-option-select').innerHTML = domains.map(item => `<option value="${item}">${item}</option>`);
+
+    // render number option into select element
+    document.getElementById('number-option-select').innerHTML = keyNumber.map(item => `<option value="${item}">${item}</option>`);
+
     if (document.getElementById('national'))
       document.getElementById('national').onchange = onNationalChange;
   }
@@ -536,20 +571,25 @@ document.getElementById('switch-button').onclick = onSwitchButtonClick;
 /**
  * on add button click
  */
-function onAddButtonClick() {
-  let roomData = localStorage.getItem('room-data');
-  roomData = JSON.parse(roomData);
+function onAddButtonClick(room = undefined, users = undefined) {
+  let roomData = JSON.parse(localStorage.getItem('room-data'));
+
+  const initDiv = document.getElementById('init-register-form');
+  const register = document.createElement('register-form');
+  const sexIndex = localStorage.getItem('sex-index');
+
+  // xử lý register form
+  register.setAttribute('roomid', roomData.id);
+  register.setAttribute('sex', sexIndex == null || sexIndex == 3 ? 1 : parseInt(sexIndex));
+  register.setAttribute('class', "register-form");
+
+  if (room != undefined && users != undefined) {
+    resetRoomDataStorage(room, users);
+    register.setAttribute('roomid', room._id);
+  }
 
   const number = roomData.number;
   if (number < 4) {
-    // xử lý register form
-    const initDiv = document.getElementById('init-register-form');
-    const register = document.createElement('register-form');
-
-    const sexIndex = localStorage.getItem('sex-index');
-    register.setAttribute('roomid', roomData.id);
-    register.setAttribute('sex', sexIndex == null || sexIndex == 3 ? 1 : parseInt(sexIndex));
-    register.setAttribute('class', "register-form");
     initDiv.appendChild(register);
     initialize(register);
   } else {
@@ -577,20 +617,31 @@ function onSubmitClick() {
   const national = document.getElementById('national');
   const idcard = document.getElementById('idcard');
   const birth = document.getElementById('birth');
-  const email = document.getElementById('email');
+  const localPart = document.getElementById('local-part');
   const dantocOptions = document.getElementById('dantoc-options');
   const roomOptions = document.getElementById('room-options');
   const sex = document.getElementById('sex-options');
 
+  const preprocessNumber = (number) => {
+    let _number = number;
+    if (_number[0] === "0") _number = _number.slice(1);
+    _number = _number.replace('+84', '');
+    _number = _number.replace('+856', '');
+    return _number;
+  }
+
+  const numberOption = document.getElementById('number-option-select');
+  const domainOption = document.getElementById('domain-option-select');
+
   // init object
   const data = {
     name: fullname.value,
-    phoneNumber: number.value,
+    phoneNumber: `${numberOption.value}${preprocessNumber(number.value)}`,
     address: address.value,
     nationality: national.value,
     iDCard: idcard.value.toLowerCase(),
     birth: birth.value,
-    email: email.value,
+    email: `${localPart.value}@${domainOption.value}`,
     danToc: dantocOptions.value,
     roomId: roomOptions.value,
     sex: sex.value,
@@ -603,7 +654,6 @@ function onSubmitClick() {
     UserProvider
       .create(data)
       .then((data) => {
-        console.log(data);
         if (JSON.stringify(data).toString() === "null") {
           thongBaoValidation("Người dùng này đã tồn tại hãy kiểm tra lại mã sinh viên");
         } else {
@@ -640,7 +690,7 @@ function onCancelClick() {
  * initialize
  * @param {*} registerForm
  */
-function initialize(registerForm) {  
+function initialize(registerForm) {
   registerFormInit(registerForm);
   loadNationality();
   loadRoom(registerForm);
@@ -697,7 +747,7 @@ async function roomUpdateInit(user, roomId) {
   const room = await RoomProvider.findById(roomId)
 
   // render inner html into init-switch-form index
-  $('#init-switch-form').html(initSwitchFormHTML(room))
+  document.getElementById('init-switch-form').innerHTML = initSwitchFormHTML(room)
 
   // khởi tạo switch form
   switchFormInit(roomId);
@@ -756,7 +806,9 @@ async function switchRoom(roomId) {
   });
 
   // render inner html into init-switch-form index
-  $('#init-switch-form').html(initSwitchFormHTML(room))
+  document
+    .getElementById('init-switch-form')
+    .innerHTML = initSwitchFormHTML(room);
 
   // khởi tạo switch form
   switchFormInit(roomId);
