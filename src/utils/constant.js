@@ -6,8 +6,14 @@ const CONSTANTS = {
     K4: '62388666303cbab102eae3cb',
   },
 
+  NATIONALITIES: {
+    VIETNAM: '623736b36f608d84c08460fd',
+    LAOS: '623736ba6f608d84c08460ff',
+  },
+
   DANTOC: {
-    KINH: '62373d336f608d84c0846165'
+    KINH: '62373d336f608d84c0846165',
+    LAO: '6247e17bbfad448b38733e14'
   },
 
   STATUS: {

@@ -7,12 +7,7 @@ import {
 } from '/providers/index.js';
 
 // validation
-import {
-  isNotEmpty,
-  isEmail,
-  isNumberPhone,
-  isDate
-} from './validation.js';
+import { isNotEmpty, isEmail, isNumberPhone, isDate } from './validation.js';
 
 // DANTOC constants
 import {
@@ -47,18 +42,9 @@ const templateInit = (
   data,
   users,
   _status = {
-    empty: {
-      name: "empty",
-      classname: "empty",
-    },
-    semi: {
-      name: "exist",
-      classname: "semi",
-    },
-    full: {
-      name: "full",
-      classname: "full",
-    },
+    empty: { name: "empty", classname: "empty" },
+    semi: { name: "exist", classname: "semi" },
+    full: { name: "full", classname: "full" },
   }
 ) => {
   return `
@@ -85,7 +71,7 @@ const templateInit = (
       <div class="project-box-footer">
          <div class="participants">
             ${users.map(user => `<img src='${user.avatar}' alt='${user.avatar}'>`).join("")}
-            <button class="add-participant" style="color: #ff942e;">
+            <button class="add-participant" style="color: #ff942e;" id="add-participant-${data._id}">
                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
                   fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
                   stroke-linejoin="round" class="feather feather-plus">
@@ -98,8 +84,7 @@ const templateInit = (
          </div>
       </div>
    </div>
-</div>
-`;
+</div>`;
 }
 
 /**
@@ -108,68 +93,34 @@ const templateInit = (
  * @returns
  */
 const templateMember = (memberModel) => {
-  let html = `
-    <div class="message-box">
-       <img src="images/user.png" alt="profile image">
-       <div class="message-content" id="message-box-${memberModel.id}">
-          <div class="message-header">
-             <div class="name">${memberModel.name}</div>
-          </div>
-          <p class="message-line">${memberModel.email}</p>
-          <p class="message-line">${memberModel.phoneNumber}</p>
-          <p class="message-line">${memberModel.address}</p>
-          <p class="message-line">${memberModel.sex === 1 ? "Nam" : "Nữ"}</p>
-       </div>
-      <div class="delete-button" id="delete-button-${memberModel.id}"><span class="iconify" data-icon="ant-design:user-delete-outlined"
-      style="font-size: 20px; color: red"></span></div>
-    </div>
-    `.trim();
+  const html = new String(`
+  <div class="message-box">
+     <img src="images/user.png" alt="profile image">
+     <div class="message-content" id="message-box-${memberModel.id}">
+        <div class="message-header">
+           <div class="name">${memberModel.name}</div>
+        </div>
+        <p class="message-line">${memberModel.email}</p>
+        <p class="message-line">${memberModel.phoneNumber}</p>
+        <p class="message-line">${memberModel.address}</p>
+        <p class="message-line">${memberModel.sex === 1 ? "Nam" : "Nữ"}</p>
+     </div>
+    <div class="delete-button" id="delete-button-${memberModel.id}"><span class="iconify" data-icon="ant-design:user-delete-outlined"
+    style="font-size: 20px; color: red"></span></div>
+  </div>`);
+
   return [html, `message-box-${memberModel.id}`, memberModel, `delete-button-${memberModel.id}`];
 };
 
 /**
- * UX process
+ * preloading
  */
-document.addEventListener("DOMContentLoaded", function () {
-  var modeSwitch = document.querySelector(".mode-switch");
-
-  modeSwitch.addEventListener("click", function () {
-    document.documentElement.classList.toggle("dark");
-    modeSwitch.classList.toggle("active");
-  });
-
-  var listView = document.querySelector(".list-view");
-  var gridView = document.querySelector(".grid-view");
-  var projectsList = document.querySelector(".project-boxes");
-
-  listView.addEventListener("click", function () {
-    gridView.classList.remove("active");
-    listView.classList.add("active");
-    projectsList.classList.remove("jsGridView");
-    projectsList.classList.add("jsListView");
-  });
-
-  gridView.addEventListener("click", function () {
-    gridView.classList.add("active");
-    listView.classList.remove("active");
-    projectsList.classList.remove("jsListView");
-    projectsList.classList.add("jsGridView");
-  });
-
-  document.querySelector(".messages-btn").addEventListener("click", function () {
-    document.querySelector(".messages-section").classList.add("show");
-  });
-
-  document.querySelector(".messages-close").addEventListener("click", function () {
-    document.querySelector(".messages-section").classList.remove("show");
-  });
-});
-
 function preloading() {
   // preloading
   let viewIndex = document.getElementById('view-index');
   viewIndex.innerHTML = "";
 
+  // template initialize
   const template = () => `
     <div class="loading-card">
        <div class="header">
@@ -187,10 +138,15 @@ function preloading() {
        </div>
     </div>
     `;
+
+  // render template loading
   for (let i = 0; i < 10; i++)
     viewIndex.innerHTML += template();
 }
 
+/**
+ * init method
+ */
 async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONSTANTS.STATUS.ALL, loading: false }) {
   if (argument.loading) loadingCall();
   preloading();
@@ -199,11 +155,13 @@ async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONST
   let buildings = localStorage.getItem('buildings');
   let status = localStorage.getItem('status');
 
+  // tìm buildings
   BuildingProvider.findById(buildings).then(data => {
     localStorage.setItem('sex-index', data.allowSex);
     return data;
   });
 
+  // get sĩ số
   UserProvider.getSiSo(
     buildings,
     status
@@ -211,6 +169,7 @@ async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONST
     let maleNum = data['male'];
     let femaleNum = data['female'];
 
+    // sĩ số tổng + nam + nữ
     tong.innerHTML = maleNum + femaleNum;
     male.innerHTML = maleNum;
     female.innerHTML = femaleNum;
@@ -227,6 +186,7 @@ async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONST
     argument.status
   );
 
+  // get rooms
   let rooms = {};
   roomlist.forEach(item => {
     if (rooms[item.name[0]] == undefined) rooms[item.name[0]] = []
@@ -238,13 +198,12 @@ async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONST
     // sort
     rooms[k] = v.sort((a, b) => parseInt(a.name) - parseInt(b.name));
 
+    // floor 
     const floor = rooms[k];
-    data.push(`
-                <h3>${k}F</h3>
+    data.push(`<h3>${k}F</h3>
                 <div style="border-bottom: 2px solid #eaeaea; width:100%">
                 </div><div style="margin-top: 20px; width: 100%"></div>`
     );
-
     floor.forEach(room => {
       let userList = filterUsersByRoom(room._id, users);
       room.status = (userList.length == 0 ? "empty" : userList.length >= 4 ? "full" : "semi");
@@ -254,6 +213,7 @@ async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONST
     data.push(`</div><div style="margin-top: 30px; width: 100%"></div>`);
   }
 
+  // render into viewIndex
   viewIndex.innerHTML = data.join("")
 
   // assign onclick
@@ -264,10 +224,22 @@ async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONST
     }, users)
   );
 
+  // render empty member list
   membersElement.innerHTML = "";
   listBoard.innerHTML = `List`;
+
   if ($('.project-box').length > 0) $('.project-box')[0].click();
 
+  // add event into room box
+  for (const [k, v] of Object.entries(rooms)) {
+    // floor 
+    const floor = rooms[k];
+    floor.forEach(room => {
+      document.getElementById(`add-participant-${room._id}`).onclick = onAddButtonClick;
+    });
+  }
+
+  // detroy loading
   if (argument.loading) $('body').loadingModal('destroy');
 }
 
@@ -311,6 +283,7 @@ function onRoomClick(room, users) {
   localStorage.setItem('room-data', JSON.stringify(room));
 }
 
+// init render
 init();
 
 
@@ -319,10 +292,11 @@ init();
 // ====================================================================================================================================================
 // ====================================================================================================================================================
 // ====================================================================================================================================================
-let loadQuocTich = false;
-let loadDanToc = false;
-let loadPhong = false;
 
+/**
+ * register form init
+ * @param {HTMLDOMElemnet} registerForm
+ */
 function registerFormInit(registerForm) {
 
   if (registerForm != undefined) {
@@ -389,7 +363,12 @@ function registerFormInit(registerForm) {
     </div>
     `;
 
+    // render into sex-options
     document.getElementById('sex-options').value = registerForm.getAttribute('sex')
+
+    console.log(document.getElementById('national'));
+    if (document.getElementById('national'))
+      document.getElementById('national').onchange = onNationalChange;
   }
 }
 
@@ -402,10 +381,40 @@ function loadingCall() {
 }
 
 /**
+ * load data dantoc
+ */
+async function onLoadDanToc() {
+  return DantocProvider.getAll().then(dantocs => {
+    let dantocOpts = document.getElementById('dantoc-options');
+    let national = document.getElementById('national');
+
+    if (dantocs && dantocOpts) {
+      dantocOpts.innerHTML = dantocs
+        .filter(dantoc => dantoc.nationality === national.value)
+        .map(dantoc => `<option value="${dantoc.id}" id="${dantoc.id}">${dantoc.name}</option>`)
+        .join('');
+
+      if (national.value === CONSTANTS.NATIONALITIES.VIETNAM) {
+        dantocOpts.value = CONSTANTS.DANTOC.KINH;
+        document.getElementById(CONSTANTS.DANTOC.KINH).setAttribute('selected', 'true');
+      } else {
+        dantocOpts.value = CONSTANTS.DANTOC.LAO;
+        document.getElementById(CONSTANTS.DANTOC.LAO).setAttribute('selected', 'true');
+      }
+    }
+  });
+}
+
+/**
  * load data room
  */
 async function loadRoom(registerForm) {
-  let rooms = await RoomProvider.getAll();
+  const argument = { buildings: localStorage.buildings, status: localStorage.status };
+  let rooms = await RoomProvider.getRoomBy(
+    argument.buildings,
+    argument.status
+  );
+
   let roomOptions = document.getElementById('room-options');
 
   // rooms sorted
@@ -416,11 +425,11 @@ async function loadRoom(registerForm) {
   // room options
   if (roomOptions) {
     roomOptions.innerHTML = rooms
-      .map(room => `<option value="${room.id}">${room.name}</option>`)
+      .map(room => `<option value="${room._id}">${room.name}</option>`)
       .join('');
   }
 
-  // tồn tại register form
+  // CHECK: exist of register form
   if (registerForm != undefined && registerForm.attributes['roomid']) {
     if (roomOptions)
       roomOptions.value = registerForm.attributes['roomid'].value
@@ -429,8 +438,6 @@ async function loadRoom(registerForm) {
       if (roomOptions)
         roomOptions.value = rooms[0].id
   }
-
-  loadPhong = true;
 }
 
 /**
@@ -444,45 +451,20 @@ async function loadNationality() {
     national.innerHTML = nationalities
       .map(room => `<option value="${room.id}">${room.name}</option>`)
       .join('');
-  loadQuocTich = true;
-  onLoadDanToc().then(() => {
-    loadDanToc = true;
-  });
+  onLoadDanToc()
 }
+
 
 /**
- * load data dantoc
+ * on national change
  */
-async function onLoadDanToc() {
-  return DantocProvider.getAll().then(dantocs => {
-    let dantocOpts = document.getElementById('dantoc-options');
-    let national = document.getElementById('national');
-
-    if (dantocs)
-      if (dantocOpts) {
-        dantocOpts.innerHTML = dantocs
-          .filter(dantoc => dantoc.nationality === national.value)
-          .map(dantoc => `<option value="${dantoc.id}">${dantoc.name}</option>`)
-          .join('');
-        dantocOpts.value = CONSTANTS.DANTOC.KINH;
-        document.getElementById(CONSTANTS.DANTOC.KINH).setAttribute('selected', 'true');
-      }
-
-  });
-}
-
 function onNationalChange() {
   // spin loading
   loadingCall();
 
   // destroy spin loading
-  onLoadDanToc().then(() => {
-    $('body').loadingModal('destroy');
-  });
+  onLoadDanToc();
 }
-
-if (document.getElementById('national'))
-  document.getElementById('national').onchange = onNationalChange;
 
 /**
   * thông báo vi phạm validation
@@ -548,7 +530,13 @@ function validation(model) {
   return true;
 }
 
-document.getElementById('add-button').onclick = function () {
+document.getElementById('add-button').onclick = onAddButtonClick;
+document.getElementById('switch-button').onclick = onSwitchButtonClick;
+
+/**
+ * on add button click
+ */
+function onAddButtonClick() {
   let roomData = localStorage.getItem('room-data');
   roomData = JSON.parse(roomData);
 
@@ -567,15 +555,17 @@ document.getElementById('add-button').onclick = function () {
   } else {
     thongBaoValidation("Room member is maxium");
   }
-};
+}
 
-
-document.getElementById('switch-button').onclick = () => {
+/**
+ * on switch button click
+ */
+function onSwitchButtonClick() {
   let data = localStorage.getItem('room-data');
   let roomData = data != null && data != undefined ? JSON.parse(data) : undefined;
   if (roomData) switchRoom(roomData.id);
-  else alert("Chưa có dữ liệu");
-};
+  else thongBaoValidation("No data");
+}
 
 /**
  * on submit click
@@ -592,6 +582,7 @@ function onSubmitClick() {
   const roomOptions = document.getElementById('room-options');
   const sex = document.getElementById('sex-options');
 
+  // init object
   const data = {
     name: fullname.value,
     phoneNumber: number.value,
@@ -607,31 +598,34 @@ function onSubmitClick() {
     avatar: "images/user.png",
   };
 
+  // check validate
   if (validation(data)) {
-    UserProvider.create(data).then((data) => {
-      console.log(data);
-      if (JSON.stringify(data).toString() === "null") {
-        thongBaoValidation("Người dùng này đã tồn tại hãy kiểm tra lại mã sinh viên");
-      } else {
-        // xóa form
-        onCancelClick();
+    UserProvider
+      .create(data)
+      .then((data) => {
+        console.log(data);
+        if (JSON.stringify(data).toString() === "null") {
+          thongBaoValidation("Người dùng này đã tồn tại hãy kiểm tra lại mã sinh viên");
+        } else {
+          // xóa form
+          onCancelClick();
 
-        // code render
-        const argument = {
-          buildings: localStorage.getItem('buildings'),
-          status: localStorage.getItem('status'),
-          loading: true,
+          // code render
+          init({
+            buildings: localStorage.getItem('buildings'),
+            status: localStorage.getItem('status'),
+            loading: true,
+          });
+
+          // clear field
+          fullname.value = "";
+          number.value = "";
+          address.value = "";
+          idcard.value = "";
+          birth.value = "";
+          email.value = "";
         }
-        init(argument);
-
-        fullname.value = "";
-        number.value = "";
-        address.value = "";
-        idcard.value = "";
-        birth.value = "";
-        email.value = "";
-      }
-    });
+      });
   }
 }
 
@@ -646,10 +640,11 @@ function onCancelClick() {
  * initialize
  * @param {*} registerForm
  */
-function initialize(registerForm) {
+function initialize(registerForm) {  
   registerFormInit(registerForm);
-  loadRoom(registerForm);
   loadNationality();
+  loadRoom(registerForm);
+
 
   if (document.getElementById('submit'))
     document.getElementById('submit').onclick = onSubmitClick;
@@ -699,10 +694,7 @@ const initSwitchFormHTML = (roomModel) => {
  * @param {string} roomId
  */
 async function roomUpdateInit(user, roomId) {
-  const room = await RoomProvider.findById(roomId).then(data => {
-    $("body").loadingModal('destroy');
-    return data;
-  });
+  const room = await RoomProvider.findById(roomId)
 
   // render inner html into init-switch-form index
   $('#init-switch-form').html(initSwitchFormHTML(room))
@@ -803,22 +795,23 @@ async function onSwitchFormSubmit(user, roomIdNeedToChanged) {
   if (users.length < 4) {
     // use update by id api to room id change
     UserProvider.updateById(user).then(userUpdated => {
-      // code render
-      const argument = {
+      // re-render
+      init({
         buildings: localStorage.getItem('buildings'),
         status: localStorage.getItem('status'),
         loading: true,
-      }
-      init(argument);
+      });
 
+      // auto-click on switch form cancel method
       onSwitchFormCancel();
     });
   } else {
+    // render notification form
     thongBaoValidation("Room full");
+
+    // detroy loading
     $("body").loadingModal('destroy');
   }
-
-
 }
 
 /**
@@ -965,53 +958,83 @@ function autocomplete(inp, arr) {
  * switch form initialize
  */
 async function switchFormInit(roomId) {
-  let rooms = await RoomProvider.getAll();
+  const argument = { buildings: localStorage.buildings, status: localStorage.status };
+  let rooms = await RoomProvider.getRoomBy(
+    argument.buildings,
+    argument.status
+  );
+
   const data = rooms.sort((a, b) => a.name - b.name).filter(item => item.id !== roomId);
+  console.log(document.getElementById("switch-form-to"));
   autocomplete(document.getElementById("switch-form-to"), data);
 }
 
+/**
+ * buildings k1 click
+ */
 document.getElementById('buildings-k1').onclick = function () {
   onBuildingFilterClick(CONSTANTS.BUILDING.K1);
   $(".badge-filter.building").addClass("unactive")
   this.classList.toggle('unactive')
 }
 
+/**
+ * buildings k2 click
+ */
 document.getElementById('buildings-k2').onclick = function () {
   onBuildingFilterClick(CONSTANTS.BUILDING.K2);
   $(".badge-filter.building").addClass("unactive")
   this.classList.toggle('unactive')
 }
 
+/**
+ * buildings k3 click
+ */
 document.getElementById('buildings-k3').onclick = function () {
   onBuildingFilterClick(CONSTANTS.BUILDING.K3);
   $(".badge-filter.building").addClass("unactive")
   this.classList.toggle('unactive')
 }
 
+/**
+ * buildings k4 click
+ */
 document.getElementById('buildings-k4').onclick = function () {
   onBuildingFilterClick(CONSTANTS.BUILDING.K4);
   $(".badge-filter.building").addClass("unactive")
   this.classList.toggle('unactive')
 }
 
+/**
+ * status s1 click
+ */
 document.getElementById('status-s1').onclick = function () {
   onStatusFilterClick(CONSTANTS.STATUS.ALL);
   $(".badge-filter.status").addClass("unactive")
   this.classList.toggle('unactive')
 }
 
+/**
+ * status s2 click
+ */
 document.getElementById('status-s2').onclick = function () {
   onStatusFilterClick(CONSTANTS.STATUS.FULL);
   $(".badge-filter.status").addClass("unactive")
   this.classList.toggle('unactive')
 }
 
+/**
+ * status s3 click
+ */
 document.getElementById('status-s3').onclick = function () {
   onStatusFilterClick(CONSTANTS.STATUS.EXIST);
   $(".badge-filter.status").addClass("unactive")
   this.classList.toggle('unactive')
 }
 
+/**
+ * status s4 click
+ */
 document.getElementById('status-s4').onclick = function () {
   onStatusFilterClick(CONSTANTS.STATUS.EMPTY);
   $(".badge-filter.status").addClass("unactive")
@@ -1020,7 +1043,7 @@ document.getElementById('status-s4').onclick = function () {
 
 /**
  * on building filter click
- * @param {*} buildingId 
+ * @param {string} buildingId 
  */
 function onBuildingFilterClick(buildingId) {
   localStorage.setItem('buildings', buildingId);
@@ -1030,12 +1053,13 @@ function onBuildingFilterClick(buildingId) {
     loading: true,
   }
 
+  // re init
   init(argument);
 }
 
 /**
  * on status filter click
- * @param {*} status 
+ * @param {string} status 
  */
 function onStatusFilterClick(status) {
   localStorage.setItem('status', status);
@@ -1045,5 +1069,6 @@ function onStatusFilterClick(status) {
     loading: true,
   }
 
+  // re init
   init(argument);
 }

@@ -14,7 +14,7 @@ export const isNumberPhone = (str) => {
     return String(str)
         .toLowerCase()
         .match(
-            /\d{10}/
+            /0\d{9}/
         );
 }
 
