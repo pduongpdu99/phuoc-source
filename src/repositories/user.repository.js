@@ -1,6 +1,15 @@
 import FRONTEND from '/common/config/config.js';
 
 const userAPIPath = `${FRONTEND.BACKEND_PATH}`;
+
+const commonRequestOptions = {
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+};
+
 export class UserRepository {
     /**
     * get all API
@@ -8,11 +17,14 @@ export class UserRepository {
     */
     static async getAll() {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json());
+        });
+
+        return fetch(path, options).then(data => data.json());
+
     }
 
     /**
@@ -22,11 +34,14 @@ export class UserRepository {
      */
     static async findById(id = "") {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/${id}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json());
+        });
+
+        return fetch(path, options).then(data => data.json());
+
     }
 
     /**
@@ -36,11 +51,13 @@ export class UserRepository {
      */
     static async create(body = {}) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        }).then(data => data.json())
+        });
+
+        return fetch(path, options).then(data => data.json());
     }
 
     /**
@@ -50,11 +67,13 @@ export class UserRepository {
      */
     static async deleteById(id = "") {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/${id}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "DELETE",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json())
+        });
+
+        return fetch(path, options).then(data => data.json());
     }
 
     /**
@@ -64,11 +83,13 @@ export class UserRepository {
      */
     static async updateById(body = {}) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        }).then(data => data.json())
+        });
+
+        return fetch(path, options).then(data => data.json());
     }
 
     /**
@@ -78,6 +99,12 @@ export class UserRepository {
    */
     static async getUsersByRoomId(id = "") {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/byRoom/${id}`;
+        const options = Object.assign({}, commonRequestOptions, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' },
+            body: null,
+        });
+
         return fetch(path, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
@@ -93,11 +120,13 @@ export class UserRepository {
      */
     static async getSiSo(building, status) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/siso/${building}/${status}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json())
+        });
+
+        return fetch(path, options).then(data => data.json());
     }
 
     /**
@@ -106,11 +135,13 @@ export class UserRepository {
      */
     static async getRoomsBySex(sex = 0) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/getRoomsBySex/${sex}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json())
+        });
+
+        return fetch(path, options).then(data => data.json());
     }
 
     /**
@@ -120,11 +151,13 @@ export class UserRepository {
      */
     static async getRoomsByName(name) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/getRoomsByName/${name}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json())
+        });
+
+        return fetch(path, options).then(data => data.json());
     }
 
     /**
@@ -134,6 +167,12 @@ export class UserRepository {
      */
     static async getRoomsByUserNumber(type) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/getRoomsByUserNumber/${type}`;
+        const options = Object.assign({}, commonRequestOptions, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' },
+            body: null,
+        });
+
         return fetch(path, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
@@ -149,6 +188,12 @@ export class UserRepository {
      */
     static async switchAll(from, to) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}/switchAll/${from}/${to}`;
+        const options = Object.assign({}, commonRequestOptions, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' },
+            body: null,
+        });
+
         return fetch(path, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },

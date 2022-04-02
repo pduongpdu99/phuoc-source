@@ -1,6 +1,16 @@
 import FRONTEND from '/common/config/config.js';
 
 const nationalityAPIPath = `${FRONTEND.BACKEND_PATH}`;
+
+const commonRequestOptions = {
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+};
+
+
 export class NationalityRepository {
     /**
     * get all API
@@ -8,11 +18,13 @@ export class NationalityRepository {
     */
     static async getAll() {
         const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json());
+        });
+
+        return fetch(path, options).then(data => data.json());
     }
 
     /**
@@ -22,11 +34,13 @@ export class NationalityRepository {
      */
     static async findById(id = "") {
         const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}/${id}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json());
+        });
+
+        return fetch(path, options).then(data => data.json());
     }
 
     /**
@@ -36,11 +50,13 @@ export class NationalityRepository {
      */
     static async create(body = {}) {
         const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        }).then(data => data.json());
+        });
+
+        return fetch(path, options).then(data => data.json())
     }
 
     /**
@@ -50,11 +66,13 @@ export class NationalityRepository {
      */
     static async deleteById(id = "") {
         const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}/${id}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "DELETE",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json());
+        });
+
+        return fetch(path, options).then(data => data.json())
     }
 
     /**
@@ -64,10 +82,12 @@ export class NationalityRepository {
      */
     static async updateById(body = {}) {
         const path = `${nationalityAPIPath}/${FRONTEND.MODEL_PATH.NATIONALITY}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        }).then(data => data.json());
+        });
+
+        return fetch(path, options).then(data => data.json())
     }
 }

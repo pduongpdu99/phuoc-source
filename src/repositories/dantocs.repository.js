@@ -1,6 +1,15 @@
 import FRONTEND from '/common/config/config.js';
 
 const dantocAPIPath = `${FRONTEND.BACKEND_PATH}`;
+
+const commonRequestOptions = {
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+};
+
 export class DantocRepository {
     /**
     * get all API
@@ -8,11 +17,13 @@ export class DantocRepository {
     */
     static async getAll() {
         const path = `${dantocAPIPath}/${FRONTEND.MODEL_PATH.DANTOCS}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json());
+        });
+
+        return fetch(path, options).then(data => data.json());
     }
 
     /**
@@ -22,11 +33,13 @@ export class DantocRepository {
      */
     static async findById(id = "") {
         const path = `${dantocAPIPath}/${FRONTEND.MODEL_PATH.DANTOCS}/${id}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json());
+        });
+
+        return fetch(path, options).then(data => data.json());
     }
 
     /**
@@ -36,11 +49,13 @@ export class DantocRepository {
      */
     static async create(body = {}) {
         const path = `${dantocAPIPath}/${FRONTEND.MODEL_PATH.DANTOCS}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        }).then(data => data.json());
+        });
+
+        return fetch(path, options).then(data => data.json())
     }
 
     /**
@@ -50,11 +65,13 @@ export class DantocRepository {
      */
     static async deleteById(id = "") {
         const path = `${dantocAPIPath}/${FRONTEND.MODEL_PATH.DANTOCS}/${id}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "DELETE",
             headers: { 'Content-Type': 'application/json' },
             body: null,
-        }).then(data => data.json());
+        });
+
+        return fetch(path, options).then(data => data.json())
     }
 
     /**
@@ -64,11 +81,13 @@ export class DantocRepository {
      */
     static async updateById(body = {}) {
         const path = `${dantocAPIPath}/${FRONTEND.MODEL_PATH.DANTOCS}`;
-        return fetch(path, {
+        const options = Object.assign({}, commonRequestOptions, {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
-        }).then(data => data.json());
+        });
+
+        return fetch(path, options).then(data => data.json())
     }
 }
 
