@@ -3,11 +3,11 @@ import FRONTEND from '/common/config/config.js';
 const roomAPIPath = `${FRONTEND.BACKEND_PATH}`;
 
 const commonRequestOptions = {
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
+    // mode: 'cors',
+    // cache: 'no-cache',
+    // credentials: 'same-origin',
+    // redirect: 'follow',
+    // referrerPolicy: 'no-referrer',
     headers: { 'Content-Type': 'application/json' },
 };
 
