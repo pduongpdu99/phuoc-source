@@ -3,12 +3,12 @@ import FRONTEND from '/common/config/config.js';
 const historyAPIPath = `${FRONTEND.BACKEND_PATH}`;
 
 const commonRequestOptions = {
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-    headers: { 'Content-Type': 'application/json' },
+    // mode: 'cors',
+    // cache: 'no-cache',
+    // credentials: 'same-origin',
+    // redirect: 'follow',
+    // referrerPolicy: 'no-referrer',
+    headers: { 'Content-type': 'application/json; charset=UTF-8' },
 };
 
 export class HistoryRepository {
@@ -72,17 +72,17 @@ export class HistoryRepository {
     }
 
     /**
-     * updateById API
+     * update API
      * @param {body} body 
      * @returns 
      */
-    static async updateById(body = {}) {
+    static async update(body = {}) {
         const path = `${historyAPIPath}/${FRONTEND.MODEL_PATH.HISTORY}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "PUT",
             body: JSON.stringify(body),
         });
 
-        return fetch(path, options).then(data => data.json())
+        return fetch(path, options).then(data => data);
     }
 }

@@ -48,11 +48,11 @@ export class NationalityProvider {
     }
 
     /**
-     * updateById API
+     * update API
      * @param {body} body 
      * @returns 
      */
-    static async updateById(body = {}) {
-        return NationalityRepository.updateById(body);
+    static async update(body = {}) {
+        return NationalityRepository.update(body);
     }
 }

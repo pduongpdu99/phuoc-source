@@ -46,11 +46,11 @@ export class BuildingProvider {
     }
 
     /**
-     * updateById API
+     * update API
      * @param {body} body 
      * @returns 
      */
-    static async updateById(body = {}) {
-        return BuildingRepository.updateById(body);
+    static async update(body = {}) {
+        return BuildingRepository.update(body);
     }
 }

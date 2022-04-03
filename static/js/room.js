@@ -105,17 +105,44 @@ const templateMember = (memberModel) => {
         <p class="message-line">${memberModel.address}</p>
         <p class="message-line">${memberModel.sex === 1 ? "Nam" : "Nữ"}</p>
      </div>
-    <div class="delete-button" id="delete-button-${memberModel.id}"><span class="iconify" data-icon="ant-design:user-delete-outlined"
-    style="font-size: 20px; color: red"></span></div>
+
+    <!-- features -->
+    <div>
+      <!-- delete button -->
+      <div class="delete-feature-button" id="delete-button-${memberModel.id}" title="Delete">
+        <span class="iconify" data-icon="ant-design:user-delete-outlined"></span>
+      </div>
+
+      <!-- update button -->
+      <div class="update-feature-button" id="update-button-${memberModel.id}" title="Update">
+        <span class="iconify" data-icon="clarity:update-line"></span>
+      </div>
+
+      <!-- switch button -->
+      <div class="switch-feature-button" id="switch-button-${memberModel.id}" title="Switch">
+        <span class="iconify" data-icon="fluent:table-switch-16-filled"></span>
+      </div>
+    </div>
   </div>`);
 
   return [
     html,
     `message-box-${memberModel.id}`,
     memberModel,
-    `delete-button-${memberModel.id}`
+    `delete-button-${memberModel.id}`,
+    `update-button-${memberModel.id}`,
+    `switch-button-${memberModel.id}`,
   ];
 };
+
+
+/**
+ * loading
+ */
+function loadingCall() {
+  $('body').loadingModal({ text: 'Loading...' });
+  $('body').loadingModal('animation', loadingType);
+}
 
 /**
  * preloading
@@ -263,33 +290,50 @@ function onRoomClick(room, users) {
   let filters = filterUsersByRoom(room.id, users);
   let ids = [];
 
-  // filter data
-  // - html
-  // - [user, roomId]
+  /**
+   * filter data
+   * - html
+   * - [user, roomId]
+   */
   membersElement.innerHTML = filters.map(user => {
     let content = templateMember(user);
-    ids.push([content[1], content[2], content[3]]);
+    ids.push([content[1], content[2], content[3], content[4], content[5]]);
     return content[0];
   }).join('');
 
+  // render limit status
   document.getElementById('member-list-status').innerHTML = `LIMIT STATUS: ${filters.length}/4`;
 
   // gán onclick vào thành viên mỗi room
   ids.forEach(id => {
-    document.getElementById(id[0]).onclick = () => roomUpdateInit(
+    // remove user by id 
+    document.getElementById(id[2]).onclick = () => onRemoveUserClick(id[1]);
+
+    // update user by id 
+    document.getElementById(id[3]).onclick = () => onUpdateUserClick(id[1]);
+
+    // switch user by id 
+    document.getElementById(id[4]).onclick = () => onRoomUpdateInitClick(
       id[1],
       room.id,
     );
-
-    document.getElementById(id[2]).onclick = () => removeUser(id[1]);
   })
 
-
+  // render room name
   listBoard.innerHTML = `${room.name}`;
+
+  // toggle selected classname (if any)
   document.getElementById(room.id).classList.toggle('selected');
 
+  // get number user number of room
   room.number = filters.length;
+
+  // reset local strage into 'room-data' key with room data
   localStorage.setItem('room-data', JSON.stringify(room));
+
+  // set local storage into 'room-users-data' key with users of that room
+  localStorage.setItem('room-users-data', JSON.stringify(filters));
+
 }
 
 /**
@@ -317,7 +361,7 @@ init();
  * register form init
  * @param {HTMLDOMElemnet} registerForm
  */
-function registerFormInit(registerForm) {
+function registerFormInit(registerForm, updateStatus = false) {
 
   if (registerForm != undefined) {
     registerForm.innerHTML = `
@@ -375,7 +419,7 @@ function registerFormInit(registerForm) {
             <option value="3">Other</option>
           </select>
         </label>
-        <button type="button" id="submit" class="submit">Register</button>
+        ${!updateStatus ? `<button type="button" id="submit" class="submit">Register</button>` : `<button type="button" id="update-submit" class="update-submit">Update</button>`}
         <button type="button" id="fb-btn" class="fb-btn">Cancel</button>
       </div>
       <div class=" sub-cont">
@@ -388,13 +432,32 @@ function registerFormInit(registerForm) {
       </div>
     </div>
     `;
+    const domains = CONSTANTS.EMAIL_DOMAIN;
 
-    const domains = ["gmail.com", "yahoo.com", "hotmail.com", "aol.com", "hotmail.co.uk", "hotmail.fr", "msn.com", "yahoo.fr", "wanadoo.fr", "orange.fr", "comcast.net", "yahoo.co.uk", "yahoo.com.br", "yahoo.co.in", "live.com", "rediffmail.com", "free.fr", "gmx.de", "web.de", "yandex.ru", "ymail.com", "libero.it", "outlook.com", "uol.com.br", "bol.com.br", "mail.ru", "cox.net", "hotmail.it", "sbcglobal.net", "sfr.fr", "live.fr", "verizon.net", "live.co.uk", "googlemail.com", "yahoo.es", "ig.com.br", "live.nl", "bigpond.com", "terra.com.br", "yahoo.it", "neuf.fr", "yahoo.de", "alice.it", "rocketmail.com", "att.net", "laposte.net", "facebook.com", "bellsouth.net", "yahoo.in", "hotmail.es", "charter.net", "yahoo.ca", "yahoo.com.au", "rambler.ru", "hotmail.de", "tiscali.it", "shaw.ca", "yahoo.co.jp", "sky.com", "earthlink.net", "optonline.net", "freenet.de", "t-online.de", "aliceadsl.fr", "virgilio.it", "home.nl", "qq.com", "telenet.be", "me.com", "yahoo.com.ar", "tiscali.co.uk", "yahoo.com.mx", "voila.fr", "gmx.net", "mail.com", "planet.nl", "tin.it", "live.it", "ntlworld.com", "arcor.de", "yahoo.co.id", "frontiernet.net", "hetnet.nl", "live.com.au", "yahoo.com.sg", "zonnet.nl", "club-internet.fr", "juno.com", "optusnet.com.au", "blueyonder.co.uk", "bluewin.ch", "skynet.be", "sympatico.ca", "windstream.net", "mac.com", "centurytel.net", "chello.nl", "live.ca", "aim.com", "bigpond.net.au"];
-
-    const keyNumber = ['+84', '+856'];
+    const keyNumber = CONSTANTS.KEY_NUMBER_PHONE;
 
     // render into sex-options
-    document.getElementById('sex-options').value = registerForm.getAttribute('sex');
+    let sexOptions = document.getElementById('sex-options');
+    sexOptions.value = registerForm.getAttribute('sex');
+
+    // disable process reset attribute into input sex-option
+    const sexIndex = localStorage.getItem('sex-index');
+    if (sexIndex != 3 && sexIndex != null) {
+      // set disable into sexOption element
+      sexOptions.setAttribute('disabled', '');
+    } else {
+      let userFilter = JSON.parse(localStorage.getItem('room-users-data'));
+
+      // check first sex value of user is male or female
+      // set default this into sexOption element
+      if (userFilter.length > 0) {
+        userFilter = userFilter.map(item => item.sex);
+        sexOptions.value = userFilter[0];
+
+        // set disable into sexOption element
+        sexOptions.setAttribute('disabled', '');
+      }
+    }
 
     // render domain option into select element
     document.getElementById('domain-option-select').innerHTML = domains.map(item => `<option value="${item}">${item}</option>`);
@@ -402,18 +465,12 @@ function registerFormInit(registerForm) {
     // render number option into select element
     document.getElementById('number-option-select').innerHTML = keyNumber.map(item => `<option value="${item}">${item}</option>`);
 
+    // set on event change into onchange attribute national index
     if (document.getElementById('national'))
       document.getElementById('national').onchange = onNationalChange;
   }
 }
 
-/**
- * loading
- */
-function loadingCall() {
-  $('body').loadingModal({ text: 'Loading...' });
-  $('body').loadingModal('animation', loadingType);
-}
 
 /**
  * load data dantoc
@@ -437,6 +494,8 @@ async function onLoadDanToc() {
         document.getElementById(CONSTANTS.DANTOC.LAO).setAttribute('selected', 'true');
       }
     }
+
+    $("body").loadingModal('destroy');
   });
 }
 
@@ -609,8 +668,9 @@ function onSwitchButtonClick() {
 
 /**
  * on submit click
+ * @param {Boolean} updateStatus
  */
-function onSubmitClick() {
+function onSubmitClick(updateStatus = false, user) {
   const fullname = document.getElementById('fullname');
   const number = document.getElementById('number');
   const address = document.getElementById('address');
@@ -651,15 +711,45 @@ function onSubmitClick() {
 
   // check validate
   if (validation(data)) {
-    UserProvider
-      .create(data)
-      .then((data) => {
-        if (JSON.stringify(data).toString() === "null") {
-          thongBaoValidation("Người dùng này đã tồn tại hãy kiểm tra lại mã sinh viên");
-        } else {
-          // xóa form
-          onCancelClick();
+    if (!updateStatus) {
+      UserProvider
+        .create(data)
+        .then((data) => {
+          if (JSON.stringify(data).toString() === "null") {
+            thongBaoValidation("Người dùng này đã tồn tại hãy kiểm tra lại mã sinh viên");
+          } else {
+            // xóa form
+            onCancelClick();
 
+            // code render
+            init({
+              buildings: localStorage.getItem('buildings'),
+              status: localStorage.getItem('status'),
+              loading: true,
+            });
+
+            // clear field
+            fullname.value = "";
+            number.value = "";
+            address.value = "";
+            idcard.value = "";
+            birth.value = "";
+            localPart.value = "";
+          }
+        });
+    } else {
+      // merge 
+      let dataKeys = Object.keys(data);
+      for (let key of dataKeys) user[key] = data[key];
+
+      delete user.createdAt;
+      delete user.updatedAt;
+      delete user.avatar;
+
+      // COMMENT: updated
+      UserProvider
+        .update(user)
+        .then((data) => {
           // code render
           init({
             buildings: localStorage.getItem('buildings'),
@@ -673,9 +763,14 @@ function onSubmitClick() {
           address.value = "";
           idcard.value = "";
           birth.value = "";
-          email.value = "";
-        }
-      });
+          localPart.value = "";
+
+          // xóa form
+          onCancelClick();
+
+        });
+    }
+
   }
 }
 
@@ -697,7 +792,9 @@ function initialize(registerForm) {
 
 
   if (document.getElementById('submit'))
-    document.getElementById('submit').onclick = onSubmitClick;
+    document.getElementById('submit').onclick = function () {
+      onSubmitClick();
+    };
   if (document.getElementById('fb-btn'))
     document.getElementById('fb-btn').onclick = onCancelClick;
 }
@@ -743,7 +840,7 @@ const initSwitchFormHTML = (roomModel) => {
  * @param {User} userId
  * @param {string} roomId
  */
-async function roomUpdateInit(user, roomId) {
+async function onRoomUpdateInitClick(user, roomId) {
   const room = await RoomProvider.findById(roomId)
 
   // render inner html into init-switch-form index
@@ -778,7 +875,7 @@ async function roomUpdateInit(user, roomId) {
  * @param {User} userId
  * @param {string} roomId
  */
-async function removeUser(user) {
+async function onRemoveUserClick(user) {
   if (confirm('Do you wanna remove this user?')) {
     UserProvider.deleteById(user.id).then(data => {
       // code render
@@ -792,6 +889,43 @@ async function removeUser(user) {
       return data;
     })
   }
+}
+
+async function onUpdateUserClick(user) {
+  let roomData = JSON.parse(localStorage.getItem('room-data'));
+
+  const initDiv = document.getElementById('init-register-form');
+  const register = document.createElement('register-form');
+  const sexIndex = localStorage.getItem('sex-index');
+
+  // xử lý register form
+  register.setAttribute('roomid', roomData.id);
+  register.setAttribute('sex', sexIndex == null || sexIndex == 3 ? 1 : parseInt(sexIndex));
+  register.setAttribute('class', "register-form");
+
+  initDiv.appendChild(register);
+
+  registerFormInit(register, true);
+  loadNationality();
+  loadRoom(register);
+
+  // render user field
+  document.getElementById('fullname').value = user.name;
+  document.getElementById('number').value = user.phoneNumber.slice(3);
+  document.getElementById('address').value = user.address;
+  document.getElementById('idcard').value = user.iDCard;
+  document.getElementById('local-part').value = user.email.split("@")[0];
+
+  // enable sex option
+  document.getElementById('sex-options').removeAttribute('disabled')
+
+  if (document.getElementById('update-submit'))
+    document.getElementById('update-submit').onclick = function () {
+      onSubmitClick(true, user);
+    };
+  if (document.getElementById('fb-btn'))
+    document.getElementById('fb-btn').onclick = onCancelClick;
+
 }
 
 /**
@@ -846,7 +980,7 @@ async function onSwitchFormSubmit(user, roomIdNeedToChanged) {
 
   if (users.length < 4) {
     // use update by id api to room id change
-    UserProvider.updateById(user).then(userUpdated => {
+    UserProvider.update(user).then(userUpdated => {
       // re-render
       init({
         buildings: localStorage.getItem('buildings'),
@@ -1017,7 +1151,6 @@ async function switchFormInit(roomId) {
   );
 
   const data = rooms.sort((a, b) => a.name - b.name).filter(item => item.id !== roomId);
-  console.log(document.getElementById("switch-form-to"));
   autocomplete(document.getElementById("switch-form-to"), data);
 }
 
@@ -1124,3 +1257,72 @@ function onStatusFilterClick(status) {
   // re init
   init(argument);
 }
+
+
+// FIXBUG 8: fix day by localtime
+
+const LOCALE_TEMPLATE = {
+  EN: {
+    MONTH: {
+      0: 'January',
+      1: 'February',
+      2: 'March',
+      3: 'April',
+      4: 'May',
+      5: 'June',
+      6: 'July',
+      7: 'August',
+      8: 'September',
+      9: 'October',
+      10: 'November',
+      11: 'December',
+    }
+  }
+}
+
+const localRefer = {
+  en: getDateInEnglishLocale,
+  vi: getDateInVietnameseLocale,
+}
+
+/**
+ * get date in english locale
+ * @param {Date} currentDate 
+ */
+function getDateInEnglishLocale(currentDate) {
+  let enRefers = LOCALE_TEMPLATE.EN;
+  let date = currentDate.getDate();
+  let stand = date == 1 ? "st" : date == 2 ? "nd" : date == 3 ? "rd" : "th";
+
+  let month = currentDate.getMonth();
+  let year = currentDate.getFullYear();
+
+  return `${enRefers.MONTH[month]}, ${date}${stand} ${year} `;
+}
+
+/**
+ * get date in vietnam locale
+ * @param {Date} currentDate 
+ */
+function getDateInVietnameseLocale(currentDate) {
+  // let viRefers = LOCALE_TEMPLATE.VI;
+
+  let date = currentDate.getDate();
+  let month = currentDate.getMonth() + 1;
+  let year = currentDate.getFullYear();
+
+  return `Ngày ${date} /${month}/${year} `;
+}
+
+/**
+ * load date at locale
+ * @param {String} locale 
+ */
+function loadDateAtLocale(locale) {
+  const dateDisplay = localRefer[locale](new Date());
+  document.getElementById('today').innerHTML = dateDisplay;
+}
+
+// run load date display at locale
+const locale = "en";
+loadDateAtLocale(locale);

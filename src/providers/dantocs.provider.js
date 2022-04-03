@@ -46,11 +46,11 @@ export class DantocProvider {
     }
 
     /**
-     * updateById API
+     * update API
      * @param {body} body 
      * @returns 
      */
-    static async updateById(body = {}) {
-        return DantocRepository.updateById(body);
+    static async update(body = {}) {
+        return DantocRepository.update(body);
     }
 }

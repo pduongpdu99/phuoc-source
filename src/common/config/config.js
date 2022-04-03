@@ -32,7 +32,7 @@ const FRONTEND = {
       },
     },
   },
-
+  
   HEADERS: {
 
   }

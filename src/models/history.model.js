@@ -1,13 +1,13 @@
 export class History {
     id = "";
     eventName = "";
-    atUpdated = "";
-    atCreated = "";
+    updatedAt = "";
+    createdAt = "";
 
     toJson(data) {
         this.id = data._id;
         this.eventName = data.eventname;
-        this.atUpdated = data.atupdated;
-        this.atCreated = data.atcreated;
+        this.updatedAt = data.updatedAt;
+        this.createdAt = data.createdAt;
     }
 }

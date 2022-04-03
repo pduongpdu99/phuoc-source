@@ -10,8 +10,8 @@ export class User {
     sex = 0;
     roomId = "";
     avatar = "";
-    atUpdated = "";
-    atCreated = "";
+    updatedAt = "";
+    createdAt = "";
 
     toJson(data) {
         this.id = data._id;
@@ -20,7 +20,7 @@ export class User {
         this.phoneNumber = data.phoneNumber;
         this.address = data.address;
         this.nationality = data.nationality;
-        this.iDCard = data.idcard;
+        this.iDCard = data.iDCard;
         this.birth = data.birth;
         this.sex = data.sex;
         this.email = data.email;

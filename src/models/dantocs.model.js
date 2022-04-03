@@ -2,14 +2,14 @@ export class Dantoc {
     id = "";
     name = "";
     nationality = "";
-    atUpdated = "";
-    atCreated = "";
+    updatedAt = "";
+    createdAt = "";
 
     toJson(data) {
         this.id = data._id;
         this.name = data.name;
         this.nationality = data.nationality;
-        this.atUpdated = data.atupdated;
-        this.atCreated = data.atcreated;
+        this.updatedAt = data.updatedAt;
+        this.createdAt = data.createdAt;
     }
 }

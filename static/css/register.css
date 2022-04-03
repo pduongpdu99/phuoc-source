@@ -269,7 +269,14 @@ register-form .forgot-pass {
 register-form .submit {
   margin-top: 40px;
   margin-bottom: 20px;
-  background: #d4af7a;
+  background: #3fd166;
+  text-transform: uppercase;
+}
+
+register-form .update-submit {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  background: #629ce3;
   text-transform: uppercase;
 }
 
@@ -277,6 +284,7 @@ register-form .fb-btn {
   border: 2px solid #d3dae9;
   color: #8fa1c7;
 }
+
 register-form .fb-btn span {
   font-weight: bold;
   color: #455a81;

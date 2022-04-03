@@ -46,12 +46,12 @@ export class RoomProvider {
     }
 
     /**
-     * updateById API
+     * update API
      * @param {body} body
      * @returns
      */
-    static async updateById(body = {}) {
-        return RoomRepository.updateById(body);
+    static async update(body = {}) {
+        return RoomRepository.update(body);
     }
 
     /**

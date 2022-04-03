@@ -48,11 +48,11 @@ export class HistoryProvider {
     }
 
     /**
-     * updateById API
+     * update API
      * @param {body} body 
      * @returns 
      */
-    static async updateById(body = {}) {
-        return HistoryRepository.updateById(body);
+    static async update(body = {}) {
+        return HistoryRepository.update(body);
     }
 }

@@ -48,12 +48,12 @@ export class UserProvider {
     }
 
     /**
-     * updateById API
+     * update API
      * @param {body} body
      * @returns
      */
-    static async updateById(body = {}) {
-        return UserRepository.updateById(body);
+    static async update(body = {}) {
+        return UserRepository.update(body);
     }
 
     /**
