@@ -3,11 +3,11 @@ import FRONTEND from '/common/config/config.js';
 const dantocAPIPath = `${FRONTEND.BACKEND_PATH}`;
 
 const commonRequestOptions = {
-    // mode: 'cors',
-    // cache: 'no-cache',
-    // credentials: 'same-origin',
-    // redirect: 'follow',
-    // referrerPolicy: 'no-referrer',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
     headers: { 'Content-type': 'application/json; charset=UTF-8' },
 };
 

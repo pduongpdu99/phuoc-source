@@ -481,10 +481,10 @@ a {
   width: 40px;
   height: 40px;
 
-  user-select: none;
   -ms-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+  user-select: none;
 }
 
 .message-header {
@@ -507,10 +507,10 @@ a {
   width: 100%;
   cursor: pointer;
 
-  user-select: none;
   -ms-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+  user-select: none;
 }
 
 .star-checkbox input {
@@ -1080,11 +1080,11 @@ a {
   margin-right: 10px;
   cursor: pointer;
 
-  user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
   -o-user-select: none;
+  user-select: none;
 }
 
 .filter-list .group-line-round {
