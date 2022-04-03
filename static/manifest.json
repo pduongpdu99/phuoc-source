@@ -1,0 +1,62 @@
+{
+    "short_name": "KTX PDU",
+    "name": "Ký túc xá Đại học Phạm Văn Đồng",
+    "icons": [
+        {
+            "src": "./images/logopdu.jpg",
+            "type": "image/jpg",
+            "sizes": "144x144",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "./images/logopdu.jpg",
+            "type": "image/jpg",
+            "sizes": "144x144",
+            "purpose": "maskable any"
+        }
+    ],
+    "start_url": "/?source=pwa",
+    "background_color": "#3367D6",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#3367D6",
+    "shortcuts": [
+        {
+            "name": "How's weather today?",
+            "short_name": "Today",
+            "description": "View weather information for today",
+            "url": "/today?source=pwa",
+            "icons": [
+                {
+                    "src": "images/logopdu.jpg",
+                    "sizes": "144x144"
+                }
+            ]
+        },
+        {
+            "name": "How's weather tomorrow?",
+            "short_name": "Tomorrow",
+            "description": "View weather information for tomorrow",
+            "url": "/tomorrow?source=pwa",
+            "icons": [
+                {
+                    "src": "images/logopdu.jpg",
+                    "sizes": "144x144"
+                }
+            ]
+        }
+    ],
+    "description": "Đăng ký phòng tại ký túc xá ĐH Phạm Văm Đồng",
+    "screenshots": [
+        {
+            "src": "images/logopdu.jpg",
+            "type": "image/jpg",
+            "sizes": "144x144"
+        },
+        {
+            "src": "images/logopdu.jpg",
+            "type": "image/jpg",
+            "sizes": "144x144"
+        }
+    ]
+}

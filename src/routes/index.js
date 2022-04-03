@@ -34,7 +34,7 @@ const routing = (express) => {
 
     // route not found(404) for link left
     router.get(FRONTEND_ROUTES.ALL, function (_req, res) {
-        fs.readFile('src/pages/404/index.html', function (err, data) {
+        fs.readFile('src/pages/notfound/index.html', function (err, data) {
             if (err) return console.log(err);
             res.setHeader('Content-Type', 'text/html');
             res.end(data);
