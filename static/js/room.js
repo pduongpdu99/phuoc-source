@@ -52,17 +52,6 @@ const templateInit = (
    <div class="project-box ${data.status}" id="${data._id}">
       <div class="project-box-header" style="width: 100%">
          <span>December 10, 2020</span>
-         <div class="more-wrapper">
-            <button class="project-btn-more">
-               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round" class="feather feather-more-vertical">
-                  <circle cx="12" cy="12" r="1" />
-                  <circle cx="12" cy="5" r="1" />
-                  <circle cx="12" cy="19" r="1" />
-               </svg>
-            </button>
-         </div>
       </div>
       <div class="project-box-content-header">
          <p class="box-content-header">${data.name} room</p>
@@ -71,7 +60,7 @@ const templateInit = (
       <div class="project-box-footer">
          <div class="participants">
             ${users.map(user => `<img src='${user.avatar}' alt='${user.avatar}'>`).join("")}
-            <button class="add-participant" style="color: #ff942e;" id="add-participant-${data._id}">
+            <button class="add-participant" id="add-participant-${data._id}" title="Add user">
                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
                   fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
                   stroke-linejoin="round" class="feather feather-plus">
@@ -79,7 +68,7 @@ const templateInit = (
                </svg>
             </button>
          </div>
-         <div class="days-left" style="color: ${_status[data.status].color}">
+         <div class="days-left">
          ${_status[data.status].name}
          </div>
       </div>
