@@ -1,6 +1,6 @@
 {
   "name": "phuoc-source",
-  "module": "module",
+  "module": "commonjs",
   "version": "1.0.0",
   "description": "hỗ trợ và đăng ký phòng kiến túc xá",
   "main": "index.js",
@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3",
-    "fs": "^0.0.1-security"
+    "fetch-headers": "^3.0.1",
+    "fs": "^0.0.1-security",
+    "headers": "^0.9.6"
   }
 }

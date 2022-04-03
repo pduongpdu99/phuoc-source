@@ -1,6 +1,7 @@
 .room-planning {
     padding: 100px;
     position: relative;
+    width: -moz-fit-content;
     width: fit-content;
     display: inline-block;
 }
