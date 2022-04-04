@@ -11,11 +11,18 @@ import {
 // validation
 import { isNotEmpty, isEmail, isNumberPhone, isDate } from './validation.js';
 
-import { autocomplete } from '/common/methods/auto-complete.js';
-import { loadDateAtLocale } from '/common/methods/load-date-at-local.js';
-import { loadingCall, loadingDestroy } from '/common/methods/loadingModal.js';
-import { templateInit, templateMember, loadingCardTemplate, formTemplate, initSwitchFormHTML } from '/common/methods/template.js';
-import { setEventOnClick } from '/common/methods/set-event.js';
+import {
+  autocomplete,
+  loadingCall,
+  loadDateAtLocale,
+  loadingDestroy,
+  templateInit,
+  templateMember,
+  loadingCardTemplate,
+  formTemplate,
+  initSwitchFormHTML,
+  setEventOnClick,
+} from '/common/methods/index.js';
 
 
 // DANTOC constants
