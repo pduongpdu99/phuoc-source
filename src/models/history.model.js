@@ -9,5 +9,6 @@ export class History {
         this.eventName = data.eventname;
         this.updatedAt = data.updatedAt;
         this.createdAt = data.createdAt;
+        return this;
     }
 }

@@ -11,5 +11,6 @@ export class Dantoc {
         this.nationality = data.nationality;
         this.updatedAt = data.updatedAt;
         this.createdAt = data.createdAt;
+        return this;
     }
 }

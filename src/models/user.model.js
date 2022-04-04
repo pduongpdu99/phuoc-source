@@ -28,5 +28,6 @@ export class User {
         this.roomId = data.roomId;
         this.createdAt = data.createdAt;
         this.updatedAt = data.updatedAt;
+        return this;
     }
 }

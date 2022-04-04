@@ -413,7 +413,6 @@ a {
 .update-feature-button,
 .switch-feature-button {
   position: relative;
-  z-index: 2;
   cursor: pointer;
 }
 

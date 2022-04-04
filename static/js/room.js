@@ -6,30 +6,29 @@ import {
   BuildingProvider,
 } from '/providers/index.js';
 
+// models
+
 // validation
 import { isNotEmpty, isEmail, isNumberPhone, isDate } from './validation.js';
 
+import { autocomplete } from '/common/methods/auto-complete.js';
+import { loadDateAtLocale } from '/common/methods/load-date-at-local.js';
+import { loadingCall, loadingDestroy } from '/common/methods/loadingModal.js';
+import { templateInit, templateMember, loadingCardTemplate, formTemplate, initSwitchFormHTML } from '/common/methods/template.js';
+import { setEventOnClick } from '/common/methods/set-event.js';
+
+
 // DANTOC constants
-import {
-  CONSTANTS
-} from '/common/utils/constant.js';
+import { CONSTANTS } from '/common/utils/constant.js';
+import { RoomCustom } from '/models/room-custom.model.js';
 
-
-const filterUsersByRoom = (roomId, users) => {
-  let results = [];
-  users.forEach(function (a) {
-    if (a.roomId === roomId) results.push(a);
-  });
-  return results;
-}
 
 const membersElement = document.getElementById('members');
 const listBoard = document.getElementById('list-name');
-const loadingType = "spinner";
-
 const tong = document.getElementById('tong');
 const male = document.getElementById('male');
 const female = document.getElementById('female');
+
 localStorage.clear()
 
 if (localStorage.getItem('buildings') == null)
@@ -38,100 +37,6 @@ if (localStorage.getItem('buildings') == null)
 if (localStorage.getItem('status') == null)
   localStorage.setItem('status', CONSTANTS.STATUS.ALL);
 
-const templateInit = (
-  data,
-  users,
-  _status = {
-    empty: { name: "empty", classname: "empty" },
-    semi: { name: "exist", classname: "semi" },
-    full: { name: "full", classname: "full" },
-  }
-) => {
-  return `
-<div class="project-box-wrapper">
-   <div class="project-box ${data.status}" id="${data._id}">
-      <div class="project-box-header" style="width: 100%">
-         <span>December 10, 2020</span>
-      </div>
-      <div class="project-box-content-header">
-         <p class="box-content-header">${data.name} room</p>
-         <p class="box-content-subheader">${data.describe}</p>
-      </div>
-      <div class="project-box-footer">
-         <div class="participants">
-            ${users.map(user => `<img src='${user.avatar}' alt='${user.avatar}'>`).join("")}
-            <button class="add-participant" id="add-participant-${data._id}" title="Add user">
-               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
-                  fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
-                  stroke-linejoin="round" class="feather feather-plus">
-                  <path d="M12 5v14M5 12h14" />
-               </svg>
-            </button>
-         </div>
-         <div class="days-left">
-         ${_status[data.status].name}
-         </div>
-      </div>
-   </div>
-</div>`;
-}
-
-/**
- * template member
- * @param {{id: String, name: String, email: String, number: String, address: String}} memberModel
- * @returns
- */
-const templateMember = (memberModel) => {
-  const html = new String(`
-  <div class="message-box">
-     <img src="images/user.png" alt="profile image">
-     <div class="message-content" id="message-box-${memberModel.id}">
-        <div class="message-header">
-           <div class="name">${memberModel.name}</div>
-        </div>
-        <p class="message-line">${memberModel.email}</p>
-        <p class="message-line">${memberModel.phoneNumber}</p>
-        <p class="message-line">${memberModel.address}</p>
-        <p class="message-line">${memberModel.sex === 1 ? "Nam" : "Nữ"}</p>
-     </div>
-
-    <!-- features -->
-    <div>
-      <!-- delete button -->
-      <div class="delete-feature-button" id="delete-button-${memberModel.id}" title="Delete">
-        <span class="iconify" data-icon="ant-design:user-delete-outlined"></span>
-      </div>
-
-      <!-- update button -->
-      <div class="update-feature-button" id="update-button-${memberModel.id}" title="Update">
-        <span class="iconify" data-icon="clarity:update-line"></span>
-      </div>
-
-      <!-- switch button -->
-      <div class="switch-feature-button" id="switch-button-${memberModel.id}" title="Switch">
-        <span class="iconify" data-icon="fluent:table-switch-16-filled"></span>
-      </div>
-    </div>
-  </div>`);
-
-  return [
-    html,
-    `message-box-${memberModel.id}`,
-    memberModel,
-    `delete-button-${memberModel.id}`,
-    `update-button-${memberModel.id}`,
-    `switch-button-${memberModel.id}`,
-  ];
-};
-
-
-/**
- * loading
- */
-function loadingCall() {
-  $('body').loadingModal({ text: 'Loading...' });
-  $('body').loadingModal('animation', loadingType);
-}
 
 /**
  * preloading
@@ -141,35 +46,16 @@ function preloading() {
   let viewIndex = document.getElementById('view-index');
   viewIndex.innerHTML = "";
 
-  // template initialize
-  const template = () => `
-    <div class="loading-card">
-       <div class="header">
-          <div class="details">
-             <span class="name"></span>
-             <br>
-             <span class="about"></span>
-          </div>
-       </div>
-       <div style="margin-top: 20px"></div>
-       <div class="btns">
-          <div class="btn btn-1"></div>
-          <div style="width: 100%;"></div>
-          <div class="btn btn-2"></div>
-       </div>
-    </div>
-    `;
-
   // render template loading
   for (let i = 0; i < 10; i++)
-    viewIndex.innerHTML += template();
+    viewIndex.innerHTML += loadingCardTemplate();
 }
 
 /**
  * init method
  */
 async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONSTANTS.STATUS.ALL, loading: false }) {
-  if (argument.loading) loadingCall();
+  if (argument.loading) loadingCall($("body"));
   preloading();
 
   // load sĩ số
@@ -198,14 +84,13 @@ async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONST
 
   let viewIndex = document.getElementById("view-index");
 
-  // get all user list
-  const users = await UserProvider.getAll();
-
   // get rooms list
-  const roomlist = await RoomProvider.getRoomBy(
+  let roomlist = await RoomProvider.getRoomBy(
     argument.buildings,
     argument.status
-  );
+  ).then(data => {
+    return data.map(item => (new RoomCustom()).toJson(item))
+  });
 
   // get rooms
   let rooms = {};
@@ -226,7 +111,7 @@ async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONST
                 </div><div style="margin-top: 20px; width: 100%"></div>`
     );
     floor.forEach(room => {
-      let userList = filterUsersByRoom(room._id, users);
+      let userList = room.users;
       room.status = (userList.length == 0 ? "empty" : userList.length >= 4 ? "full" : "semi");
       data.push(templateInit(room, userList));
     });
@@ -239,10 +124,10 @@ async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONST
 
   // assign onclick
   roomlist.forEach(
-    model => document.getElementById(model._id).onclick = () => onRoomClick({
-      id: model._id,
-      name: model.name
-    }, users)
+    model => {
+      console.log(model);
+      setEventOnClick(model.id, () => onRoomClick(model))
+    }
   );
 
   // render empty member list
@@ -256,27 +141,24 @@ async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONST
     // floor 
     const floor = rooms[key];
     floor.forEach(room => {
-      document.getElementById(`add-participant-${room._id}`).onclick = function () {
-        onAddButtonClick(room, users)
-      }
+      setEventOnClick(`add-participant-${room.id}`, function () { onAddButtonClick(room) });
     });
   }
 
   // detroy loading
-  if (argument.loading) $('body').loadingModal('destroy');
+  if (argument.loading) loadingDestroy($("body"));
 }
 
 /**
  * on add click
- * @param {{id: String, name:String}} room
- * @param {User[]} users
+ * @param {RoomCustom} room
  */
-function onRoomClick(room, users) {
+function onRoomClick(room) {
   // remove selected
   $('.project-box.selected').toggleClass('selected');
 
   // filter user by rooom id
-  let filters = filterUsersByRoom(room.id, users);
+  let filters = room.users;
   let ids = [];
 
   /**
@@ -296,17 +178,16 @@ function onRoomClick(room, users) {
   // gán onclick vào thành viên mỗi room
   ids.forEach(id => {
     // remove user by id 
-    document.getElementById(id[2]).onclick = () => onRemoveUserClick(id[1]);
+    setEventOnClick(id[2], () => onRemoveUserClick(id[1]))
 
     // update user by id 
-    document.getElementById(id[3]).onclick = () => onUpdateUserClick(id[1]);
+    setEventOnClick(id[3], () => onUpdateUserClick(id[1]))
 
     // switch user by id 
-    document.getElementById(id[4]).onclick = () => onRoomUpdateInitClick(
-      id[1],
-      room.id,
-    );
-  })
+    setEventOnClick(id[4], () => onRoomUpdateInitClick(id[1], room.id,))
+  });
+
+  console.log(room);
 
   // render room name
   listBoard.innerHTML = `${room.name}`;
@@ -330,8 +211,8 @@ function onRoomClick(room, users) {
  * @param {Room} room 
  * @param {User[]} users 
  */
-function resetRoomDataStorage(room, users) {
-  let filters = filterUsersByRoom(room.id, users);
+function resetRoomDataStorage(room) {
+  let filters = room.users;
   room.number = filters.length;
   localStorage.setItem('room-data', JSON.stringify(room));
 }
@@ -353,74 +234,7 @@ init();
 function registerFormInit(registerForm, updateStatus = false) {
 
   if (registerForm != undefined) {
-    registerForm.innerHTML = `
-    <div class="bg-dark"></div>
-    <div class="cont animation">
-      <div class="form" id="form">
-        <h2>Đơn đăng ký vào ở ký túc xá</h2>
-        <label>
-          <span>Fullname</span>
-          <input type="text" id="fullname" placeholder="Enter fullname"/>
-        </label>
-        <label>
-          <span>Number phone</span>
-          <div class="number-field-custom">
-            <select id="number-option-select"></select>
-            <input type="text" id="number"  placeholder="Enter number phone"/>
-          </div>
-        </label>
-        <label>
-          <span>Address</span>
-          <input type="text" id="address" placeholder="Enter address"/>
-        </label>
-        <label>
-          <span>National</span>
-          <select id="national"></select placeholder="Enter nationality">
-        </label>
-        <label>
-          <span>Card id</span>
-          <input type="text" id="idcard" placeholder="Enter id card/ CMND/ StudentID"/>
-        </label>
-        <label>
-          <span>Birthday</span>
-          <input type="date" id="birth" class="form-input datepicker" value="2000-01-01" min="1970-01-01" max="2030-01-01">
-        </label>
-        <label>
-          <span>Email</span>
-          <div class="email-field-custom">
-            <input type="text" placeholder="Ex: admin" id="local-part"/>
-            <select id="domain-option-select"></select>
-          </div>
-        </label>
-        <label>
-          <span>Dân tộc</span>
-          <select id="dantoc-options"></select>
-        </label>
-        <label>
-          <span>Room</span>
-          <select id="room-options"></select>
-        </label>
-        <label>
-          <span>Sex</span>
-          <select id="sex-options">
-            <option value="1">Male</option>
-            <option value="2">Female</option>
-            <option value="3">Other</option>
-          </select>
-        </label>
-        ${!updateStatus ? `<button type="button" id="submit" class="submit">Register</button>` : `<button type="button" id="update-submit" class="update-submit">Update</button>`}
-        <button type="button" id="fb-btn" class="fb-btn">Cancel</button>
-      </div>
-      <div class=" sub-cont">
-        <div class="img">
-          <div class="img__text m--up">
-            <h2>Welcome to Dormitory of PDU</h2>
-            <p>Vui mừng chào đón các bạn tới với kí tý xá trường Đại học Phạm Văn Đồng</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    `;
+    registerForm.innerHTML = formTemplate(updateStatus);
     const domains = CONSTANTS.EMAIL_DOMAIN;
 
     const keyNumber = CONSTANTS.KEY_NUMBER_PHONE;
@@ -508,7 +322,7 @@ async function loadRoom(registerForm) {
   // room options
   if (roomOptions) {
     roomOptions.innerHTML = rooms
-      .map(room => `<option value="${room._id}">${room.name}</option>`)
+      .map(room => `<option value="${room.id}">${room.name}</option>`)
       .join('');
   }
 
@@ -543,7 +357,7 @@ async function loadNationality() {
  */
 function onNationalChange() {
   // spin loading
-  loadingCall();
+  loadingCall($("body"));
 
   // destroy spin loading
   onLoadDanToc();
@@ -613,13 +427,13 @@ function validation(model) {
   return true;
 }
 
-document.getElementById('add-button').onclick = onAddButtonClick;
-document.getElementById('switch-button').onclick = onSwitchButtonClick;
+setEventOnClick('add-button', onAddButtonClick);
+setEventOnClick('switch-button', onSwitchButtonClick);
 
 /**
  * on add button click
  */
-function onAddButtonClick(room = undefined, users = undefined) {
+function onAddButtonClick(room = undefined) {
   let roomData = JSON.parse(localStorage.getItem('room-data'));
 
   const initDiv = document.getElementById('init-register-form');
@@ -631,9 +445,9 @@ function onAddButtonClick(room = undefined, users = undefined) {
   register.setAttribute('sex', sexIndex == null || sexIndex == 3 ? 1 : parseInt(sexIndex));
   register.setAttribute('class', "register-form");
 
-  if (room != undefined && users != undefined) {
-    resetRoomDataStorage(room, users);
-    register.setAttribute('roomid', room._id);
+  if (room != undefined) {
+    resetRoomDataStorage(room);
+    register.setAttribute('roomid', room.id);
   }
 
   const number = roomData.number;
@@ -781,11 +595,9 @@ function initialize(registerForm) {
 
 
   if (document.getElementById('submit'))
-    document.getElementById('submit').onclick = function () {
-      onSubmitClick();
-    };
-  if (document.getElementById('fb-btn'))
-    document.getElementById('fb-btn').onclick = onCancelClick;
+    setEventOnClick('submit', function () { onSubmitClick() });
+
+  if (document.getElementById('fb-btn')) setEventOnClick('fb-btn', onCancelClick);
 }
 
 
@@ -793,36 +605,6 @@ function initialize(registerForm) {
 // ====================================================================================================================================================
 // ====================================================================================================================================================
 // ====================================================================================================================================================
-
-/**
- * switch form html init
- * @param {Room} roomModel
- * @returns
- */
-const initSwitchFormHTML = (roomModel) => {
-  return `
-    <div class="bg-dark"></div>
-    <switch-form user="user_id" room="room_id" class="light">
-       <div class="cont">
-          <div class="form sign-in">
-             <h2>Room switch</h2>
-             <label>
-                <span>Current</span>
-                <input type="text" id="switch-form-current" placeholder="101" value="${roomModel.name}" readonly/>
-             </label>
-             <label>
-                <span>To</span>
-                <div class="autocomplete">
-                   <input type="text" id="switch-form-to" placeholder="101"/>
-                </div>
-             </label>
-             <button type="button" class="submit" id="switch-submit">Switch</button>
-             <button type="button" class="fb-btn" id="switch-cancel">Cancel</button>
-          </div>
-       </div>
-    </switch-form>
-    `;
-}
 
 /**
  * tạo form chuyển phòng cho user
@@ -839,7 +621,7 @@ async function onRoomUpdateInitClick(user, roomId) {
   switchFormInit(roomId);
 
   // assign event function cho button trong switch form
-  document.getElementById('switch-submit').onclick = function () {
+  setEventOnClick('switch-submit', function () {
     const roomdIdNeedToChange = document.getElementById('switch-form-to').getAttribute('data-id');
 
     // check null
@@ -853,10 +635,10 @@ async function onRoomUpdateInitClick(user, roomId) {
       );
     } else alert("Dữ liệu không hợp lệ/ Dữ liệu không được rỗng")
 
-  };
+  })
 
   // assign event function cho cancel button switch form
-  document.getElementById('switch-cancel').onclick = onSwitchFormCancel;
+  setEventOnClick('switch-cancel', onSwitchFormCancel)
 }
 
 /**
@@ -909,12 +691,9 @@ async function onUpdateUserClick(user) {
   document.getElementById('sex-options').removeAttribute('disabled')
 
   if (document.getElementById('update-submit'))
-    document.getElementById('update-submit').onclick = function () {
-      onSubmitClick(true, user);
-    };
-  if (document.getElementById('fb-btn'))
-    document.getElementById('fb-btn').onclick = onCancelClick;
+    setEventOnClick('update-submit', function () { onSubmitClick(true, user); })
 
+  if (document.getElementById('fb-btn')) setEventOnClick('fb-btn', onCancelClick)
 }
 
 /**
@@ -922,7 +701,7 @@ async function onUpdateUserClick(user) {
  * @param {string} roomId
  */
 async function switchRoom(roomId) {
-  loadingCall();
+  loadingCall($("body"));
   const room = await RoomProvider.findById(roomId).then(data => {
     $("body").loadingModal('destroy');
     return data;
@@ -937,24 +716,27 @@ async function switchRoom(roomId) {
   switchFormInit(roomId);
 
   // assign event function cho button trong switch form
-  document.getElementById('switch-submit').onclick = function () {
-    const toRoomId = document.getElementById('switch-form-to').getAttribute('data-id');
+  setEventOnClick(
+    'switch-submit',
+    function () {
+      const toRoomId = document.getElementById('switch-form-to').getAttribute('data-id');
 
-    // check null
-    if (toRoomId && toRoomId.length > 0) {
-      onSwitchAllClick(
-        // id từ room bàn đầu
-        roomId,
+      // check null
+      if (toRoomId && toRoomId.length > 0) {
+        onSwitchAllClick(
+          // id từ room bàn đầu
+          roomId,
 
-        // id room cần chuyển
-        toRoomId
-      );
-    } else alert("Dữ liệu không hợp lệ/ Dữ liệu không được rỗng")
+          // id room cần chuyển
+          toRoomId
+        );
+      } else alert("Dữ liệu không hợp lệ/ Dữ liệu không được rỗng")
 
-  };
+    }
+  )
 
   // assign event function cho cancel button switch form
-  document.getElementById('switch-cancel').onclick = onSwitchFormCancel;
+  setEventOnClick('switch-cancel', onSwitchFormCancel)
 }
 
 /**
@@ -995,7 +777,7 @@ async function onSwitchFormSubmit(user, roomIdNeedToChanged) {
  * @param {string} toRoomId
  */
 function onSwitchAllClick(fromRoomId, toRoomId) {
-  loadingCall();
+  loadingCall($("body"));
 
 
   // use update by id api to room id change
@@ -1009,7 +791,7 @@ function onSwitchAllClick(fromRoomId, toRoomId) {
     init(argument);
 
     // destroy spin loading
-    $('body').loadingModal('destroy');
+    loadingDestroy($("body"));
     onSwitchFormCancel();
   });
 }
@@ -1022,112 +804,6 @@ function onSwitchFormCancel() {
   switchForm.innerHTML = ``;
 }
 
-/**
- * auto complete
- * @param {*} inp
- * @param {Room[]} arr
- */
-function autocomplete(inp, arr) {
-  /*the autocomplete function takes two arguments,
-  the text field element and an array of possible autocompleted values:*/
-  var currentFocus;
-  /*execute a function when someone writes in the text field:*/
-  inp.addEventListener("input", function (e) {
-    var a, b, val = this.value;
-    /*close any already open lists of autocompleted values*/
-    closeAllLists();
-    if (!val) { return false; }
-    currentFocus = -1;
-    /*create a DIV element that will contain the items (values):*/
-    a = document.createElement("DIV");
-    a.setAttribute("id", this.id + "autocomplete-list");
-    a.setAttribute("class", "autocomplete-items");
-    /*append the DIV element as a child of the autocomplete container:*/
-    this.parentNode.appendChild(a);
-
-    /*for each item in the array...*/
-    arr.forEach(index => {
-      /*check if the item starts with the same letters as the text field value:*/
-      if (index.name.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-        /*create a DIV element for each matching element:*/
-        b = document.createElement("DIV");
-        /*make the matching letters bold:*/
-        b.innerHTML = "<strong>" + index.name.substr(0, val.length) + "</strong>";
-        b.innerHTML += index.name.substr(val.length);
-        /*insert a input field that will hold the current array item's value:*/
-        b.innerHTML += "<input type='hidden' value='" + index.id + "'>";
-        /*execute a function when someone clicks on the item value (DIV element):*/
-        b.addEventListener("click", function (e) {
-          /*insert the value for the autocomplete text field:*/
-          inp.value = index.name;
-          inp.setAttribute('data-id', index.id);
-          /*close the list of autocompleted values,
-          (or any other open lists of autocompleted values:*/
-          closeAllLists();
-        });
-        a.appendChild(b);
-      }
-    })
-  });
-
-  // execute a function presses a key on the keyboardF
-  inp.addEventListener("keydown", function (e) {
-    var x = document.getElementById(this.id + "autocomplete-list");
-    if (x) x = x.getElementsByTagName("div");
-    if (e.keyCode == 40) {
-      /*If the arrow DOWN key is pressed,
-      increase the currentFocus variable:*/
-      currentFocus++;
-      /*and and make the current item more visible:*/
-      addActive(x);
-    } else if (e.keyCode == 38) { //up
-      /*If the arrow UP key is pressed,
-      decrease the currentFocus variable:*/
-      currentFocus--;
-      /*and and make the current item more visible:*/
-      addActive(x);
-    } else if (e.keyCode == 13) {
-      /*If the ENTER key is pressed, prevent the form from being submitted,*/
-      e.preventDefault();
-      if (currentFocus > -1) {
-        /*and simulate a click on the "active" item:*/
-        if (x) x[currentFocus].click();
-      }
-    }
-  });
-
-  function addActive(x) {
-    /*a function to classify an item as "active":*/
-    if (!x) return false;
-    /*start by removing the "active" class on all items:*/
-    removeActive(x);
-    if (currentFocus >= x.length) currentFocus = 0;
-    if (currentFocus < 0) currentFocus = (x.length - 1);
-    /*add class "autocomplete-active":*/
-    x[currentFocus].classList.add("autocomplete-active");
-  }
-  function removeActive(x) {
-    /*a function to remove the "active" class from all autocomplete items:*/
-    for (var i = 0; i < x.length; i++) {
-      x[i].classList.remove("autocomplete-active");
-    }
-  }
-  function closeAllLists(elmnt) {
-    /*close all autocomplete lists in the document,
-    except the one passed as an argument:*/
-    var x = document.getElementsByClassName("autocomplete-items");
-    for (var i = 0; i < x.length; i++) {
-      if (elmnt != x[i] && elmnt != inp) {
-        x[i].parentNode.removeChild(x[i]);
-      }
-    }
-  }
-
-  /*execute a function when someone clicks in the document:*/
-  document.addEventListener("click", function (e) {
-    closeAllLists(e.target);
-  });
-}
 
 /**
  * switch form initialize
@@ -1146,74 +822,74 @@ async function switchFormInit(roomId) {
 /**
  * buildings k1 click
  */
-document.getElementById('buildings-k1').onclick = function () {
+setEventOnClick('buildings-k1', function () {
   onBuildingFilterClick(CONSTANTS.BUILDING.K1);
   $(".badge-filter.building").addClass("unactive")
   this.classList.toggle('unactive')
-}
+});
 
 /**
  * buildings k2 click
  */
-document.getElementById('buildings-k2').onclick = function () {
+setEventOnClick('buildings-k2', function () {
   onBuildingFilterClick(CONSTANTS.BUILDING.K2);
   $(".badge-filter.building").addClass("unactive")
   this.classList.toggle('unactive')
-}
+});
 
 /**
  * buildings k3 click
  */
-document.getElementById('buildings-k3').onclick = function () {
+setEventOnClick('buildings-k3', function () {
   onBuildingFilterClick(CONSTANTS.BUILDING.K3);
   $(".badge-filter.building").addClass("unactive")
   this.classList.toggle('unactive')
-}
+});
 
 /**
  * buildings k4 click
  */
-document.getElementById('buildings-k4').onclick = function () {
+setEventOnClick('buildings-k3', function () {
   onBuildingFilterClick(CONSTANTS.BUILDING.K4);
   $(".badge-filter.building").addClass("unactive")
   this.classList.toggle('unactive')
-}
+});
 
 /**
  * status s1 click
  */
-document.getElementById('status-s1').onclick = function () {
+setEventOnClick('status-s1', function () {
   onStatusFilterClick(CONSTANTS.STATUS.ALL);
   $(".badge-filter.status").addClass("unactive")
   this.classList.toggle('unactive')
-}
+});
 
 /**
  * status s2 click
  */
-document.getElementById('status-s2').onclick = function () {
+setEventOnClick('status-s2', function () {
   onStatusFilterClick(CONSTANTS.STATUS.FULL);
   $(".badge-filter.status").addClass("unactive")
   this.classList.toggle('unactive')
-}
+});
 
 /**
  * status s3 click
  */
-document.getElementById('status-s3').onclick = function () {
+setEventOnClick('status-s3', function () {
   onStatusFilterClick(CONSTANTS.STATUS.EXIST);
   $(".badge-filter.status").addClass("unactive")
   this.classList.toggle('unactive')
-}
+});
 
 /**
  * status s4 click
  */
-document.getElementById('status-s4').onclick = function () {
+setEventOnClick('status-s4', function () {
   onStatusFilterClick(CONSTANTS.STATUS.EMPTY);
   $(".badge-filter.status").addClass("unactive")
   this.classList.toggle('unactive')
-}
+});
 
 /**
  * on building filter click
@@ -1247,71 +923,5 @@ function onStatusFilterClick(status) {
   init(argument);
 }
 
-
-// FIXBUG 8: fix day by localtime
-
-const LOCALE_TEMPLATE = {
-  EN: {
-    MONTH: {
-      0: 'January',
-      1: 'February',
-      2: 'March',
-      3: 'April',
-      4: 'May',
-      5: 'June',
-      6: 'July',
-      7: 'August',
-      8: 'September',
-      9: 'October',
-      10: 'November',
-      11: 'December',
-    }
-  }
-}
-
-const localRefer = {
-  en: getDateInEnglishLocale,
-  vi: getDateInVietnameseLocale,
-}
-
-/**
- * get date in english locale
- * @param {Date} currentDate 
- */
-function getDateInEnglishLocale(currentDate) {
-  let enRefers = LOCALE_TEMPLATE.EN;
-  let date = currentDate.getDate();
-  let stand = date == 1 ? "st" : date == 2 ? "nd" : date == 3 ? "rd" : "th";
-
-  let month = currentDate.getMonth();
-  let year = currentDate.getFullYear();
-
-  return `${enRefers.MONTH[month]}, ${date}${stand} ${year} `;
-}
-
-/**
- * get date in vietnam locale
- * @param {Date} currentDate 
- */
-function getDateInVietnameseLocale(currentDate) {
-  // let viRefers = LOCALE_TEMPLATE.VI;
-
-  let date = currentDate.getDate();
-  let month = currentDate.getMonth() + 1;
-  let year = currentDate.getFullYear();
-
-  return `Ngày ${date} /${month}/${year} `;
-}
-
-/**
- * load date at locale
- * @param {String} locale 
- */
-function loadDateAtLocale(locale) {
-  const dateDisplay = localRefer[locale](new Date());
-  document.getElementById('today').innerHTML = dateDisplay;
-}
-
 // run load date display at locale
-const locale = "en";
-loadDateAtLocale(locale);
+loadDateAtLocale("en");

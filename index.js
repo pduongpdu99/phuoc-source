@@ -5,8 +5,11 @@ const app = express();
 
 // use
 app.use(express.json());
+
+// add status
 app.use(express.static('static'));
 app.use(express.static('src'));
+
 app.use(express.urlencoded({ extended: true }));
 app.use('', routing(express))
 

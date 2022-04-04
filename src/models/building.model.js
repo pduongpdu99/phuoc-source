@@ -11,5 +11,7 @@ export class Building {
         this.allowSex = data.allowSex;
         this.updatedAt = data.updatedAt;
         this.createdAt = data.createdAt;
+
+        return this;
     }
 }

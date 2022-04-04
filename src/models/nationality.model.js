@@ -9,5 +9,6 @@ export class Nationality {
         this.name = data.name;
         this.updatedAt = data.updatedAt;
         this.createdAt = data.createdAt;
+        return this;
     }
 }
