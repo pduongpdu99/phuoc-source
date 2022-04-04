@@ -125,7 +125,6 @@ async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONST
   // assign onclick
   roomlist.forEach(
     model => {
-      console.log(model);
       setEventOnClick(model.id, () => onRoomClick(model))
     }
   );
@@ -186,8 +185,6 @@ function onRoomClick(room) {
     // switch user by id 
     setEventOnClick(id[4], () => onRoomUpdateInitClick(id[1], room.id,))
   });
-
-  console.log(room);
 
   // render room name
   listBoard.innerHTML = `${room.name}`;
