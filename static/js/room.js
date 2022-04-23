@@ -853,7 +853,7 @@ setEventOnClick('buildings-k3', function () {
 /**
  * buildings k4 click
  */
-setEventOnClick('buildings-k3', function () {
+setEventOnClick('buildings-k4', function () {
   onBuildingFilterClick(CONSTANTS.BUILDING.K4);
   $(".badge-filter.building").addClass("unactive")
   this.classList.toggle('unactive')
