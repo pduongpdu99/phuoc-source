@@ -431,7 +431,7 @@ function validation(model) {
   return true;
 }
 
-setEventOnClick('add-button', onAddButtonClick);
+setEventOnClick('add-button', function () { onAddButtonClick() });
 setEventOnClick('switch-button', onSwitchButtonClick);
 
 /**
