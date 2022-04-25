@@ -61,7 +61,20 @@ function preloading() {
 /**
  * init method
  */
-async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONSTANTS.STATUS.ALL, loading: false }) {
+async function init(
+  argument = {
+    buildings: CONSTANTS.BUILDING.K1,
+    status: CONSTANTS.STATUS.ALL,
+    loading: false
+  }, numberPhone = localStorage.getItem('search-input-value') ? localStorage.getItem('search-input-value') : ''
+) {
+  // pre-process phone number
+  let pn = numberPhone.replace('+84', '');
+  pn = pn.replace('+856', '');
+  if ((pn.length > 0) && pn[0] === "0") {
+    pn = pn.slice(1);
+  }
+
   if (argument.loading) loadingCall($("body"));
   preloading();
 
@@ -109,18 +122,29 @@ async function init(argument = { buildings: CONSTANTS.BUILDING.K1, status: CONST
   let data = [];
   for (const [k, v] of Object.entries(rooms)) {
     // sort
-    rooms[k] = v.sort((a, b) => parseInt(a.name) - parseInt(b.name));
+    data.push(`<h3>${k}F</h3>
+    <div style="border-bottom: 2px solid #eaeaea; width:100%">
+    </div><div style="margin-top: 20px; width: 100%"></div>`
+    );
 
     // floor 
+    rooms[k] = v.sort((a, b) => parseInt(a.name) - parseInt(b.name));
     const floor = rooms[k];
-    data.push(`<h3>${k}F</h3>
-                <div style="border-bottom: 2px solid #eaeaea; width:100%">
-                </div><div style="margin-top: 20px; width: 100%"></div>`
-    );
     floor.forEach(room => {
       let userList = room.users;
       room.status = (userList.length == 0 ? "empty" : userList.length >= 4 ? "full" : "semi");
-      data.push(templateInit(room, userList));
+
+      if (pn.length > 0) {
+        userList = userList.filter(item => {
+          console.log(item.phoneNumber, pn, item.phoneNumber.includes(pn))
+          return item.phoneNumber.includes(pn);
+        })
+
+        if (userList.length > 0) data.push(templateInit(room, userList));
+      } else {
+        data.push(templateInit(room, userList));
+      }
+
     });
 
     data.push(`</div><div style="margin-top: 30px; width: 100%"></div>`);
@@ -829,7 +853,7 @@ async function switchFormInit(roomId) {
 setEventOnClick('buildings-k1', function () {
   onBuildingFilterClick(CONSTANTS.BUILDING.K1);
   $(".badge-filter.building").addClass("unactive")
-  this.classList.toggle('unactive')
+  this.classList.toggle('unactive');
 });
 
 /**
@@ -838,7 +862,7 @@ setEventOnClick('buildings-k1', function () {
 setEventOnClick('buildings-k2', function () {
   onBuildingFilterClick(CONSTANTS.BUILDING.K2);
   $(".badge-filter.building").addClass("unactive")
-  this.classList.toggle('unactive')
+  this.classList.toggle('unactive');
 });
 
 /**
@@ -847,7 +871,7 @@ setEventOnClick('buildings-k2', function () {
 setEventOnClick('buildings-k3', function () {
   onBuildingFilterClick(CONSTANTS.BUILDING.K3);
   $(".badge-filter.building").addClass("unactive")
-  this.classList.toggle('unactive')
+  this.classList.toggle('unactive');
 });
 
 /**
@@ -856,7 +880,7 @@ setEventOnClick('buildings-k3', function () {
 setEventOnClick('buildings-k4', function () {
   onBuildingFilterClick(CONSTANTS.BUILDING.K4);
   $(".badge-filter.building").addClass("unactive")
-  this.classList.toggle('unactive')
+  this.classList.toggle('unactive');
 });
 
 /**
@@ -865,7 +889,7 @@ setEventOnClick('buildings-k4', function () {
 setEventOnClick('status-s1', function () {
   onStatusFilterClick(CONSTANTS.STATUS.ALL);
   $(".badge-filter.status").addClass("unactive")
-  this.classList.toggle('unactive')
+  this.classList.toggle('unactive');
 });
 
 /**
@@ -874,7 +898,7 @@ setEventOnClick('status-s1', function () {
 setEventOnClick('status-s2', function () {
   onStatusFilterClick(CONSTANTS.STATUS.FULL);
   $(".badge-filter.status").addClass("unactive")
-  this.classList.toggle('unactive')
+  this.classList.toggle('unactive');
 });
 
 /**
@@ -883,7 +907,7 @@ setEventOnClick('status-s2', function () {
 setEventOnClick('status-s3', function () {
   onStatusFilterClick(CONSTANTS.STATUS.EXIST);
   $(".badge-filter.status").addClass("unactive")
-  this.classList.toggle('unactive')
+  this.classList.toggle('unactive');
 });
 
 /**
@@ -892,8 +916,23 @@ setEventOnClick('status-s3', function () {
 setEventOnClick('status-s4', function () {
   onStatusFilterClick(CONSTANTS.STATUS.EMPTY);
   $(".badge-filter.status").addClass("unactive")
-  this.classList.toggle('unactive')
+  this.classList.toggle('unactive');
 });
+
+setEventOnClick('pn-filter', function () {
+  const searchInput = document.getElementById('search-input');
+  const argument = {
+    buildings: localStorage.getItem('buildings'),
+    status: localStorage.getItem('status'),
+    loading: true,
+  }
+
+  if (searchInput.value.length == 0) localStorage.removeItem('search-input-value');
+  else localStorage.setItem('search-input-value', searchInput.value)
+
+  // re init
+  init(argument, searchInput.value);
+})
 
 /**
  * on building filter click

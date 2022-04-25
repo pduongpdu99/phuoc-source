@@ -2,9 +2,9 @@ export const templateInit = (
    data,
    users,
    _status = {
-      empty: { name: "empty", classname: "empty" },
-      semi: { name: "exist", classname: "semi" },
-      full: { name: "full", classname: "full" },
+      empty: { name: "Rỗng", classname: "empty" },
+      semi: { name: "Có người", classname: "semi" },
+      full: { name: "Đầy", classname: "full" },
    }
 ) => {
    return `

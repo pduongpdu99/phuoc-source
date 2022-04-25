@@ -5,7 +5,8 @@
  * @param {function} method 
  */
 export function setEventOnClick(elementIndex, method) {
-    document.getElementById(elementIndex).onclick = method;
+    if (document.getElementById(elementIndex))
+        document.getElementById(elementIndex).onclick = method;
 }
 
 /**
@@ -26,5 +27,6 @@ export function setEventOnClickIntoClassname(elementClassnames, method) {
     let array = Array.from(document.getElementsByClassName(elementClassnames));
 
     array.forEach((element) => setEventOnClickIntoObject(element, method));
-    document.getElementById(elementIndex).onclick = method;
+    if (document.getElementById(elementIndex))
+        document.getElementById(elementIndex).onclick = method;
 }
