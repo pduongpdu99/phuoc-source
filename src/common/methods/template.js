@@ -16,7 +16,8 @@ export const templateInit = (
       "Thứ năm",
       "Thứ sáu",
       "Thứ bảy",
-   ]
+   ];
+
    return `
   <div class="project-box-wrapper">
      <div class="project-box ${data.status}" id="${data.id}">
@@ -55,7 +56,7 @@ export const templateMember = (memberModel) => {
    const html = new String(`
     <div class="message-box">
        <img src="images/user.png" alt="profile image">
-       <div class="message-content" id="message-box-${memberModel.id}">
+       <div class="message-content" id="message-box-${memberModel._id}">
           <div class="message-header">
              <div class="name">${memberModel.name}</div>
           </div>
@@ -68,17 +69,17 @@ export const templateMember = (memberModel) => {
       <!-- features -->
       <div>
         <!-- delete button -->
-        <div class="delete-feature-button" id="delete-button-${memberModel.id}" title="Delete">
+        <div class="delete-feature-button" id="delete-button-${memberModel._id}" title="Delete">
           <span class="iconify" data-icon="ant-design:user-delete-outlined"></span>
         </div>
   
         <!-- update button -->
-        <div class="update-feature-button" id="update-button-${memberModel.id}" title="Update">
+        <div class="update-feature-button" id="update-button-${memberModel._id}" title="Update">
           <span class="iconify" data-icon="clarity:update-line"></span>
         </div>
   
         <!-- switch button -->
-        <div class="switch-feature-button" id="switch-button-${memberModel.id}" title="Switch">
+        <div class="switch-feature-button" id="switch-button-${memberModel._id}" title="Switch">
           <span class="iconify" data-icon="fluent:table-switch-16-filled"></span>
         </div>
       </div>
@@ -86,11 +87,11 @@ export const templateMember = (memberModel) => {
 
    return [
       html,
-      `message-box-${memberModel.id}`,
+      `message-box-${memberModel._id}`,
       memberModel,
-      `delete-button-${memberModel.id}`,
-      `update-button-${memberModel.id}`,
-      `switch-button-${memberModel.id}`,
+      `delete-button-${memberModel._id}`,
+      `update-button-${memberModel._id}`,
+      `switch-button-${memberModel._id}`,
    ];
 };
 

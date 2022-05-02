@@ -20,10 +20,9 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => (
-            data.headers.get('content-type')?.includes('json') ?
-                data.json() :
-                data.text()));;
+        return fetch(path, options).then(data => data.headers.get('content-type')?.includes('json') ?
+            data.json() :
+            data.text());
 
     }
 
@@ -39,10 +38,10 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => (
-            data.headers.get('content-type')?.includes('json') ?
-                data.json() :
-                data.text()));;
+        return fetch(path, options).then(data => data.headers.get('content-type')?.includes('json') ?
+            data.json() :
+            data.text()
+        );
 
     }
 
@@ -57,11 +56,11 @@ export class UserRepository {
             method: "POST",
             body: JSON.stringify(body),
         });
-        
-        return fetch(path, options).then(data => (
-            data.headers.get('content-type')?.includes('json') ?
-                data.json() :
-                data.text()));
+
+        return fetch(path, options).then(data => data.headers.get('content-type')?.includes('json') ?
+            data.json() :
+            data.text()
+        );
     }
 
     /**
@@ -76,10 +75,9 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => (
-            data.headers.get('content-type')?.includes('json') ?
-                data.json() :
-                data.text()));;
+        return fetch(path, options).then(data => data.headers.get('content-type')?.includes('json') ?
+            data.json() :
+            data.text());
     }
 
     /**
@@ -109,10 +107,9 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => (
-            data.headers.get('content-type')?.includes('json') ?
-                data.json() :
-                data.text()));
+        return fetch(path, options).then(data => data.headers.get('content-type')?.includes('json') ?
+            data.json() :
+            data.text());
     }
 
     /**

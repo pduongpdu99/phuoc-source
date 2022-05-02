@@ -42,8 +42,7 @@ const CONSTANTS = {
     "chello.nl", "live.ca", "aim.com", "bigpond.net.au"
   ],
 
-  KEY_NUMBER_PHONE: ['+84',
-    '+856'],
+  KEY_NUMBER_PHONE: ['+84', '+856'],
 
   REQUEST_OPTIONS: {
     mode: 'cors',
@@ -52,10 +51,7 @@ const CONSTANTS = {
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
     headers: {
-      'Content-type': 'text/html; charset=utf-8',
-      'Cache-Control': 'no-cache',
-      'Set-Cookie': 'cross-site-cookie=whatever; SameSite=None; Secure',
-      'Pragma': 'no-cache'
+      'Content-type': 'application/json',
     }
   },
 

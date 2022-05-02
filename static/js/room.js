@@ -109,9 +109,9 @@ async function init(
     argument.buildings,
     argument.status
   ).then(data => {
-    console.log(data)
-    if (data.length == 0)
-      return null;
+    // console.log(data);
+    // if (data.length == 0)
+    //   return null;
     return data.map(item => (new RoomCustom()).toJson(item))
   });
 
@@ -140,7 +140,6 @@ async function init(
 
         if (pn.length > 0) {
           userList = userList.filter(item => {
-            console.log(item.phoneNumber, pn, item.phoneNumber.includes(pn))
             return item.phoneNumber.includes(pn);
           })
 
@@ -214,6 +213,11 @@ function onRoomClick(room) {
 
   // gán onclick vào thành viên mỗi room
   ids.forEach(id => {
+    if (id[1]._id) {
+      id[1].id = id[1]._id;
+      delete id[1]._id;
+    }
+
     // remove user by id 
     setEventOnClick(id[2], () => onRemoveUserClick(id[1]))
 
@@ -463,9 +467,7 @@ function validation(model) {
   return true;
 }
 
-setEventOnClick('add-button', () => {
-  onAddButtonClick();
-});
+setEventOnClick('add-button', () => { onAddButtonClick(); });
 setEventOnClick('switch-button', () => onSwitchButtonClick());
 
 /**
@@ -507,11 +509,76 @@ function onSwitchButtonClick() {
   else thongBaoValidation("No data");
 }
 
+function onEventTrigger(data, updateStatus = false, user = undefined) {
+  const fullname = document.getElementById('fullname');
+  const number = document.getElementById('number');
+  const address = document.getElementById('address');
+  const idcard = document.getElementById('idcard');
+  const birth = document.getElementById('birth');
+  const localPart = document.getElementById('local-part');
+
+  // check validate
+  if (validation(data)) {
+    if (!updateStatus) {
+      UserProvider.create(data).then((response) => {
+        if (response.toString() === "null") {
+          thongBaoValidation("Người dùng này đã tồn tại hãy kiểm tra lại mã sinh viên/ căn cước công dân");
+        } else {
+          // code render
+          init({
+            buildings: localStorage.getItem('buildings'),
+            status: localStorage.getItem('status'),
+            loading: true,
+          });
+
+          // clear field
+          fullname.value = "";
+          number.value = "";
+          address.value = "";
+          idcard.value = "";
+          birth.value = "";
+          localPart.value = "";
+
+          // xóa form
+          onCancelClick();
+        }
+      });
+    } else {
+      // merge 
+      let dataKeys = Object.keys(data);
+      for (let key of dataKeys) user[key] = data[key];
+      user['id'] = user['_id'];
+      delete user._id;
+
+      // COMMENT: updated
+      UserProvider.update(user).then((data) => {
+        // code render
+        init({
+          buildings: localStorage.getItem('buildings'),
+          status: localStorage.getItem('status'),
+          loading: true,
+        });
+
+        // clear field
+        fullname.value = "";
+        number.value = "";
+        address.value = "";
+        idcard.value = "";
+        birth.value = "";
+        localPart.value = "";
+
+        // xóa form
+        onCancelClick();
+      });
+    }
+  }
+}
+
 /**
  * on submit click
  * @param {Boolean} updateStatus
  */
-function onSubmitClick(updateStatus = false, user) {
+function onSubmitClick(updateStatus = false, user = undefined) {
   const fullname = document.getElementById('fullname');
   const number = document.getElementById('number');
   const address = document.getElementById('address');
@@ -550,63 +617,8 @@ function onSubmitClick(updateStatus = false, user) {
     avatar: "images/user.png",
   };
 
-  // check validate
-  if (validation(data)) {
-    if (!updateStatus) {
-      UserProvider.create(data).then((response) => {
-        if (response == null) {
-          thongBaoValidation("Người dùng này đã tồn tại hãy kiểm tra lại mã sinh viên/ căn cước công dân");
-        } else {
-          // xóa form
-          onCancelClick();
-
-          // code render
-          init({
-            buildings: localStorage.getItem('buildings'),
-            status: localStorage.getItem('status'),
-            loading: true,
-          });
-
-          // clear field
-          fullname.value = "";
-          number.value = "";
-          address.value = "";
-          idcard.value = "";
-          birth.value = "";
-          localPart.value = "";
-        }
-      });
-    } else {
-      // merge 
-      let dataKeys = Object.keys(data);
-      for (let key of dataKeys) user[key] = data[key];
-
-      delete user.createdAt;
-      delete user.updatedAt;
-      delete user.avatar;
-
-      // COMMENT: updated
-      UserProvider.update(user).then((data) => {
-        // code render
-        init({
-          buildings: localStorage.getItem('buildings'),
-          status: localStorage.getItem('status'),
-          loading: true,
-        });
-
-        // clear field
-        fullname.value = "";
-        number.value = "";
-        address.value = "";
-        idcard.value = "";
-        birth.value = "";
-        localPart.value = "";
-
-        // xóa form
-        onCancelClick();
-      });
-    }
-  }
+  // event trigger
+  onEventTrigger(data, updateStatus, user);
 }
 
 /**
@@ -625,9 +637,8 @@ function initialize(registerForm) {
   loadNationality();
   loadRoom(registerForm);
 
-
   if (document.getElementById('submit'))
-    setEventOnClick('submit', function () { onSubmitClick() });
+    setEventOnClick('submit', () => onSubmitClick(false));
 
   if (document.getElementById('fb-btn')) setEventOnClick('fb-btn', onCancelClick);
 }
@@ -694,6 +705,10 @@ async function onRemoveUserClick(user) {
   }
 }
 
+/**
+ * on update user click
+ * @param {*} user 
+ */
 async function onUpdateUserClick(user) {
   let roomData = JSON.parse(localStorage.getItem('room-data'));
 
@@ -773,13 +788,15 @@ async function switchRoom(roomId) {
 
 /**
  * on switch form submit
- * @param {User} user
+ * @param {string} user 
+ * @param {string} roomIdNeedToChanged 
  */
 async function onSwitchFormSubmit(user, roomIdNeedToChanged) {
+  // reset room id to change
   user.roomId = roomIdNeedToChanged;
 
   // lấy tất cả người dùng theo id room
-  const users = (await UserProvider.getAll()).filter(item => item.roomId === roomIdNeedToChanged)
+  const users = (await UserProvider.getAll()).filter(item => item.roomId === roomIdNeedToChanged);
 
   if (users.length < 4) {
     // use update by id api to room id change
@@ -842,13 +859,22 @@ function onSwitchFormCancel() {
  */
 async function switchFormInit(roomId) {
   const argument = { buildings: localStorage.buildings, status: localStorage.status };
-  let rooms = await RoomProvider.getRoomBy(
+  RoomProvider.getRoomBy(
     argument.buildings,
     argument.status
-  );
+  ).then(rooms => {
+    rooms = rooms.map(item => {
+      if (item._id) {
+        item.id = item._id;
+        delete item._id;
+      }
 
-  const data = rooms.sort((a, b) => a.name - b.name).filter(item => item.id !== roomId);
-  autocomplete(document.getElementById("switch-form-to"), data);
+      return item;
+    })
+
+    const data = rooms.sort((a, b) => a.name - b.name).filter(item => item.id !== roomId);
+    autocomplete(document.getElementById("switch-form-to"), data);
+  });
 }
 
 /**

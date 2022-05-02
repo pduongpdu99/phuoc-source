@@ -107,7 +107,6 @@ export class RoomRepository {
         });
 
         return fetch(path, options).then(data => {
-            console.log(data)
             return (
                 data.headers.get('content-type')?.includes('json') ?
                     data.json() :
