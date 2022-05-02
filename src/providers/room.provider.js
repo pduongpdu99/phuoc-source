@@ -32,7 +32,7 @@ export class RoomProvider {
      * @param {object} body
      * @returns
      */
-    static async create(body = {}) {
+    static async create(body) {
         return RoomRepository.create(body);
     }
 
@@ -50,7 +50,7 @@ export class RoomProvider {
      * @param {body} body
      * @returns
      */
-    static async update(body = {}) {
+    static async update(body) {
         return RoomRepository.update(body);
     }
 

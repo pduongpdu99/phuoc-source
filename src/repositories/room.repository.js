@@ -18,7 +18,10 @@ export class RoomRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json());
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));;
     }
 
     /**
@@ -33,7 +36,10 @@ export class RoomRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json());
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));;
     }
 
     /**
@@ -41,14 +47,17 @@ export class RoomRepository {
      * @param {object} body 
      * @returns 
      */
-    static async create(body = {}) {
+    static async create(body) {
         const path = `${roomAPIPath}/${FRONTEND.MODEL_PATH.ROOM}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "POST",
             body: JSON.stringify(body),
         });
 
-        return fetch(path, options).then(data => data.json())
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));
     }
 
     /**
@@ -63,7 +72,10 @@ export class RoomRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json())
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));
     }
 
     /**
@@ -71,7 +83,7 @@ export class RoomRepository {
      * @param {body} body 
      * @returns 
      */
-    static async update(body = {}) {
+    static async update(body) {
         const path = `${roomAPIPath}/${FRONTEND.MODEL_PATH.ROOM}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "PUT",
@@ -87,13 +99,19 @@ export class RoomRepository {
      * @param {number} buildings 
      * @returns 
      */
-    static async getRoomBy(sex, buildings) {
-        const path = `${roomAPIPath}/${FRONTEND.MODEL_PATH.ROOM}/roomBy/${sex}/${buildings}`;
+    static async getRoomBy(buildings, sex) {
+        const path = `${roomAPIPath}/${FRONTEND.MODEL_PATH.ROOM}/roomBy/${buildings}/${sex}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "GET",
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json());
+        return fetch(path, options).then(data => {
+            console.log(data)
+            return (
+                data.headers.get('content-type')?.includes('json') ?
+                    data.json() :
+                    data.text());
+        });;
     }
 }

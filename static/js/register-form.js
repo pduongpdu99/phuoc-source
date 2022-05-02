@@ -28,19 +28,19 @@ function registerFormInit() {
       <div class="form" id="form">
         <h2>Đơn đăng ký vào ở ký túc xá</h2>
         <label>
-          <span>Fullname</span>
+          <span>Họ và tên</span>
           <input type="text" id="fullname"/>
         </label>
         <label>
-          <span>Number</span>
+          <span>Số điện thoại</span>
           <input type="text" id="number" />
         </label>
         <label>
-          <span>Address</span>
+          <span>Địa chỉ cụ thể</span>
           <input type="text" id="address" />
         </label>
         <label>
-          <span>Nationality</span>
+          <span>Quốc tịch</span>
           <select id="national"></select>
         </label>
         <label>
@@ -48,19 +48,19 @@ function registerFormInit() {
           <input type="text" id="idcard"/>
         </label>
         <label>
-          <span>Birthday</span>
+          <span>Ngày sinh</span>
           <input type="text" id="birth"/>
         </label>
         <label>
-          <span>Email</span>
+          <span>Địa chỉ email</span>
           <input type="text" id="email"/>
         </label>
         <label>
-          <span>Ethnic</span>
+          <span>Dân tộc</span>
           <select id="dantoc-options"></select>
         </label>
         <label>
-          <span>Room</span>
+          <span>Phòng</span>
           <select id="room-options">
           </select>
         </label>

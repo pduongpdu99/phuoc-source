@@ -7,6 +7,8 @@ const userAPIPath = `${FRONTEND.BACKEND_PATH}`;
 const commonRequestOptions = CONSTANTS.REQUEST_OPTIONS;
 
 export class UserRepository {
+    axios = require('axios');
+
     /**
     * get all API
     * @returns list
@@ -18,7 +20,10 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json());
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));;
 
     }
 
@@ -34,7 +39,10 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json());
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));;
 
     }
 
@@ -43,14 +51,17 @@ export class UserRepository {
      * @param {object} body
      * @returns
      */
-    static async create(body = {}) {
+    static async create(body) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "POST",
             body: JSON.stringify(body),
         });
-
-        return fetch(path, options).then(data => data.json());
+        
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));
     }
 
     /**
@@ -65,7 +76,10 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json());
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));;
     }
 
     /**
@@ -73,7 +87,7 @@ export class UserRepository {
      * @param {body} body
      * @returns
      */
-    static async update(body = {}) {
+    static async update(body) {
         const path = `${userAPIPath}/${FRONTEND.MODEL_PATH.USER}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "PUT",
@@ -95,7 +109,10 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json())
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));
     }
 
     /**
@@ -111,7 +128,10 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json());
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));;
     }
 
     /**
@@ -125,7 +145,10 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json());
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));;
     }
 
     /**
@@ -140,7 +163,10 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json());
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));;
     }
 
     /**
@@ -155,7 +181,10 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json())
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));
     }
 
     /**
@@ -171,6 +200,9 @@ export class UserRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json())
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));
     }
 }

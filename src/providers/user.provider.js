@@ -34,7 +34,7 @@ export class UserProvider {
      * @param {object} body
      * @returns
      */
-    static async create(body = {}) {
+    static async create(body) {
         return UserRepository.create(body);
     }
 
@@ -52,7 +52,7 @@ export class UserProvider {
      * @param {body} body
      * @returns
      */
-    static async update(body = {}) {
+    static async update(body) {
         return UserRepository.update(body);
     }
 

@@ -18,7 +18,10 @@ export class HistoryRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json());
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));;
     }
 
     /**
@@ -33,7 +36,10 @@ export class HistoryRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json());
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));;
     }
 
     /**
@@ -41,14 +47,17 @@ export class HistoryRepository {
      * @param {object} body 
      * @returns 
      */
-    static async create(body = {}) {
+    static async create(body) {
         const path = `${historyAPIPath}/${FRONTEND.MODEL_PATH.HISTORY}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "POST",
             body: JSON.stringify(body),
         });
 
-        return fetch(path, options).then(data => data.json())
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));
     }
 
     /**
@@ -63,7 +72,10 @@ export class HistoryRepository {
             body: null,
         });
 
-        return fetch(path, options).then(data => data.json())
+        return fetch(path, options).then(data => (
+            data.headers.get('content-type')?.includes('json') ?
+                data.json() :
+                data.text()));
     }
 
     /**
@@ -71,7 +83,7 @@ export class HistoryRepository {
      * @param {body} body 
      * @returns 
      */
-    static async update(body = {}) {
+    static async update(body) {
         const path = `${historyAPIPath}/${FRONTEND.MODEL_PATH.HISTORY}`;
         const options = Object.assign({}, commonRequestOptions, {
             method: "PUT",

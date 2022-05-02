@@ -7,12 +7,22 @@ export const templateInit = (
       full: { name: "Đầy", classname: "full" },
    }
 ) => {
+   const date = new Date(data.createdAt);
+   const days = [
+      "Chủ nhật",
+      "Thứ hai",
+      "Thứ ba",
+      "Thứ tư",
+      "Thứ năm",
+      "Thứ sáu",
+      "Thứ bảy",
+   ]
    return `
   <div class="project-box-wrapper">
      <div class="project-box ${data.status}" id="${data.id}">
-        <div class="project-box-header" style="width: 100%">
-           <span>December 10, 2020</span>
-        </div>
+        <!--<div class="project-box-header" style="width: 100%">
+           <span>${days[date.getDay()]}, ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}</span>
+        </div>-->
         <div class="project-box-content-header">
            <p class="box-content-header">${data.name} room</p>
            <p class="box-content-subheader">${data.describe}</p>
@@ -117,36 +127,36 @@ export const formTemplate = (updateStatus) => `
   <div class="form" id="form">
     <h2>Đơn đăng ký vào ở ký túc xá</h2>
     <label>
-      <span>Fullname</span>
-      <input type="text" id="fullname" placeholder="Enter fullname"/>
+      <span>Họ và tên</span>
+      <input type="text" id="fullname" placeholder="Nhập họ và tên"/>
     </label>
     <label>
-      <span>Number phone</span>
+      <span>Số điện thoại</span>
       <div class="number-field-custom">
         <select id="number-option-select"></select>
-        <input type="text" id="number"  placeholder="Enter number phone"/>
+        <input type="text" id="number"  placeholder="Nhập số điện thoại"/>
       </div>
     </label>
     <label>
-      <span>Address</span>
-      <input type="text" id="address" placeholder="Enter address"/>
+      <span>Địa chỉ</span>
+      <input type="text" id="address" placeholder="Nhập địa chỉ"/>
     </label>
     <label>
-      <span>National</span>
-      <select id="national"></select placeholder="Enter nationality">
+      <span>Quốc tịch</span>
+      <select id="national"></select placeholder="Nhập quốc tịch">
     </label>
     <label>
-      <span>Card id</span>
-      <input type="text" id="idcard" placeholder="Enter id card/ CMND/ StudentID"/>
+      <span>Mã sinh viên/căng cước công dân</span>
+      <input type="text" id="idcard" placeholder="Nhập mã sinh viên/căn cước công dân"/>
     </label>
     <label>
-      <span>Birthday</span>
+      <span>Ngày sinh</span>
       <input type="date" id="birth" class="form-input datepicker" value="2000-01-01" min="1970-01-01" max="2030-01-01">
     </label>
     <label>
-      <span>Email</span>
+      <span>Địa chỉ email</span>
       <div class="email-field-custom">
-        <input type="text" placeholder="Ex: admin" id="local-part"/>
+        <input type="text" placeholder="Nhập email" id="local-part"/>
         <select id="domain-option-select"></select>
       </div>
     </label>
@@ -155,24 +165,24 @@ export const formTemplate = (updateStatus) => `
       <select id="dantoc-options"></select>
     </label>
     <label>
-      <span>Room</span>
+      <span>Phòng</span>
       <select id="room-options"></select>
     </label>
     <label>
-      <span>Sex</span>
+      <span>Giới tính</span>
       <select id="sex-options">
-        <option value="1">Male</option>
-        <option value="2">Female</option>
-        <option value="3">Other</option>
+        <option value="1">Nam</option>
+        <option value="2">Nữ</option>
+        <option value="3">Không yêu cầu</option>
       </select>
     </label>
-    ${!updateStatus ? `<button type="button" id="submit" class="submit">Register</button>` : `<button type="button" id="update-submit" class="update-submit">Update</button>`}
-    <button type="button" id="fb-btn" class="fb-btn">Cancel</button>
+    ${!updateStatus ? `<button type="button" id="submit" class="submit">Register</button>` : `<button type="button" id="update-submit" class="update-submit">Cập nhật</button>`}
+    <button type="button" id="fb-btn" class="fb-btn">Hủy</button>
   </div>
   <div class=" sub-cont">
     <div class="img">
       <div class="img__text m--up">
-        <h2>Welcome to Dormitory of PDU</h2>
+        <h2>Chào mừng</h2>
         <p>Vui mừng chào đón các bạn tới với kí tý xá trường Đại học Phạm Văn Đồng</p>
       </div>
     </div>
@@ -192,7 +202,7 @@ export const initSwitchFormHTML = (roomModel) => {
      <switch-form user="user_id" room="room_id" class="light">
         <div class="cont">
            <div class="form sign-in">
-              <h2>Room switch</h2>
+              <h2>Chuyển phòng</h2>
               <label>
                  <span>Current</span>
                  <input type="text" id="switch-form-current" placeholder="101" value="${roomModel.name}" readonly/>
@@ -203,8 +213,8 @@ export const initSwitchFormHTML = (roomModel) => {
                     <input type="text" id="switch-form-to" placeholder="101"/>
                  </div>
               </label>
-              <button type="button" class="submit" id="switch-submit">Switch</button>
-              <button type="button" class="fb-btn" id="switch-cancel">Cancel</button>
+              <button type="button" class="submit" id="switch-submit">Đồng ý</button>
+              <button type="button" class="fb-btn" id="switch-cancel">Hủy</button>
            </div>
         </div>
      </switch-form>

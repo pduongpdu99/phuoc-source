@@ -32,7 +32,7 @@ export class BuildingProvider {
      * @param {object} body 
      * @returns 
      */
-    static async create(body = {}) {
+    static async create(body) {
         return BuildingRepository.create(body);
     }
 
@@ -50,7 +50,7 @@ export class BuildingProvider {
      * @param {body} body 
      * @returns 
      */
-    static async update(body = {}) {
+    static async update(body) {
         return BuildingRepository.update(body);
     }
 }

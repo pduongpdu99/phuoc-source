@@ -56,7 +56,7 @@ const CONSTANTS = {
       'Cache-Control': 'no-cache',
       'Set-Cookie': 'cross-site-cookie=whatever; SameSite=None; Secure',
       'Pragma': 'no-cache'
-    },
+    }
   },
 
   LOCALE_TEMPLATE: {

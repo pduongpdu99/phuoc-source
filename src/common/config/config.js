@@ -1,5 +1,6 @@
 const FRONTEND = {
   BACKEND_PATH: "https://phuoc-backend.herokuapp.com",
+  // BACKEND_PATH: "http://localhost:5000",
 
   MODEL_PATH: {
     DANTOCS: 'dantocs',

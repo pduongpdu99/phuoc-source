@@ -109,74 +109,81 @@ async function init(
     argument.buildings,
     argument.status
   ).then(data => {
+    console.log(data)
+    if (data.length == 0)
+      return null;
     return data.map(item => (new RoomCustom()).toJson(item))
   });
 
-  // get rooms
-  let rooms = {};
-  roomlist.forEach(item => {
-    if (rooms[item.name[0]] == undefined) rooms[item.name[0]] = []
-    rooms[item.name[0]].push(item);
-  });
+  if (roomlist) {
+    // get rooms
+    let rooms = {};
+    roomlist.forEach(item => {
+      if (rooms[item.name[0]] == undefined) rooms[item.name[0]] = []
+      rooms[item.name[0]].push(item);
+    });
 
-  let data = [];
-  for (const [k, v] of Object.entries(rooms)) {
-    // sort
-    data.push(`<h3>${k}F</h3>
-    <div style="border-bottom: 2px solid #eaeaea; width:100%">
-    </div><div style="margin-top: 20px; width: 100%"></div>`
+    let data = [];
+    for (const [k, v] of Object.entries(rooms)) {
+      // sort
+      data.push(`<h3>${k}F</h3>
+      <div style="border-bottom: 2px solid #eaeaea; width:100%">
+      </div><div style="margin-top: 20px; width: 100%"></div>`
+      );
+
+      // floor 
+      rooms[k] = v.sort((a, b) => parseInt(a.name) - parseInt(b.name));
+      const floor = rooms[k];
+      floor.forEach(room => {
+        let userList = room.users;
+        room.status = (userList.length == 0 ? "empty" : userList.length >= 4 ? "full" : "semi");
+
+        if (pn.length > 0) {
+          userList = userList.filter(item => {
+            console.log(item.phoneNumber, pn, item.phoneNumber.includes(pn))
+            return item.phoneNumber.includes(pn);
+          })
+
+          if (userList.length > 0) data.push(templateInit(room, userList));
+        } else {
+          data.push(templateInit(room, userList));
+        }
+
+      });
+
+      data.push(`</div><div style="margin-top: 30px; width: 100%"></div>`);
+    }
+
+    // render into viewIndex
+    viewIndex.innerHTML = data.join("")
+
+    // assign onclick
+    roomlist.forEach(
+      model => {
+        setEventOnClick(model.id, () => onRoomClick(model))
+      }
     );
 
-    // floor 
-    rooms[k] = v.sort((a, b) => parseInt(a.name) - parseInt(b.name));
-    const floor = rooms[k];
-    floor.forEach(room => {
-      let userList = room.users;
-      room.status = (userList.length == 0 ? "empty" : userList.length >= 4 ? "full" : "semi");
+    // render empty member list
+    membersElement.innerHTML = "";
+    listBoard.innerHTML = `Danh sách`;
 
-      if (pn.length > 0) {
-        userList = userList.filter(item => {
-          console.log(item.phoneNumber, pn, item.phoneNumber.includes(pn))
-          return item.phoneNumber.includes(pn);
-        })
+    if ($('.project-box').length > 0) $('.project-box')[0].click();
 
-        if (userList.length > 0) data.push(templateInit(room, userList));
-      } else {
-        data.push(templateInit(room, userList));
-      }
-
-    });
-
-    data.push(`</div><div style="margin-top: 30px; width: 100%"></div>`);
-  }
-
-  // render into viewIndex
-  viewIndex.innerHTML = data.join("")
-
-  // assign onclick
-  roomlist.forEach(
-    model => {
-      setEventOnClick(model.id, () => onRoomClick(model))
+    // add event into room box
+    for (const key of Object.keys(rooms)) {
+      // floor 
+      const floor = rooms[key];
+      floor.forEach(room => {
+        setEventOnClick(`add-participant-${room.id}`, () => onAddButtonClick(room));
+      });
     }
-  );
 
-  // render empty member list
-  membersElement.innerHTML = "";
-  listBoard.innerHTML = `List`;
-
-  if ($('.project-box').length > 0) $('.project-box')[0].click();
-
-  // add event into room box
-  for (const key of Object.keys(rooms)) {
-    // floor 
-    const floor = rooms[key];
-    floor.forEach(room => {
-      setEventOnClick(`add-participant-${room.id}`, function () { onAddButtonClick(room) });
-    });
+    // detroy loading
+    if (argument.loading) loadingDestroy($("body"));
   }
 
-  // detroy loading
-  if (argument.loading) loadingDestroy($("body"));
+
 }
 
 /**
@@ -218,7 +225,7 @@ function onRoomClick(room) {
   });
 
   // render room name
-  listBoard.innerHTML = `${room.name}`;
+  listBoard.innerHTML = `Phòng ${room.name}`;
 
   // toggle selected classname (if any)
   document.getElementById(room.id).classList.toggle('selected');
@@ -299,6 +306,7 @@ function registerFormInit(registerForm, updateStatus = false) {
     // set on event change into onchange attribute national index
     if (document.getElementById('national'))
       document.getElementById('national').onchange = onNationalChange;
+
   }
 }
 
@@ -350,7 +358,7 @@ async function loadRoom(registerForm) {
   // room options
   if (roomOptions) {
     roomOptions.innerHTML = rooms
-      .map(room => `<option value="${room.id}">${room.name}</option>`)
+      .map(room => `<option value="${room._id}">${room.name}</option>`)
       .join('');
   }
 
@@ -403,60 +411,62 @@ function thongBaoValidation(value) {
   */
 function validation(model) {
   if (!isNotEmpty(model.name)) {
-    thongBaoValidation("Fullname is not empty");
+    thongBaoValidation("Họ và tên không được rỗng");
     return false;
   }
 
   if (!isNumberPhone(model.phoneNumber)) {
-    thongBaoValidation("It's not number phone");
+    thongBaoValidation("Đây không phải là số điện thoại");
     return false;
   }
 
   if (!isNotEmpty(model.address)) {
-    thongBaoValidation("address  is not empty");
+    thongBaoValidation("Địa chỉ không được rỗng");
     return false;
   }
 
   if (!isNotEmpty(model.nationality)) {
-    thongBaoValidation("National is not empty");
+    thongBaoValidation("Quốc tịch không được rỗng");
     return false;
   }
 
   if (!isNotEmpty(model.iDCard)) {
-    thongBaoValidation("idCard is not empty");
+    thongBaoValidation("Mã sinh viên không được rỗng");
     return false;
   }
 
   if (!isDate(model.birth)) {
-    thongBaoValidation("Birth is invalid date format yyyy-mm-dd");
+    thongBaoValidation("Ngày sinh không đúng định dạng");
     return false;
   }
 
   if (!isEmail(model.email)) {
-    thongBaoValidation("it is not email");
+    thongBaoValidation("Email không hợp lệ");
     return false;
   }
 
   if (!isNotEmpty(model.danToc)) {
-    thongBaoValidation("dantoc field is not empty");
+    thongBaoValidation("Dân tộc không được rỗng");
     return false;
   }
 
   if (!isNotEmpty(model.sex)) {
-    thongBaoValidation("sex field is not empty");
+    thongBaoValidation("Giới tính không được rỗng");
     return false;
   }
 
   if (!isNotEmpty(model.roomId)) {
-    thongBaoValidation("room is not empty");
+    thongBaoValidation("Phòng không được rỗng");
     return false;
   }
 
   return true;
 }
 
-setEventOnClick('add-button', function () { onAddButtonClick() });
-setEventOnClick('switch-button', onSwitchButtonClick);
+setEventOnClick('add-button', () => {
+  onAddButtonClick();
+});
+setEventOnClick('switch-button', () => onSwitchButtonClick());
 
 /**
  * on add button click
@@ -474,7 +484,7 @@ function onAddButtonClick(room = undefined) {
   register.setAttribute('class', "register-form");
 
   if (room != undefined) {
-    resetRoomDataStorage(room);
+    resetRoomDataStorage(roomData.id);
     register.setAttribute('roomid', room.id);
   }
 
@@ -483,7 +493,7 @@ function onAddButtonClick(room = undefined) {
     initDiv.appendChild(register);
     initialize(register);
   } else {
-    thongBaoValidation("Room member is maxium");
+    thongBaoValidation("Phỏng chỉ cho phép 4 sinh viên cư trú");
   }
 }
 
@@ -536,51 +546,20 @@ function onSubmitClick(updateStatus = false, user) {
     danToc: dantocOptions.value,
     roomId: roomOptions.value,
     sex: sex.value,
-    role: 1,
+    role: "1",
     avatar: "images/user.png",
   };
 
   // check validate
   if (validation(data)) {
     if (!updateStatus) {
-      UserProvider
-        .create(data)
-        .then((data) => {
-          if (JSON.stringify(data).toString() === "null") {
-            thongBaoValidation("Người dùng này đã tồn tại hãy kiểm tra lại mã sinh viên");
-          } else {
-            // xóa form
-            onCancelClick();
+      UserProvider.create(data).then((response) => {
+        if (response == null) {
+          thongBaoValidation("Người dùng này đã tồn tại hãy kiểm tra lại mã sinh viên/ căn cước công dân");
+        } else {
+          // xóa form
+          onCancelClick();
 
-            // code render
-            init({
-              buildings: localStorage.getItem('buildings'),
-              status: localStorage.getItem('status'),
-              loading: true,
-            });
-
-            // clear field
-            fullname.value = "";
-            number.value = "";
-            address.value = "";
-            idcard.value = "";
-            birth.value = "";
-            localPart.value = "";
-          }
-        });
-    } else {
-      // merge 
-      let dataKeys = Object.keys(data);
-      for (let key of dataKeys) user[key] = data[key];
-
-      delete user.createdAt;
-      delete user.updatedAt;
-      delete user.avatar;
-
-      // COMMENT: updated
-      UserProvider
-        .update(user)
-        .then((data) => {
           // code render
           init({
             buildings: localStorage.getItem('buildings'),
@@ -595,13 +574,38 @@ function onSubmitClick(updateStatus = false, user) {
           idcard.value = "";
           birth.value = "";
           localPart.value = "";
+        }
+      });
+    } else {
+      // merge 
+      let dataKeys = Object.keys(data);
+      for (let key of dataKeys) user[key] = data[key];
 
-          // xóa form
-          onCancelClick();
+      delete user.createdAt;
+      delete user.updatedAt;
+      delete user.avatar;
 
+      // COMMENT: updated
+      UserProvider.update(user).then((data) => {
+        // code render
+        init({
+          buildings: localStorage.getItem('buildings'),
+          status: localStorage.getItem('status'),
+          loading: true,
         });
-    }
 
+        // clear field
+        fullname.value = "";
+        number.value = "";
+        address.value = "";
+        idcard.value = "";
+        birth.value = "";
+        localPart.value = "";
+
+        // xóa form
+        onCancelClick();
+      });
+    }
   }
 }
 
@@ -675,7 +679,7 @@ async function onRoomUpdateInitClick(user, roomId) {
  * @param {string} roomId
  */
 async function onRemoveUserClick(user) {
-  if (confirm('Do you wanna remove this user?')) {
+  if (confirm('Bạn có muốn xóa user này không?')) {
     UserProvider.deleteById(user.id).then(data => {
       // code render
       const argument = {
@@ -792,7 +796,7 @@ async function onSwitchFormSubmit(user, roomIdNeedToChanged) {
     });
   } else {
     // render notification form
-    thongBaoValidation("Room full");
+    thongBaoValidation("Phòng đầy");
 
     // detroy loading
     $("body").loadingModal('destroy');

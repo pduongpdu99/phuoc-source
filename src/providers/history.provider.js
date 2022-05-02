@@ -34,7 +34,7 @@ export class HistoryProvider {
      * @param {object} body 
      * @returns 
      */
-    static async create(body = {}) {
+    static async create(body) {
         return HistoryRepository.create(body);
     }
 
@@ -52,7 +52,7 @@ export class HistoryProvider {
      * @param {body} body 
      * @returns 
      */
-    static async update(body = {}) {
+    static async update(body) {
         return HistoryRepository.update(body);
     }
 }

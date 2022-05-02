@@ -32,7 +32,7 @@ export class DantocProvider {
      * @param {object} body 
      * @returns 
      */
-    static async create(body = {}) {
+    static async create(body) {
         return DantocRepository.create(body);
     }
 
@@ -50,7 +50,7 @@ export class DantocProvider {
      * @param {body} body 
      * @returns 
      */
-    static async update(body = {}) {
+    static async update(body) {
         return DantocRepository.update(body);
     }
 }
