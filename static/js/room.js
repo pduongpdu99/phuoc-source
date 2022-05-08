@@ -547,8 +547,6 @@ function onEventTrigger(data, updateStatus = false, user = undefined) {
       // merge 
       let dataKeys = Object.keys(data);
       for (let key of dataKeys) user[key] = data[key];
-      user['id'] = user['_id'];
-      delete user._id;
 
       // COMMENT: updated
       UserProvider.update(user).then((data) => {
