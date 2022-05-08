@@ -251,6 +251,7 @@ function onRoomClick(room) {
  * @param {User[]} users 
  */
 function resetRoomDataStorage(room) {
+  console.log(room)
   let filters = room.users;
   room.number = filters.length;
   localStorage.setItem('room-data', JSON.stringify(room));
@@ -486,7 +487,7 @@ function onAddButtonClick(room = undefined) {
   register.setAttribute('class', "register-form");
 
   if (room != undefined) {
-    resetRoomDataStorage(roomData.id);
+    resetRoomDataStorage(roomData);
     register.setAttribute('roomid', room.id);
   }
 
