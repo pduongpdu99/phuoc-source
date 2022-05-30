@@ -110,14 +110,16 @@ async function init(
     argument.status
   ).then(data => {
     if (data.length > 0) {
+      let elements = document.getElementsByClassName('item-status');
       if (data[0].buildingId.allowSex == 1) {
-        document.getElementsByClassName('item-status')[1].style.display = "flex";
-        document.getElementsByClassName('item-status')[2].style.display = "none";
-      }
-
-      if (data[0].buildingId.allowSex == 2) {
-        document.getElementsByClassName('item-status')[1].style.display = "none";
-        document.getElementsByClassName('item-status')[2].style.display = "flex";
+        elements[1].style.display = "flex";
+        elements[2].style.display = "none";
+      } else if (data[0].buildingId.allowSex == 2) {
+        elements[1].style.display = "none";
+        elements[2].style.display = "flex";
+      } else {
+        elements[1].style.display = "flex";
+        elements[2].style.display = "flex";
       }
     }
     return data.map(item => (new RoomCustom()).toJson(item))
