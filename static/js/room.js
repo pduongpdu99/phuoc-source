@@ -109,9 +109,17 @@ async function init(
     argument.buildings,
     argument.status
   ).then(data => {
-    // console.log(data);
-    // if (data.length == 0)
-    //   return null;
+    if (data.length > 0) {
+      if (data[0].buildingId.allowSex == 1) {
+        document.getElementsByClassName('item-status')[1].style.display = "flex";
+        document.getElementsByClassName('item-status')[2].style.display = "none";
+      }
+
+      if (data[0].buildingId.allowSex == 2) {
+        document.getElementsByClassName('item-status')[1].style.display = "none";
+        document.getElementsByClassName('item-status')[2].style.display = "flex";
+      }
+    }
     return data.map(item => (new RoomCustom()).toJson(item))
   });
 
@@ -510,6 +518,12 @@ function onSwitchButtonClick() {
   else thongBaoValidation("No data");
 }
 
+/**
+ * on event trigger
+ * @param {*} data 
+ * @param {*} updateStatus 
+ * @param {*} user 
+ */
 function onEventTrigger(data, updateStatus = false, user = undefined) {
   const fullname = document.getElementById('fullname');
   const number = document.getElementById('number');
@@ -522,7 +536,7 @@ function onEventTrigger(data, updateStatus = false, user = undefined) {
   if (validation(data)) {
     if (!updateStatus) {
       UserProvider.create(data).then((response) => {
-        if (response.toString() === "null") {
+        if (Object.keys(response) == 0) {
           thongBaoValidation("Người dùng này đã tồn tại hãy kiểm tra lại mã sinh viên/ căn cước công dân");
         } else {
           // code render

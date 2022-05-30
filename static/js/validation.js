@@ -14,7 +14,7 @@ export const isNumberPhone = (str) => {
     return String(str)
         .toLowerCase()
         .match(
-            /[+84|+856]\d{9}/
+            /^([+]{0,1}\d{3})\d{8}$/
         );
 }
 

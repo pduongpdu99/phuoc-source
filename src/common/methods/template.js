@@ -63,7 +63,7 @@ export const templateMember = (memberModel) => {
           <p class="message-line">${memberModel.email}</p>
           <p class="message-line">${memberModel.phoneNumber}</p>
           <p class="message-line">${memberModel.address}</p>
-          <p class="message-line">${memberModel.sex === 1 ? "Nam" : "Nữ"}</p>
+          <p class="message-line">${memberModel.sex === '1' ? "Nam" : "Nữ"}</p>
        </div>
   
       <!-- features -->
