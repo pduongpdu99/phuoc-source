@@ -191,8 +191,6 @@ async function init(
     // detroy loading
     if (argument.loading) loadingDestroy($("body"));
   }
-
-
 }
 
 /**
@@ -261,7 +259,6 @@ function onRoomClick(room) {
  * @param {User[]} users 
  */
 function resetRoomDataStorage(room) {
-  console.log(room)
   let filters = room.users;
   room.number = filters.length;
   localStorage.setItem('room-data', JSON.stringify(room));
@@ -486,6 +483,7 @@ setEventOnClick('switch-button', () => onSwitchButtonClick());
  */
 function onAddButtonClick(room = undefined) {
   let roomData = JSON.parse(localStorage.getItem('room-data'));
+  if (room) roomData = room;
 
   const initDiv = document.getElementById('init-register-form');
   const register = document.createElement('register-form');
